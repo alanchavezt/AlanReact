@@ -59,12 +59,8 @@ function App() {
                 <Header></Header>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
-
-                        <Route exact path="/login">
-                            <Login />
-                        </Route>
-
-                        <Route path="/dashboard" exact component={Dashboard}/>
+                        <PublicRoute path="/login" exact component={Login}/>
+                        <PrivateRoute path="/dashboard" exact component={Dashboard}/>
 
                         <Route path="/" exact component={Home}/>
                         <Route path="/home" exact component={Home}/>

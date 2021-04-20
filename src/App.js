@@ -3,10 +3,6 @@ import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-
 import { Header } from './components/common';
 import { getToken, removeUserSession, setUserSession } from './utils/Common';
 

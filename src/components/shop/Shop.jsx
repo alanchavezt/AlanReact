@@ -3,10 +3,6 @@ import './Shop.css';
 import { Link} from "react-router-dom";
 import ProductService from "./ProductService";
 
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Card } from 'primereact/card';
-
 function Shop () {
 
     const [items, setItems] = useState([]);

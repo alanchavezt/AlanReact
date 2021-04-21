@@ -68,7 +68,7 @@ function App() {
                         <PrivateRoute path="/users" exact component={UserListEntry} />
                         <Route path="/users/create" exact component={UserCreateEntry} />
                         <Route path="/users/:id" exact component={UserViewEntry} />
-                        <Route path="/users/:id/edit" exact component={UserEditEntry} />
+                        <PrivateRoute path="/users/:id/edit" exact component={UserEditEntry} />
 
                         {/*Routing to an specific item*/}
                         <Route path="/shop/:id" component={ItemView}/>

@@ -65,7 +65,7 @@ function App() {
                         <Route path="/contact" component={Contact} />
 
                         {/*User routes*/}
-                        <Route path="/users" exact component={UserListEntry} />
+                        <PrivateRoute path="/users" exact component={UserListEntry} />
                         <Route path="/users/create" exact component={UserCreateEntry} />
                         <Route path="/users/:id" exact component={UserViewEntry} />
                         <Route path="/users/:id/edit" exact component={UserEditEntry} />

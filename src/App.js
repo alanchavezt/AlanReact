@@ -26,8 +26,6 @@ const UserCreateEntry = lazy(() => import('./components/users/UserCreateEntry'))
 const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
 const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
-
-
 function App() {
     const [authLoading, setAuthLoading] = useState(true);
 
@@ -60,15 +58,15 @@ function App() {
 
                         <Route path="/" exact component={Home}/>
                         <Route path="/home" exact component={Home}/>
-                        <Route path="/about" component={About} />
-                        <Route path="/shop" exact component={Shop} />
-                        <Route path="/contact" component={Contact} />
+                        <Route path="/about" component={About}/>
+                        <Route path="/shop" exact component={Shop}/>
+                        <Route path="/contact" component={Contact}/>
 
                         {/*User routes*/}
-                        <PrivateRoute path="/users" exact component={UserListEntry} />
-                        <Route path="/users/create" exact component={UserCreateEntry} />
-                        <Route path="/users/:id" exact component={UserViewEntry} />
-                        <PrivateRoute path="/users/:id/edit" exact component={UserEditEntry} />
+                        <PrivateRoute path="/users" exact component={UserListEntry}/>
+                        <Route path="/users/create" exact component={UserCreateEntry}/>
+                        <Route path="/users/:id" exact component={UserViewEntry}/>
+                        <PrivateRoute path="/users/:id/edit" exact component={UserEditEntry}/>
 
                         {/*Routing to an specific item*/}
                         <Route path="/shop/:id" component={ItemView}/>

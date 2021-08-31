@@ -11,7 +11,7 @@ export default class UserService {
     }
 
     getUsers() {
-        return axios.get('https://jsonplaceholder.typicode.com/users').then(res => res.data);
+        return axios.get(`/REST/usersdb`).then(res => res.data);
     }
 
     // updateUser(user) {
@@ -21,6 +21,4 @@ export default class UserService {
     // deleteUser(userId) {
     //     return axios.delete('https://api/users/' + userId).then(res => res.data);
     // }
-
-
 }

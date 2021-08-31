@@ -42,18 +42,26 @@ export default class UserListEntry extends React.Component {
                     <thead className="thead-dark">
                     <tr>
                         <th colSpan="1">#</th>
-                        <th colSpan="1">Name</th>
+                        <th colSpan="1">ID</th>
                         <th colSpan="1">Username</th>
+                        <th colSpan="1">Password</th>
+                        <th colSpan="1">First Name</th>
+                        <th colSpan="1">Middle Name</th>
+                        <th colSpan="1">Last Name</th>
                         <th colSpan="1">Email</th>
                         <th colSpan="1">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     {this.state.users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td><Link to={`users/${user.id}`}>{user.name}</Link></td>
+                        <tr key={user.userId}>
+                            <td>--</td>
+                            <td>{user.userId}</td>
                             <td>{user.username}</td>
+                            <td>{user.password}</td>
+                            <td><Link to={`users/${user.userId}`}>{user.firstName}</Link></td>
+                            <td>{user.middleName}</td>
+                            <td>{user.lastName}</td>
                             <td>{user.email}</td>
                             <td>
                                 <Link to={`users/${user.id}/edit`}>

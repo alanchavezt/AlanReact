@@ -19,7 +19,8 @@ module.exports = {
         host: 'localhost',
         port: port,
         historyApiFallback: true,
-        open: false
+        open: false,
+        proxy: {"/REST/*": {target: 'http://localhost:4000', secure: false }}
     },
     module: {
         rules: [

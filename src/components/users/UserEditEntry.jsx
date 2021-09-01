@@ -25,16 +25,43 @@ export default class UserEditEntry extends React.Component {
         this.setState({user});
     }
 
+    handleSave = (e) => {
+        const user = this.state.user;
+
+        this.userService.updateUser(user).then(data => {
+            this.setState({user: data});
+            window.location.href = "/users";
+        });
+    }
+
+    isFormValid = () => {
+        let formData = this.state.user;
+
+        if (!formData.username) {
+            return false;
+        }
+        if (!formData.password) {
+            return false;
+        }
+        if (!formData.firstName) {
+            return false;
+        }
+        if (!formData.lastName) {
+            return false;
+        }
+        return true;
+    }
+
     render () {
         if (!this.state.user) {
             return <Loading />
         }
         return (
-            <div className="container">
+            <div className="container" style={{padding: "40px"}}>
                 <h1>Edit User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">
-                    <button type="button" className="btn btn-primary float-right">Save</button>
+                    <button type="button" className="btn btn-primary float-right" onClick={this.handleSave} disabled={!this.isFormValid()}>Save</button>
                     <button type="button" className="btn btn-danger float-right">Delete</button>
                 </div>
             </div>

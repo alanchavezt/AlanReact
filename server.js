@@ -31,16 +31,50 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// request API handlers
-app.get('/REST/usersdb', (req, res) => {
-    axios.get("http://localhost:8080/REST/users").then(function(response) {
+// User request API handlers
+app.get('/REST/users', (req, res) => {
+    axios.get("http://localhost:8080/REST/users").then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
-    }).catch(function(error) {
+    }).catch(error => {
         res.json("Error occurred!")
-    })
+    });
 });
+
+app.get('/REST/users/:id', (req, res) => {
+    console.log('User ID:', req.params.id)
+    const userId =  req.params.id;
+
+    axios.get("http://localhost:8080/REST/users/" + userId).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+app.put('/REST/users/:id', (req, res)=>{
+    console.log('data: ', req.params.id);
+    const userId = req.params.id;
+    const user = req.body;
+
+    axios.put("http://localhost:8080/REST/users/" + userId, user).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+
+// app.post('/REST/users/:id', (req, res, next)=>{
+//     console.log('data: ', req.body.username);
+//     res.redirect('/');
+//     });
+
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
 //In all future routes, this helps to know if the request is authenticated or not.

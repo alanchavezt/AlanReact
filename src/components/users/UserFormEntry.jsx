@@ -27,6 +27,7 @@ export default class UserFormEntry extends React.Component {
         return (
             <form onChange={this.onFormChange}>
                 <InputText
+                    // style={{display: this.props.user.userId ? "inline" : "none"}}
                     label="User ID"
                     id="userId"
                     name="userId"
@@ -42,6 +43,7 @@ export default class UserFormEntry extends React.Component {
                 />
                 <InputText
                     label="Password"
+                    type="password"
                     id="password"
                     name="password"
                     value={this.props.user.password}
@@ -49,7 +51,6 @@ export default class UserFormEntry extends React.Component {
                 />
                 <InputText
                     label="First Name"
-                    type="password"
                     id="firstName"
                     name="firstName"
                     value={this.props.user.firstName}

@@ -70,10 +70,18 @@ app.put('/REST/users/:id', (req, res)=>{
 });
 
 
-// app.post('/REST/users/:id', (req, res, next)=>{
-//     console.log('data: ', req.body.username);
-//     res.redirect('/');
-//     });
+app.post('/REST/users', (req, res, next)=>{
+    console.log('data: ', req.body);
+    const user = req.body;
+
+    axios.post("http://localhost:8080/REST/users", user).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
 
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
@@ -103,9 +111,6 @@ app.use(function (req, res, next) {
 //     console.error(err.stack)
 //     res.status(500).send('Something broke!')
 // })
-
-
-
 
 // request handlers
 app.get('/', (req, res) => {

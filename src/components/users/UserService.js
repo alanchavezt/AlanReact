@@ -4,16 +4,16 @@ export default class UserService {
 
     apiEndpoint = "/REST/users";
 
-    // createUser(user) {
-    //     return axios.post(`/REST/users`, user).then(res => res.data);
-    // }
+    createUser(user) {
+        return axios.post(`${this.apiEndpoint}`, user).then(res => res.data);
+    }
 
     getUser(userId) {
-        return axios.get(`/REST/users/${userId}`).then(res => res.data);
+        return axios.get(`${this.apiEndpoint}/${userId}`).then(res => res.data);
     }
 
     getUsers() {
-        return axios.get(`/REST/users`).then(res => res.data);
+        return axios.get(`${this.apiEndpoint}`).then(res => res.data);
     }
 
     updateUser(user) {

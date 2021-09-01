@@ -19,6 +19,32 @@ export default class UserCreateEntry extends React.Component {
         this.setState({user});
     }
 
+    handleCreate = (e) => {
+        const user = this.state.user;
+
+        this.userService.createUser(user).then(data => {
+            window.location.href = `/users/${data.userId}/edit`;
+        });
+    }
+
+    isFormValid = () => {
+        let formData = this.state.user;
+
+        if (!formData.username) {
+            return false;
+        }
+        if (!formData.password) {
+            return false;
+        }
+        if (!formData.firstName) {
+            return false;
+        }
+        if (!formData.lastName) {
+            return false;
+        }
+        return true;
+    }
+
     render () {
         if (!this.state.user) {
             return <Loading />
@@ -27,7 +53,7 @@ export default class UserCreateEntry extends React.Component {
             <div className="container">
                 <h1>Add User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
-                <button type="submit" className="btn btn-primary float-right">Save</button>
+                <button type="submit" className="btn btn-primary float-right" onClick={this.handleCreate} disabled={!this.isFormValid()}>Create</button>
             </div>
         );
     }

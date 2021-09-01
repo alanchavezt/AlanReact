@@ -2,11 +2,14 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const utils = require('./utils');
+const axios = require("axios");
 
 const app = express();
+const router = express.Router();
 const port = process.env.PORT || 4000;
 
 // static user details
@@ -24,6 +27,74 @@ app.use(cors());
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+// User request API handlers
+app.get('/REST/users', (req, res) => {
+    axios.get("http://localhost:8080/REST/users").then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+app.get('/REST/users/:id', (req, res) => {
+    console.log('User ID:', req.params.id)
+    const userId =  req.params.id;
+
+    axios.get("http://localhost:8080/REST/users/" + userId).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+app.put('/REST/users/:id', (req, res)=>{
+    console.log('id: ', req.params.id);
+    const userId = req.params.id;
+    const user = req.body;
+
+    axios.put("http://localhost:8080/REST/users/" + userId, user).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+
+app.post('/REST/users', (req, res, next)=>{
+    console.log('user: ', req.body);
+    const user = req.body;
+
+    axios.post("http://localhost:8080/REST/users", user).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+app.delete('/REST/users/:id', (req, res)=>{
+    console.log('userId: ', req.params.id);
+    const userId = req.params.id;
+
+    axios.delete(`http://localhost:8080/REST/users/${userId}`).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
 
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
@@ -41,12 +112,18 @@ app.use(function (req, res, next) {
                 message: "Invalid user."
             });
         } else {
-            req.user = user; //set the user to req so other routes can use it
+            //set the user to req so other routes can use it
+            req.user = user;
             next();
         }
     });
 });
 
+// Error-handling middleware
+// app.use(function (err, req, res, next) {
+//     console.error(err.stack)
+//     res.status(500).send('Something broke!')
+// })
 
 // request handlers
 app.get('/', (req, res) => {
@@ -60,7 +137,7 @@ app.post('/users/signin', function (req, res) {
     const user = req.body.username;
     const pwd = req.body.password;
 
-    // return 400 status if username/password is not exist
+    // return 400 status if username/password does not exist
     if (!user || !pwd) {
         return res.status(400).json({
             error: true,
@@ -68,7 +145,7 @@ app.post('/users/signin', function (req, res) {
         });
     }
 
-    // return 401 status if the credential is not match.
+    // return 401 status if the credential does not match.
     if (user !== userData.username || pwd !== userData.password) {
         return res.status(401).json({
             error: true,
@@ -87,6 +164,7 @@ app.post('/users/signin', function (req, res) {
 
 // verify the token and return it if it's valid
 app.get('/verifyToken', function (req, res) {
+
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token;
     if (!token) {
@@ -95,6 +173,7 @@ app.get('/verifyToken', function (req, res) {
             message: "Token is required."
         });
     }
+
     // check token that was passed by decoding token using secret
     jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
         if (err) return res.status(401).json({

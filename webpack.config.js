@@ -8,10 +8,10 @@ const port = process.env.PORT || 3000;
 module.exports = {
     mode: 'development',
     context: __dirname,
-    entry: './src/index.js',
+    entry: path.resolve(__dirname, 'src/index.js'),
     output: {
         filename: 'bundle.js',
-        path: __dirname + 'dist',
+        path: path.resolve(__dirname, 'public/build'),
         publicPath: "/"
     },
     devtool: 'inline-source-map',
@@ -19,7 +19,8 @@ module.exports = {
         host: 'localhost',
         port: port,
         historyApiFallback: true,
-        open: false
+        open: false,
+        proxy: {"/REST/*": {target: 'http://localhost:4000', secure: false }}
     },
     module: {
         rules: [

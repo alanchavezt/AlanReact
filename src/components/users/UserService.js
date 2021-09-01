@@ -2,25 +2,25 @@ import axios from 'axios';
 
 export default class UserService {
 
-    // saveUser(user) {
-    //     return axios.post('https://api/users/' + user).then(res => res.data);
-    // }
+    apiEndpoint = "/REST/users";
+
+    createUser(user) {
+        return axios.post(`${this.apiEndpoint}`, user).then(res => res.data);
+    }
 
     getUser(userId) {
-        return axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`).then(res => res.data);
+        return axios.get(`${this.apiEndpoint}/${userId}`).then(res => res.data);
     }
 
     getUsers() {
-        return axios.get('https://jsonplaceholder.typicode.com/users').then(res => res.data);
+        return axios.get(`${this.apiEndpoint}`).then(res => res.data);
     }
 
-    // updateUser(user) {
-    //     return axios.put('https://api/users/' + user).then(res => res.data);
-    // }
-    //
-    // deleteUser(userId) {
-    //     return axios.delete('https://api/users/' + userId).then(res => res.data);
-    // }
+    updateUser(user) {
+        return axios.put(`${this.apiEndpoint}/${user.userId}`, user).then(res => res.data);
+    }
 
-
+    deleteUser(userId) {
+        return axios.delete(`${this.apiEndpoint}/${userId}`).then(res => res.data);
+    }
 }

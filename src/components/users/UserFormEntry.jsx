@@ -27,27 +27,47 @@ export default class UserFormEntry extends React.Component {
         return (
             <form onChange={this.onFormChange}>
                 <InputText
-                    label="First Name"
-                    id="firstName"
-                    name="firstName"
-                    value={this.props.user.firstName || this.props.user.name}
-                    // onChange={this.onFormChange}
-                    required={true}
-                />
-                <InputText
-                    label="Last Name"
-                    id="lastName"
-                    name="lastName"
-                    value={this.props.user.lastName || ""}
-                    // onChange={this.onFormChange}
-                    required={true}
+                    // style={{display: this.props.user.userId ? "inline" : "none"}}
+                    label="User ID"
+                    id="userId"
+                    name="userId"
+                    value={this.props.user.userId}
+                    readOnly={true}
                 />
                 <InputText
                     label="Username"
                     id="username"
                     name="username"
                     value={this.props.user.username}
-                    // onChange={this.onFormChange}
+                    required={true}
+                />
+                <InputText
+                    label="Password"
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={this.props.user.password}
+                    required={true}
+                />
+                <InputText
+                    label="First Name"
+                    id="firstName"
+                    name="firstName"
+                    value={this.props.user.firstName}
+                    required={true}
+                />
+                <InputText
+                    label="Middle Name"
+                    id="middleName"
+                    name="middleName"
+                    value={this.props.user.middleName}
+                    required={true}
+                />
+                <InputText
+                    label="Last Name"
+                    id="lastName"
+                    name="lastName"
+                    value={this.props.user.lastName}
                     required={true}
                 />
                 <InputText
@@ -55,44 +75,31 @@ export default class UserFormEntry extends React.Component {
                     id="email"
                     name="email"
                     value={this.props.user.email}
-                    // onChange={this.onFormChange}
                     required={true}
                 />
-
-                {/*<div className="form-group">*/}
-                {/*    <label className="float-left" htmlFor="email">Email address</label>*/}
-                {/*    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={this.props.user.email}/>*/}
-                {/*    <small id="emailHelp" className="form-text text-muted float-right">We'll never share your email with*/}
-                {/*        anyone else.</small>*/}
-                {/*</div>*/}
-                {/*<div className="form-group">*/}
-                {/*    <label className="float-left" htmlFor="password">Password</label>*/}
-                {/*    <input type="password" className="form-control" id="password"/>*/}
-                {/*</div>*/}
-
-                <InputText
-                    label="Phone"
-                    id="phone"
-                    name="phone"
-                    value={this.props.user.phone}
-                    onChange={this.onFormChange}
-                    required={true}
-                />
-                <InputText
-                    label="Website"
-                    id="website"
-                    name="website"
-                    value={this.props.user.website}
-                    onChange={this.onFormChange}
-                    required={true}
-                />
-                <CheckBox
-                    label="Check me out"
-                    id="checkMeOut"
-                    name="checkMeOut"
-                    checked={true}
-                    onChange={this.onFormChange}
-                />
+                {/*<InputText*/}
+                {/*    label="Phone"*/}
+                {/*    id="phone"*/}
+                {/*    name="phone"*/}
+                {/*    value={this.props.user.phone}*/}
+                {/*    onChange={this.onFormChange}*/}
+                {/*    required={true}*/}
+                {/*/>*/}
+                {/*<InputText*/}
+                {/*    label="Website"*/}
+                {/*    id="website"*/}
+                {/*    name="website"*/}
+                {/*    value={this.props.user.website}*/}
+                {/*    onChange={this.onFormChange}*/}
+                {/*    required={true}*/}
+                {/*/>*/}
+                {/*<CheckBox*/}
+                {/*    label="Check me out"*/}
+                {/*    id="checkMeOut"*/}
+                {/*    name="checkMeOut"*/}
+                {/*    checked={true}*/}
+                {/*    onChange={this.onFormChange}*/}
+                {/*/>*/}
             </form>
         );
     }

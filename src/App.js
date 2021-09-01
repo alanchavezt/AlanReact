@@ -29,24 +29,24 @@ const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 function App() {
     const [authLoading, setAuthLoading] = useState(true);
 
-    useEffect(() => {
-        const token = getToken();
-        if (!token) {
-            return;
-        }
-
-        axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
-            setUserSession(response.data.token, response.data.user);
-            setAuthLoading(false);
-        }).catch(error => {
-            removeUserSession();
-            setAuthLoading(false);
-        });
-    }, []);
-
-    if (authLoading && getToken()) {
-        return <div className="content">Checking Authentication...</div>
-    }
+    // useEffect(() => {
+    //     const token = getToken();
+    //     if (!token) {
+    //         return;
+    //     }
+    //
+    //     axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
+    //         setUserSession(response.data.token, response.data.user);
+    //         setAuthLoading(false);
+    //     }).catch(error => {
+    //         removeUserSession();
+    //         setAuthLoading(false);
+    //     });
+    // }, []);
+    //
+    // if (authLoading && getToken()) {
+    //     return <div className="content">Checking Authentication...</div>
+    // }
     return (
         <div className="App">
             <Router>
@@ -63,7 +63,8 @@ function App() {
                         <Route path="/contact" component={Contact}/>
 
                         {/*User routes*/}
-                        <PrivateRoute path="/users" exact component={UserListEntry}/>
+                        <Route path="/users" exact component={UserListEntry}/>
+                        {/*<PrivateRoute path="/users" exact component={UserListEntry}/>*/}
                         <Route path="/users/create" exact component={UserCreateEntry}/>
                         <Route path="/users/:id" exact component={UserViewEntry}/>
                         <PrivateRoute path="/users/:id/edit" exact component={UserEditEntry}/>

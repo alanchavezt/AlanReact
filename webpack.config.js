@@ -10,7 +10,9 @@ module.exports = {
     context: __dirname,
     entry: './src/index.js',
     output: {
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        path: __dirname + 'dist',
+        publicPath: "/"
     },
     devtool: 'inline-source-map',
     devServer: {

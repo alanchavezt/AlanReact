@@ -26,7 +26,7 @@ export default class UserListEntry extends React.Component {
     }
 
     render () {
-        if (!this.state.users || !this.state.users.length) {
+        if (!this.state.users) {
             return <Loading />
         }
         return (
@@ -53,7 +53,7 @@ export default class UserListEntry extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.users.map((user, index) => (
+                    {this.state.users.length ? this.state.users.map((user, index) => (
                         <tr key={user.userId}>
                             <td>{(index + 1)}</td>
                             <td>{user.userId}</td>
@@ -72,7 +72,11 @@ export default class UserListEntry extends React.Component {
                                 </Link>
                             </td>
                         </tr>
-                    ))}
+                    )) : (
+                        <tr>
+                            <td colSpan="9">There is not users</td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </div>

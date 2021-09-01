@@ -56,7 +56,7 @@ app.get('/REST/users/:id', (req, res) => {
 });
 
 app.put('/REST/users/:id', (req, res)=>{
-    console.log('data: ', req.params.id);
+    console.log('id: ', req.params.id);
     const userId = req.params.id;
     const user = req.body;
 
@@ -71,10 +71,23 @@ app.put('/REST/users/:id', (req, res)=>{
 
 
 app.post('/REST/users', (req, res, next)=>{
-    console.log('data: ', req.body);
+    console.log('user: ', req.body);
     const user = req.body;
 
     axios.post("http://localhost:8080/REST/users", user).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+app.delete('/REST/users/:id', (req, res)=>{
+    console.log('userId: ', req.params.id);
+    const userId = req.params.id;
+
+    axios.delete(`http://localhost:8080/REST/users/${userId}`).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);

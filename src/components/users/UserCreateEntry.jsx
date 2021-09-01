@@ -27,6 +27,10 @@ export default class UserCreateEntry extends React.Component {
         });
     }
 
+    handleCancel = (e) => {
+        window.location.href = `/users`;
+    }
+
     isFormValid = () => {
         let formData = this.state.user;
 
@@ -50,10 +54,11 @@ export default class UserCreateEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div className="container">
+            <div className="container" style={{padding: "40px"}}>
                 <h1>Add User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <button type="submit" className="btn btn-primary float-right" onClick={this.handleCreate} disabled={!this.isFormValid()}>Create</button>
+                <button type="submit" className="btn btn-secondary float-right" onClick={this.handleCancel}>Cancel</button>
             </div>
         );
     }

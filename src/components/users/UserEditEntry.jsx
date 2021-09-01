@@ -34,6 +34,23 @@ export default class UserEditEntry extends React.Component {
         });
     }
 
+    handleDelete = (e) => {
+        const userId = this.state.user.userId;
+
+        this.userService.deleteUser(userId).then(data => {
+            // window.location.href = "/users";
+            window.location.pathname = `/users`;
+        });
+
+        // confirm("Are you sure you want to delete this user?", (res) => {
+        //     if (res) {
+        //         this.http.delete(`/api/edit/user/${this.props.itemSummaries.user.id}`).then(res => {
+        //             window.location.pathname = `/admin/user/admin/all`;
+        //         });
+        //     }
+        // })
+    }
+
     isFormValid = () => {
         let formData = this.state.user;
 
@@ -62,7 +79,7 @@ export default class UserEditEntry extends React.Component {
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">
                     <button type="button" className="btn btn-primary float-right" onClick={this.handleSave} disabled={!this.isFormValid()}>Save</button>
-                    <button type="button" className="btn btn-danger float-right">Delete</button>
+                    <button type="button" className="btn btn-danger float-right" onClick={this.handleDelete}>Delete</button>
                 </div>
             </div>
         );

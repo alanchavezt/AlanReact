@@ -20,7 +20,7 @@ export default class UserService {
         return axios.put(`${this.apiEndpoint}/${user.userId}`, user).then(res => res.data);
     }
 
-    // deleteUser(userId) {
-    //     return axios.delete(`/REST/users/`${userId}).then(res => res.data);
-    // }
+    deleteUser(userId) {
+        return axios.delete(`${this.apiEndpoint}/${userId}`).then(res => res.data);
+    }
 }

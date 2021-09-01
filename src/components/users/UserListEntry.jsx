@@ -26,7 +26,7 @@ export default class UserListEntry extends React.Component {
     }
 
     render () {
-        if (!this.state.users) {
+        if (!this.state.users || !this.state.users.length) {
             return <Loading />
         }
         return (
@@ -53,9 +53,9 @@ export default class UserListEntry extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.users.map(user => (
+                    {this.state.users.map((user, index) => (
                         <tr key={user.userId}>
-                            <td>--</td>
+                            <td>{(index + 1)}</td>
                             <td>{user.userId}</td>
                             <td>{user.username}</td>
                             <td>{user.password}</td>

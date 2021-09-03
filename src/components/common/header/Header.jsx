@@ -16,7 +16,7 @@ function Header () {
                     <section className="header-top__navigation">
                         <Navbar/>
                     </section>
-                    <hr className="header-top__seperator"/>
+                    {/*<hr className="header-top__seperator"/>*/}
                 </section>
             </section>
 

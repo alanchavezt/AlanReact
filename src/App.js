@@ -12,7 +12,7 @@ import { getToken, removeUserSession, setUserSession } from './utils/Common';
 import routes from "./components/users/routes";
 
 // Breadcrumbs Component
-const Breadcrumbs = lazy(() => import('./components/common/Breadcrumbs'));
+const Breadcrumbs = lazy(() => import('./components/common/breadcrumbs/Breadcrumbs'));
 
 // Login Component
 const Login = lazy(() => import('./components/login/Login'));

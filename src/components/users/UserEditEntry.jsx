@@ -76,8 +76,8 @@ export default class UserEditEntry extends React.Component {
                 <h1>Edit User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">
-                    <button type="button" className="btn btn-primary float-right" onClick={this.handleSave} disabled={!this.isFormValid()}>Save</button>
-                    <button type="button" className="btn btn-danger float-right" onClick={this.handleDelete}>Delete</button>
+                    <button type="button" className="btn btn-outline-primary float-right" onClick={this.handleSave} disabled={!this.isFormValid()}>Save</button>
+                    <button type="button" className="btn btn-outline-danger float-right mr-1" onClick={this.handleDelete}>Delete</button>
                 </div>
             </div>
         );

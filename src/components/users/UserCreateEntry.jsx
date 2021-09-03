@@ -57,8 +57,8 @@ export default class UserCreateEntry extends React.Component {
             <div style={{paddingTop: "40px"}}>
                 <h1>Add User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
-                <button type="submit" className="btn btn-primary float-right" onClick={this.handleCreate} disabled={!this.isFormValid()}>Create</button>
-                <button type="submit" className="btn btn-secondary float-right" onClick={this.handleCancel}>Cancel</button>
+                <button type="submit" className="btn btn-outline-primary float-right" onClick={this.handleCreate} disabled={!this.isFormValid()}>Create</button>
+                <button type="submit" className="btn btn-outline-secondary float-right mr-1" onClick={this.handleCancel}>Cancel</button>
             </div>
         );
     }

@@ -33,7 +33,7 @@ export default class UserListEntry extends React.Component {
                 <div className="row row-cols-2">
                     <div className="col"><h1 className="float-left">User List</h1></div>
                     <div className="col">
-                        <button type="submit" className="btn btn-primary float-right" onClick={this.onAddClick}>Add</button>
+                        <button type="submit" className="btn btn-outline-primary float-right" onClick={this.onAddClick}>Add</button>
                     </div>
                 </div>
 

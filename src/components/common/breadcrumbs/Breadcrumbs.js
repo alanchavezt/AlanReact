@@ -13,8 +13,8 @@ const Breadcrumbs = ({ crumbs }) => {
                 key + 1 === crumbs.length ? (
                     <span key={key}>{name}</span>
                 ) : (
-                    <React.Fragment>
-                        <Link key={key} to={path}>{name}</Link>
+                    <React.Fragment key={key}>
+                        <Link to={path}>{name}</Link>
                         <span> / </span>
                     </React.Fragment>
                 )

@@ -17,7 +17,6 @@ export default class UserListEntry extends React.Component {
         this.userService.getUsers().then(data => {
             let users = data;
             this.setState({users});
-            console.log(users);
         });
     }
 
@@ -30,11 +29,11 @@ export default class UserListEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div className="container" style={{padding: "40px"}}>
+            <div style={{paddingTop: "40px"}}>
                 <div className="row row-cols-2">
                     <div className="col"><h1 className="float-left">User List</h1></div>
                     <div className="col">
-                        <button type="submit" className="btn btn-primary float-right" onClick={this.onAddClick}>Add</button>
+                        <button type="submit" className="btn btn-outline-primary float-right" onClick={this.onAddClick}>Add</button>
                     </div>
                 </div>
 

@@ -16,7 +16,6 @@ export default class UserViewEntry extends React.Component {
         this.userService.getUser(this.props.match.params.id).then(data => {
             let user = data;
             this.setState({user});
-            console.log(user);
         });
     }
 
@@ -25,7 +24,7 @@ export default class UserViewEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div className="container" style={{padding: "40px"}}>
+            <div style={{paddingTop: "40px"}}>
                 <h1>User</h1>
                 <form>
                     <div className="form-group">
@@ -46,7 +45,7 @@ export default class UserViewEntry extends React.Component {
                     </div>
                     <div className="form-group">
                         <label className="float-left" htmlFor="middleName">Middle Name</label>
-                        <input type="text" className="form-control" id="middleName" value={this.state.user.middleName} readOnly={true}/>
+                        <input type="text" className="form-control" id="middleName" value={this.state.user.middleName || ""} readOnly={true}/>
                     </div>
                     <div className="form-group">
                         <label className="float-left" htmlFor="lastName">Last Name</label>
@@ -54,7 +53,7 @@ export default class UserViewEntry extends React.Component {
                     </div>
                     <div className="form-group">
                         <label className="float-left" htmlFor="email">Email address</label>
-                        <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={this.state.user.email} readOnly={true}/>
+                        <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={this.state.user.email || ""} readOnly={true}/>
                         <small id="emailHelp" className="form-text text-muted float-right">We'll never share your email
                             with anyone else.</small>
                     </div>

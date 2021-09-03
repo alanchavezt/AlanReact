@@ -17,7 +17,6 @@ export default class UserEditEntry extends React.Component {
         this.userService.getUser(this.props.match.params.id).then(data => {
             let user = data;
             this.setState({user});
-            console.log(user);
         });
     }
 
@@ -38,7 +37,6 @@ export default class UserEditEntry extends React.Component {
         const userId = this.state.user.userId;
 
         this.userService.deleteUser(userId).then(data => {
-            // window.location.href = "/users";
             window.location.pathname = `/users`;
         });
 
@@ -74,12 +72,12 @@ export default class UserEditEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div className="container" style={{padding: "40px"}}>
+            <div style={{paddingTop: "40px"}}>
                 <h1>Edit User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">
-                    <button type="button" className="btn btn-primary float-right" onClick={this.handleSave} disabled={!this.isFormValid()}>Save</button>
-                    <button type="button" className="btn btn-danger float-right" onClick={this.handleDelete}>Delete</button>
+                    <button type="button" className="btn btn-outline-primary float-right" onClick={this.handleSave} disabled={!this.isFormValid()}>Save</button>
+                    <button type="button" className="btn btn-outline-danger float-right mr-1" onClick={this.handleDelete}>Delete</button>
                 </div>
             </div>
         );

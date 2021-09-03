@@ -16,7 +16,6 @@ export default class UserViewEntry extends React.Component {
         this.userService.getUser(this.props.match.params.id).then(data => {
             let user = data;
             this.setState({user});
-            console.log(user);
         });
     }
 
@@ -25,7 +24,7 @@ export default class UserViewEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div className="container" style={{padding: "40px"}}>
+            <div style={{paddingTop: "40px"}}>
                 <h1>User</h1>
                 <form>
                     <div className="form-group">

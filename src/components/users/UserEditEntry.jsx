@@ -17,7 +17,6 @@ export default class UserEditEntry extends React.Component {
         this.userService.getUser(this.props.match.params.id).then(data => {
             let user = data;
             this.setState({user});
-            console.log(user);
         });
     }
 
@@ -38,7 +37,6 @@ export default class UserEditEntry extends React.Component {
         const userId = this.state.user.userId;
 
         this.userService.deleteUser(userId).then(data => {
-            // window.location.href = "/users";
             window.location.pathname = `/users`;
         });
 
@@ -74,7 +72,7 @@ export default class UserEditEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div className="container" style={{padding: "40px"}}>
+            <div style={{paddingTop: "40px"}}>
                 <h1>Edit User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">

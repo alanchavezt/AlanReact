@@ -4,7 +4,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 
 import { Header } from './components/common';
+
+// Authentication
 import { getToken, removeUserSession, setUserSession } from './utils/Common';
+
+// Routes
+import routes from "./components/users/routes";
+
+// Breadcrumbs Component
+const Breadcrumbs = lazy(() => import('./components/common/Breadcrumbs'));
 
 // Login Component
 const Login = lazy(() => import('./components/login/Login'));
@@ -20,11 +28,6 @@ const Contact = lazy(() => import('./components/contact/Contact'));
 
 const ItemView = lazy(() => import('./components/shop/ItemView'));
 
-// Users Component
-const UserListEntry = lazy(() => import('./components/users/UserListEntry'));
-const UserCreateEntry = lazy(() => import('./components/users/UserCreateEntry'));
-const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
-const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
 function App() {
     const [authLoading, setAuthLoading] = useState(true);
@@ -63,11 +66,45 @@ function App() {
                         <Route path="/contact" component={Contact}/>
 
                         {/*User routes*/}
-                        <Route path="/users" exact component={UserListEntry}/>
-                        {/*<PrivateRoute path="/users" exact component={UserListEntry}/>*/}
-                        <Route path="/users/create" exact component={UserCreateEntry}/>
-                        <Route path="/users/:id" exact component={UserViewEntry}/>
-                        <PrivateRoute path="/users/:id/edit" exact component={UserEditEntry}/>
+                        {/*<Route exact path="/users" component={UserListEntry}/>*/}
+                        {/*/!*<PrivateRoute path="/users" component={UserListEntry}/>*!/*/}
+                        {/*<Route exact path="/users/create" component={UserCreateEntry}/>*/}
+                        {/*<Route exact path="/users/:id" component={UserViewEntry}/>*/}
+                        {/*<Route exact path="/users/:id/edit" component={UserEditEntry}/>*/}
+                        {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
+
+                        {routes.map(({ path, name, Component }, key) => (
+                            <Route
+                                exact
+                                path={path}
+                                key={key}
+                                render={props => {
+                                    const crumbs = routes
+                                        // Get all routes that contain the current one.
+                                        .filter(({ path }) => props.match.path.includes(path))
+                                        // Swap out any dynamic routes with their param values.
+                                        // E.g. "/users/:userId" will become "/users/1"
+                                        .map(({ path, ...rest }) => ({
+                                            path: Object.keys(props.match.params).length
+                                                ? Object.keys(props.match.params).reduce(
+                                                    (path, param) => path.replace(
+                                                        `:${param}`, props.match.params[param]
+                                                    ), path
+                                                )
+                                                : path,
+                                            ...rest
+                                        }));
+                                    console.log(`Generated crumbs for ${props.match.path}`);
+                                    crumbs.map(({ name, path }) => console.log({ name, path }));
+                                    return (
+                                        <div className="container" style={{padding: "40px"}}>
+                                            <Breadcrumbs crumbs={crumbs}/>
+                                            <Component {...props} />
+                                        </div>
+                                    );
+                                }}
+                            />
+                        ))}
 
                         {/*Routing to an specific item*/}
                         <Route path="/shop/:id" component={ItemView}/>

@@ -6,9 +6,6 @@ function Navbar () {
 
     return (
         <section className="navbar">
-            <Link className="navbar-item" to='/login'>
-                <span>Login</span>
-            </Link>
             <Link className="navbar-item" to='/home'>
                 <span>Home</span>
             </Link>
@@ -32,6 +29,12 @@ function Navbar () {
             </Link>
             <Link className="navbar-item" to='/users'>
                 <span>Users</span>
+            </Link>
+            <Link className="navbar-item" to='/login'>
+                <span>Login</span>
+            </Link>
+            <Link className="navbar-item" to='/signup'>
+                <span>Sign up</span>
             </Link>
         </section>
     );

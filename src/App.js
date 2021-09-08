@@ -15,6 +15,7 @@ import routes from "./components/users/routes";
 const Breadcrumbs = lazy(() => import('./components/common/breadcrumbs/Breadcrumbs'));
 
 // Login Component
+const SignUp = lazy(() => import('./components/signup/SignUp'));
 const Login = lazy(() => import('./components/login/Login'));
 
 const PrivateRoute = lazy(() => import('./utils/PrivateRoute'));
@@ -56,6 +57,7 @@ function App() {
                 <Header></Header>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
+                        <Route path="/signup" exact component={SignUp}/>
                         <PublicRoute path="/login" exact component={Login}/>
                         <PrivateRoute path="/dashboard" exact component={Dashboard}/>
 

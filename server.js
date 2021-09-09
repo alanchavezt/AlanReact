@@ -124,7 +124,7 @@ app.use(function (req, res, next) {
         if (err) {
             return res.status(401).json({
                 error: true,
-                message: "Invalid user."
+                message: "(Unauthorized) Invalid user."
             });
         } else {
             //set the user to req so other routes can use it
@@ -135,10 +135,10 @@ app.use(function (req, res, next) {
 });
 
 // Error-handling middleware
-// app.use(function (err, req, res, next) {
-//     console.error(err.stack)
-//     res.status(500).send('Something broke!')
-// })
+app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+})
 
 // request handlers
 app.get('/', (req, res) => {
@@ -166,7 +166,7 @@ app.post('/users/signin', function (req, res) {
         password: password
     };
 
-    axios.post("http://localhost:8080/REST/signin", auth).then(response => {
+    axios.post("http://localhost:80qc80/REST/signin", auth).then(response => {
         const user = response.data;
 
         // return 401 status if the credential does not match.

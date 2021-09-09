@@ -29,7 +29,7 @@ const SignUp = (props) => {
         };
 
         signUpService.signUpUser(user).then(data => {
-            window.location.href = `/login`;
+            window.location.href = `/signin`;
         });
     }
 

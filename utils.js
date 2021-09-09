@@ -9,9 +9,11 @@ function generateToken(user) {
 
     let u = {
         userId: user.userId,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         username: user.username,
-        isAdmin: user.isAdmin
+        email: user.email
+        // isAdmin: user.isAdmin
     };
 
     return jwt.sign(u, process.env.JWT_SECRET, {
@@ -25,9 +27,10 @@ function getCleanUser(user) {
 
     return {
         userId: user.userId,
-        name: user.name,
-        username: user.username,
-        isAdmin: user.isAdmin
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+        // isAdmin: user.isAdmin
     };
 }
 

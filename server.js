@@ -18,6 +18,7 @@ const userData = {
     password: "123456",
     name: "Alan Chavez",
     username: "alanch",
+    email: "alanchavez1@gmail.com",
     isAdmin: true
 };
 
@@ -146,33 +147,49 @@ app.get('/', (req, res) => {
 });
 
 
-// validate the user credentials
+// Sign In request: validate the user credentials
 app.post('/users/signin', function (req, res) {
-    const user = req.body.username;
-    const pwd = req.body.password;
+    // const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // return 400 status if username/password does not exist
-    if (!user || !pwd) {
+    if (!email || !password) {
         return res.status(400).json({
             error: true,
             message: "Username or Password required."
         });
     }
 
-    // return 401 status if the credential does not match.
-    if (user !== userData.username || pwd !== userData.password) {
-        return res.status(401).json({
-            error: true,
-            message: "Username or Password is Wrong."
-        });
-    }
+    const auth = {
+        email: email,
+        password: password
+    };
 
-    // generate token
-    const token = utils.generateToken(userData);
-    // get basic user details
-    const userObj = utils.getCleanUser(userData);
-    // return the token along with user details
-    return res.json({ user: userObj, token });
+    axios.post("http://localhost:8080/REST/signin", auth).then(response => {
+        const user = response.data;
+
+        // return 401 status if the credential does not match.
+        if (email !== user.email || password !== user.password) {
+            return res.status(401).json({
+                error: true,
+                message: "Username or Password is Wrong."
+            });
+        }
+
+        res.status(200);
+        res.set("Connection", "close");
+
+        // generate token
+        const token = utils.generateToken(user);
+        // get basic user details
+        const userObj = utils.getCleanUser(user);
+        // return the token along with user details
+        return res.json({ user: userObj, token });
+        // res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred: " + error)
+    });
 });
 
 

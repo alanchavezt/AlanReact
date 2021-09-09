@@ -31,6 +31,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// Sign Up request API handlers
+app.post('/REST/signup', (req, res, next)=>{
+    console.log('user: ', req.body);
+    const user = req.body;
+
+    axios.post("http://localhost:8080/REST/signup", user).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
 // User request API handlers
 app.get('/REST/users', (req, res) => {
     axios.get("http://localhost:8080/REST/users").then(response => {

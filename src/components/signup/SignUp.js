@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import InputText from "../common/form/InputText";
-import UserService from "../users/UserService";
+import SignUpService from "./SignUpService";
 
 const SignUp = (props) => {
 
-    const userService = new UserService();
+    const signUpService = new SignUpService();
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -27,8 +27,8 @@ const SignUp = (props) => {
             confirmPassword: confirmPassword
         };
 
-        userService.createUser(user).then(data => {
-            window.location.href = `/users/${data.userId}/edit`;
+        signUpService.signUpUser(user).then(data => {
+            window.location.href = `/login`;
         });
     }
 

@@ -14,9 +14,9 @@ import routes from "./components/users/routes";
 // Breadcrumbs Component
 const Breadcrumbs = lazy(() => import('./components/common/breadcrumbs/Breadcrumbs'));
 
-// Login Component
+// SignIn Component
 const SignUp = lazy(() => import('./components/signup/SignUp'));
-const Login = lazy(() => import('./components/login/Login'));
+const SignIn = lazy(() => import('./components/signin/SignIn'));
 
 const PrivateRoute = lazy(() => import('./utils/PrivateRoute'));
 const PublicRoute = lazy(() => import('./utils/PublicRoute'));
@@ -58,7 +58,7 @@ function App() {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         <Route path="/signup" exact component={SignUp}/>
-                        <PublicRoute path="/login" exact component={Login}/>
+                        <PublicRoute path="/signin" exact component={SignIn}/>
                         <PrivateRoute path="/dashboard" exact component={Dashboard}/>
 
                         <Route path="/" exact component={Home}/>

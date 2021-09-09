@@ -30,8 +30,8 @@ function Navbar () {
             <Link className="navbar-item" to='/users'>
                 <span>Users</span>
             </Link>
-            <Link className="navbar-item" to='/login'>
-                <span>Login</span>
+            <Link className="navbar-item" to='/signin'>
+                <span>Sign In</span>
             </Link>
             <Link className="navbar-item" to='/signup'>
                 <span>Sign up</span>

@@ -1,0 +1,22 @@
+@media all and (min-width: 480px) {
+    .SignIn {
+        padding: 60px 0;
+    }
+
+    .SignIn form {
+        margin: 0 auto;
+        max-width: 320px;
+    }
+
+    .SignIn form h1 {
+        margin: 0 auto;
+        text-align: center;
+        padding: 15px 0 0;
+    }
+
+    .SignIn form p {
+        margin: 0 auto;
+        text-align: center;
+        padding: 0 0 15px;
+    }
+}

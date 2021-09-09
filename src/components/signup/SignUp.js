@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import InputText from "../common/form/InputText";
 import SignUpService from "./SignUpService";
+import "./SignUp.css";
 
 const SignUp = (props) => {
 
@@ -34,52 +35,54 @@ const SignUp = (props) => {
 
     return (
         <div className="container" style={{padding: "40px"}}>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <InputText
-                    label="First Name"
-                    id="firstName"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required={true}
-                />
-                <InputText
-                    label="Last Name"
-                    id="lastName"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e => setLastName(e.target.value))}
-                    required={true}
-                />
-                <InputText
-                    label="Email address"
-                    id="email"
-                    name="email"
-                    value={email}
-                    onChange={(e => setEmail(e.target.value))}
-                    required={true}
-                />
-                <InputText
-                    label="Password"
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={(e => setPassword(e.target.value))}
-                    required={true}
-                />
-                <InputText
-                    label="Confirm Password"
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e => setConfirmPassword(e.target.value))}
-                    required={true}
-                />
-                <button type="submit" className="btn btn-outline-primary btn-lg btn-block" disabled={!validateForm()}>Submit</button>
-            </form>
+            <div className="SignUp">
+                <form onSubmit={handleSubmit}>
+                    <h1>Sign Up</h1>
+                    <InputText
+                        label="First Name"
+                        id="firstName"
+                        name="firstName"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required={true}
+                    />
+                    <InputText
+                        label="Last Name"
+                        id="lastName"
+                        name="lastName"
+                        value={lastName}
+                        onChange={(e => setLastName(e.target.value))}
+                        required={true}
+                    />
+                    <InputText
+                        label="Email address"
+                        id="email"
+                        name="email"
+                        value={email}
+                        onChange={(e => setEmail(e.target.value))}
+                        required={true}
+                    />
+                    <InputText
+                        label="Password"
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={password}
+                        onChange={(e => setPassword(e.target.value))}
+                        required={true}
+                    />
+                    <InputText
+                        label="Confirm Password"
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={confirmPassword}
+                        onChange={(e => setConfirmPassword(e.target.value))}
+                        required={true}
+                    />
+                    <button type="submit" className="btn btn-outline-primary btn-lg btn-block" disabled={!validateForm()}>Submit</button>
+                </form>
+            </div>
         </div>
     );
 }

@@ -45,24 +45,29 @@ const Avatar = (props) => {
         return canvas.toDataURL("image/png");
     }
 
-    if(!avatar){
+    if(!avatar || !user){
         return <Loading/>;
     }
 
     return (
         <React.Fragment>
-            <div className="dropdown">
+            <div className="dropdown" type="button" data-toggle="dropdown">
                 <img
                     id="avatar"
-                    type="button"
-                    src={avatar} alt="Avatar"
-                    className="dropdown-toggle avatar"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    src={avatar}
+                    alt="Avatar"
+                    className="avatar"
                 />
+                <span className="dropdown-caret"></span>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="avatar">
+                    <a className="dropdown-item" href="#" style={{display: "block"}}>
+                        <span>Signed in as
+                            <strong> {user.email}</strong>
+                        </span>
+                    </a>
+                    <div role="none" className="dropdown-divider"/>
                     <a className="dropdown-item" href="#">Profile</a>
+                    <div role="none" className="dropdown-divider"/>
                     <a className="dropdown-item" href="#">Sign Out</a>
                 </div>
             </div>

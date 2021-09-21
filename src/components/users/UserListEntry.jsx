@@ -29,7 +29,7 @@ export default class UserListEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div style={{paddingTop: "40px"}}>
+            <div>
                 <div className="row row-cols-2">
                     <div className="col"><h1 className="float-left">User List</h1></div>
                     <div className="col">

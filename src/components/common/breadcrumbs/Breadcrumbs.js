@@ -9,18 +9,26 @@ const Breadcrumbs = ({ crumbs }) => {
     return (
         <div>
             {/* Link back to any previous steps of the breadcrumb. */}
-            {crumbs.map(({ name, path }, key) =>
-                key + 1 === crumbs.length ? (
-                    <span key={key}>{name}</span>
-                ) : (
-                    <React.Fragment key={key}>
-                        <Link to={path}>{name}</Link>
-                        <span> / </span>
-                    </React.Fragment>
-                )
-            )}
+            <nav aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                    {crumbs.map(({ name, path }, key) =>
+                        key + 1 === crumbs.length ? (
+                            <li key={key} className="breadcrumb-item">
+                                <span>{name}</span>
+                            </li>
+                        ) : (
+                            <React.Fragment key={key}>
+                                <li key={key} className="breadcrumb-item">
+                                    <Link to={path}>{name}</Link>
+                                </li>
+                            </React.Fragment>
+                        )
+                    )}
+                </ol>
+            </nav>
         </div>
     );
 };
 
 export default Breadcrumbs;
+

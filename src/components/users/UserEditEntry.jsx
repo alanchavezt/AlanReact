@@ -70,7 +70,7 @@ export default class UserEditEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div style={{paddingTop: "40px"}}>
+            <div style={{paddingTop: "20px"}}>
                 <h1>Edit User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">

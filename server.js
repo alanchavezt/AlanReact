@@ -14,9 +14,10 @@ const port = process.env.PORT || 4000;
 
 // static user details
 const userData = {
-    userId: "117711",
+    userId: "5ea7f096-a107-48e1-bb35-98c448778935",
     password: "123456",
-    name: "Alan Chavez",
+    firstName: "Alan",
+    lastName: "Chavez",
     username: "alanch",
     email: "alanchavez1@gmail.com",
     isAdmin: true
@@ -197,7 +198,7 @@ app.post('/users/signin', function (req, res) {
 app.get('/verifyToken', function (req, res) {
 
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token;
+    const token = req.body.token || req.query.token;
     if (!token) {
         return res.status(400).json({
             error: true,
@@ -220,7 +221,7 @@ app.get('/verifyToken', function (req, res) {
             });
         }
         // get basic user details
-        var userObj = utils.getCleanUser(userData);
+        const userObj = utils.getCleanUser(userData);
         return res.json({ user: userObj, token });
     });
 });

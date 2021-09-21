@@ -2,7 +2,7 @@ import React from 'react';
 import {getUser, removeUserSession} from '../../utils/Common';
 import "./Dashboard.css"
 
-function Dashboard(props) {
+const Dashboard = (props) => {
 
     const user = getUser();
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import './Navbar.css';
 import { Link } from "react-router-dom";
+import {getToken} from "../../../utils/Common";
+import Avatar from "../avatar";
 
 function Navbar () {
 
@@ -9,9 +11,12 @@ function Navbar () {
             <Link className="navbar-item" to='/home'>
                 <span>Home</span>
             </Link>
-            <Link className="navbar-item" to='/dashboard'>
-                <span>Dashboard</span>
-            </Link>
+            {getToken() ?
+                <Link className="navbar-item" to='/dashboard'>
+                    <span>Dashboard</span>
+                </Link>
+                : null
+            }
             <Link className="navbar-item" to='/about'>
                 <span>About</span>
             </Link>
@@ -27,15 +32,22 @@ function Navbar () {
             <Link className="navbar-item" to='/contact'>
                 <span>Contact</span>
             </Link>
-            <Link className="navbar-item" to='/users'>
-                <span>Users</span>
-            </Link>
+
+            {getToken() ?
+                <Link className="navbar-item" to='/users'>
+                    <span>Users</span>
+                </Link>
+                : null
+            }
+
             <Link className="navbar-item" to='/signin'>
                 <span>Sign In</span>
             </Link>
             <Link className="navbar-item" to='/signup'>
                 <span>Sign up</span>
             </Link>
+
+            <Avatar/>
         </section>
     );
 }

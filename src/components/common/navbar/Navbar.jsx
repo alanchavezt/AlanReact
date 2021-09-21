@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {getToken} from "../../../utils/Common";
 import Avatar from "../avatar";
 
-function Navbar () {
+const Navbar = (props) => {
 
     return (
         <section className="navbar">
@@ -50,6 +50,6 @@ function Navbar () {
             {getToken() ? <Avatar/> : null}
         </section>
     );
-}
+};
 
 export default Navbar;

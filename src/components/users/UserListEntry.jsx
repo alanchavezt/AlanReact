@@ -43,7 +43,7 @@ export default class UserListEntry extends React.Component {
                         <th colSpan="1">#</th>
                         <th colSpan="1">ID</th>
                         <th colSpan="1">Username</th>
-                        <th colSpan="1">Password</th>
+                        {/*<th colSpan="1">Password</th>*/}
                         <th colSpan="1">First Name</th>
                         <th colSpan="1">Middle Name</th>
                         <th colSpan="1">Last Name</th>
@@ -57,7 +57,7 @@ export default class UserListEntry extends React.Component {
                             <td>{(index + 1)}</td>
                             <td>{user.userId}</td>
                             <td>{user.username}</td>
-                            <td>{user.password}</td>
+                            {/*<td>{user.password}</td>*/}
                             <td><Link to={`users/${user.userId}`}>{user.firstName}</Link></td>
                             <td>{user.middleName}</td>
                             <td>{user.lastName}</td>

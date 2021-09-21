@@ -100,7 +100,7 @@ function App() {
                                             ...rest
                                         }));
 
-                                    console.log(`Generated crumbs for ${props.match.path}`);
+                                    // console.log(`Generated crumbs for ${props.match.path}`);
                                     crumbs.map(({ name, path }) => console.log({ name, path }));
 
                                     return (

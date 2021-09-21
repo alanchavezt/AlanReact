@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const utils = require('./utils');
 const axios = require("axios");
+const bcrypt = require('bcrypt');
 
 const app = express();
 const router = express.Router();
@@ -34,17 +35,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Sign Up request API handlers
-app.post('/REST/signup', (req, res, next)=>{
-    console.log('user: ', req.body);
-    const user = req.body;
+app.post('/REST/signup', async (req, res, next)=>{
 
-    axios.post("http://localhost:8080/REST/signup", user).then(response => {
-        res.status(200);
+    console.log('user: ', req.body);
+
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const user = req.body;
+        user.password = hashedPassword;
+        const response = await axios.post("http://localhost:8080/REST/signup", user);
+
+        // res.status(200);
+        res.status(201).send();
         res.set("Connection", "close");
         res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
 });
 
 // User request API handlers
@@ -86,17 +94,22 @@ app.put('/REST/users/:id', (req, res)=>{
 });
 
 
-app.post('/REST/users', (req, res, next)=>{
+app.post('/REST/users', async (req, res, next)=>{
     console.log('user: ', req.body);
-    const user = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const user = req.body;
+        user.password = hashedPassword;
+        const response = await axios.post("http://localhost:8080/REST/users", user);
 
-    axios.post("http://localhost:8080/REST/users", user).then(response => {
-        res.status(200);
+        // res.status(200);
+        res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
 });
 
 app.delete('/REST/users/:id', (req, res)=>{

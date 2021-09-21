@@ -31,10 +31,12 @@ const ItemView = lazy(() => import('./components/shop/ItemView'));
 
 
 function App() {
+
     const [authLoading, setAuthLoading] = useState(true);
 
     useEffect(() => {
         const token = getToken();
+
         if (!token) {
             return;
         }
@@ -51,6 +53,7 @@ function App() {
     if (authLoading && getToken()) {
         return <div className="content">Checking Authentication...</div>
     }
+
     return (
         <div className="App">
             <Router>
@@ -96,8 +99,10 @@ function App() {
                                                 : path,
                                             ...rest
                                         }));
+
                                     console.log(`Generated crumbs for ${props.match.path}`);
                                     crumbs.map(({ name, path }) => console.log({ name, path }));
+
                                     return (
                                         <div className="container" style={{padding: "40px"}}>
                                             <Breadcrumbs crumbs={crumbs}/>

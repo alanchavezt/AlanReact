@@ -16,9 +16,9 @@ const Avatar = (props) => {
             const lastName = user.lastName.charAt(0).toUpperCase();
             const initials = firstName.concat(lastName);
 
-            avatar = generateAvatar(initials, "white", "#007398");
+            avatar = generateAvatar(initials, "white", "#6c757d"); // #007398
         }else {
-            avatar = generateAvatar("", "white", "#007398");
+            avatar = generateAvatar("", "white", "#6c757d");
         }
 
         setAvatar(avatar);
@@ -50,7 +50,23 @@ const Avatar = (props) => {
     }
 
     return (
-        <img src={avatar} alt="Avatar" className="avatar" id="avatar"/>
+        <React.Fragment>
+            <div className="btn-group">
+                <img
+                    id="avatar"
+                    type="button"
+                    src={avatar} alt="Avatar"
+                    className="dropdown-toggle avatar"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                />
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="avatar">
+                    <a className="dropdown-item" href="#">Profile</a>
+                    <a className="dropdown-item" href="#">Sign Out</a>
+                </div>
+            </div>
+        </React.Fragment>
     );
 };
 

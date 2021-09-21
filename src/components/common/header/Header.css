@@ -44,7 +44,7 @@
     flex: 1;
     flex-direction: row;
     justify-content: flex-end;
-    margin-right: 55px;
+    /*margin-right: 55px;*/
 }
 
 .header-bottom {

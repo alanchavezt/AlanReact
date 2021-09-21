@@ -79,18 +79,25 @@ app.get('/REST/users/:id', (req, res) => {
     });
 });
 
-app.put('/REST/users/:id', (req, res)=>{
+app.put('/REST/users/:id', async (req, res)=>{
     console.log('id: ', req.params.id);
-    const userId = req.params.id;
-    const user = req.body;
 
-    axios.put("http://localhost:8080/REST/users/" + userId, user).then(response => {
-        res.status(200);
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const userId = req.params.id;
+        const user = req.body;
+        user.password = hashedPassword;
+
+        const response = await axios.put("http://localhost:8080/REST/users/" + userId, user);
+
+        // res.status(200);
+        res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
 });
 
 
@@ -162,7 +169,7 @@ app.get('/', (req, res) => {
 
 
 // Sign In request: validate the user credentials
-app.post('/users/signin', function (req, res) {
+app.post('/users/signin', async (req, res) => {
     // const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
@@ -180,30 +187,29 @@ app.post('/users/signin', function (req, res) {
         password: password
     };
 
-    axios.post("http://localhost:8080/REST/signin", auth).then(response => {
+    try {
+        const response = await axios.post("http://localhost:8080/REST/signin", auth);
         const user = response.data;
 
         // return 401 status if the credential does not match.
-        if (email !== user.email || password !== user.password) {
+        if(await bcrypt.compare(req.body.password, user.password)) {
+            res.status(200);
+            res.set("Connection", "close");
+
+            // generate token, get basic user details and return the token along with user details
+            const token = utils.generateToken(user);
+            const userObj = utils.getCleanUser(user);
+            return res.json({ user: userObj, token });
+        } else {
             return res.status(401).json({
                 error: true,
                 message: "Username or Password is Wrong."
             });
         }
-
-        res.status(200);
-        res.set("Connection", "close");
-
-        // generate token
-        const token = utils.generateToken(user);
-        // get basic user details
-        const userObj = utils.getCleanUser(user);
-        // return the token along with user details
-        return res.json({ user: userObj, token });
-        // res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred: " + error)
-    });
+    } catch(error) {
+        res.status(500);
+        res.json("Error occurred: " + error);
+    };
 });
 
 
@@ -212,6 +218,7 @@ app.get('/verifyToken', function (req, res) {
 
     // check header or url parameters or post parameters for token
     const token = req.body.token || req.query.token;
+
     if (!token) {
         return res.status(400).json({
             error: true,

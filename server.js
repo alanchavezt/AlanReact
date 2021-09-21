@@ -182,13 +182,8 @@ app.post('/users/signin', async (req, res) => {
         });
     }
 
-    const auth = {
-        email: email,
-        password: password
-    };
-
     try {
-        const response = await axios.post("http://localhost:8080/REST/signin", auth);
+        const response = await axios.post("http://localhost:8080/REST/signin", {email, password});
         const user = response.data;
 
         // return 401 status if the credential does not match.
@@ -196,6 +191,7 @@ app.post('/users/signin', async (req, res) => {
             res.status(200);
             res.set("Connection", "close");
 
+            // todo save token in the database
             // generate token, get basic user details and return the token along with user details
             const token = utils.generateToken(user);
             const userObj = utils.getCleanUser(user);
@@ -233,6 +229,7 @@ app.get('/verifyToken', function (req, res) {
             message: "Invalid token."
         });
 
+        // todo: retrieve the token from the database and compare tokens
         // return 401 status if the userId does not match.
         if (user.userId !== userData.userId) {
             return res.status(401).json({
@@ -240,7 +237,7 @@ app.get('/verifyToken', function (req, res) {
                 message: "Invalid user."
             });
         }
-        // get basic user details
+
         const userObj = utils.getCleanUser(userData);
         return res.json({ user: userObj, token });
     });

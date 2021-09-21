@@ -47,7 +47,7 @@ function Navbar () {
                 <span>Sign up</span>
             </Link>
 
-            <Avatar/>
+            {getToken() ? <Avatar/> : null}
         </section>
     );
 }

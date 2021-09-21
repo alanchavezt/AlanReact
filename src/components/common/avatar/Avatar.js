@@ -51,7 +51,7 @@ const Avatar = (props) => {
 
     return (
         <React.Fragment>
-            <div className="btn-group">
+            <div className="dropdown">
                 <img
                     id="avatar"
                     type="button"

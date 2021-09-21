@@ -14,9 +14,9 @@ code {
 
 body {
   margin: 0;
-  font-family: 'Optima', 'RobotoRegular', 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Optima', 'Optima Bold', 'RobotoRegular', 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,6 +34,11 @@ body {
 @font-face {
   font-family: 'Optima';
   src: url('./fonts/optima/OPTIMA.ttf');
+}
+
+@font-face {
+  font-family: 'Optima Bold';
+  src: url('./fonts/optima/OPTIMA_B.ttf');
 }
 
 .header {

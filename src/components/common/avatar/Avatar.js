@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./Avatar.css"
 import Loading from "../Loading";
-import {getUser} from "../../../utils/Common";
+import {getUser, removeUserSession} from "../../../utils/Common";
 
 const Avatar = (props) => {
 
@@ -45,20 +45,28 @@ const Avatar = (props) => {
         return canvas.toDataURL("image/png");
     }
 
+    const handleSingOut = () => {
+        removeUserSession();
+        // props.history.push('/signin');
+        window.location.href = "/signin";
+    }
+
     if(!avatar || !user){
         return <Loading/>;
     }
 
     return (
         <React.Fragment>
-            <div className="dropdown" type="button" data-toggle="dropdown">
-                <img
-                    id="avatar"
-                    src={avatar}
-                    alt="Avatar"
-                    className="avatar"
-                />
-                <span className="dropdown-caret"></span>
+            <div className="dropdown">
+                <div className="dropdown" data-toggle="dropdown">
+                    <img
+                        id="avatar"
+                        src={avatar}
+                        alt="Avatar"
+                        className="avatar"
+                    />
+                    <span className="dropdown-caret"/>
+                </div>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="avatar">
                     <a className="dropdown-item" href="#" style={{display: "block"}}>
                         <span>Signed in as
@@ -68,7 +76,7 @@ const Avatar = (props) => {
                     <div role="none" className="dropdown-divider"/>
                     <a className="dropdown-item" href="#">Profile</a>
                     <div role="none" className="dropdown-divider"/>
-                    <a className="dropdown-item" href="#">Sign Out</a>
+                    <a className="dropdown-item" onClick={handleSingOut}>Sign Out</a>
                 </div>
             </div>
         </React.Fragment>

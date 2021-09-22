@@ -22,7 +22,9 @@ const SignIn = (props) => {
         axios.post('http://localhost:4000/users/signin', {email: email, password: password}).then(response => {
             setLoading(false);
             setUserSession(response.data.token, response.data.user);
-            props.history.push('/dashboard');
+            // todo: check the difference between push and href
+            // props.history.push('/dashboard');
+            window.location.href = "/dashboard";
         }).catch(error => {
             setLoading(false);
             if (error.response.status === 401) setError(error.response.data.message);
@@ -35,7 +37,7 @@ const SignIn = (props) => {
             <div className="SignIn">
                 <form>
                     <h1>Sign In</h1>
-                    <p>(Access without token only)</p>
+                    {/*<p>(Access without token only)</p>*/}
 
                     <InputText
                         label="Email address"

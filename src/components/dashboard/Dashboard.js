@@ -8,7 +8,8 @@ const Dashboard = (props) => {
 
     const handleSingOut = () => {
         removeUserSession();
-        props.history.push('/signin');
+        // props.history.push('/signin');
+        window.location.href = "/signin";
     }
 
     return (

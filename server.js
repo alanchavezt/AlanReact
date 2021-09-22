@@ -135,7 +135,7 @@ app.delete('/REST/users/:id', (req, res)=>{
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
 //In all future routes, this helps to know if the request is authenticated or not.
-app.use(function (req, res, next) {
+app.use( (req, res, next) => {
     // check header or url parameters or post parameters for token
     let token = req.headers['authorization'];
     if (!token) return next(); //if no token, continue
@@ -169,7 +169,7 @@ app.get('/', (req, res) => {
 
 
 // Sign In request: validate the user credentials
-app.post('/users/signin', async (req, res) => {
+app.post('/REST/auth/signin', async (req, res) => {
     // const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;

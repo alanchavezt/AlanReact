@@ -43,8 +43,8 @@ body {
 
 .header {
   padding: 10px;
-  background: #e0e0e0;
-  border-bottom: 1px solid #999;
+  background: #343a40 !important;
+  color: white;
 }
 .header a {
   /*color: #0072ff;*/

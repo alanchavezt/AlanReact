@@ -14,7 +14,7 @@ const SignIn = (props) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = () => {
+    const handleSignIn = () => {
         setError(null);
         setLoading(true);
 
@@ -67,7 +67,7 @@ const SignIn = (props) => {
                         type="submit"
                         className="btn btn-outline-primary btn-lg btn-block"
                         value={loading ? 'Loading...' : 'Login'}
-                        onClick={handleLogin}
+                        onClick={handleSignIn}
                         disabled={loading}
                     >Sign In
                     </button>
@@ -89,7 +89,7 @@ const SignIn = (props) => {
                     {/*)}*/}
 
                     {/*<br />*/}
-                    {/*<input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br/>*/}
+                    {/*<input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleSignIn} disabled={loading} /><br/>*/}
                 </form>
             </div>
         </div>

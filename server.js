@@ -57,12 +57,16 @@ app.post('/REST/signup', async (req, res, next)=>{
 
 // User request API handlers
 app.get('/REST/users', (req, res) => {
-    axios.get("http://localhost:8080/REST/users").then(response => {
+    axios.get("http://localhost:8080/REST/users",{
+        headers: {
+            'authorization': "Bearer " + req.headers.authorization
+        }
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
     }).catch(error => {
-        res.json("Error occurred!")
+        res.json("Error occurred: " + error);
     });
 });
 
@@ -139,20 +143,21 @@ app.use( (req, res, next) => {
     // check header or url parameters or post parameters for token
     let token = req.headers['authorization'];
     if (!token) return next(); //if no token, continue
+    next();
 
-    token = token.replace('Bearer ', '');
-    jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-        if (err) {
-            return res.status(401).json({
-                error: true,
-                message: "(Unauthorized) Invalid user."
-            });
-        } else {
-            //set the user to req so other routes can use it
-            req.user = user;
-            next();
-        }
-    });
+    // token = token.replace('Bearer ', '');
+    // jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+    //     if (err) {
+    //         return res.status(401).json({
+    //             error: true,
+    //             message: "(Unauthorized) Invalid user."
+    //         });
+    //     } else {
+    //         //set the user to req so other routes can use it
+    //         req.user = user;
+    //         next();
+    //     }
+    // });
 });
 
 // Error-handling middleware
@@ -183,25 +188,29 @@ app.post('/REST/auth/signin', async (req, res) => {
     }
 
     try {
-        const response = await axios.post("http://localhost:8080/REST/signin", {email, password});
-        const user = response.data;
+        const response = await axios.post("http://localhost:8080/REST/signin/auth", {email, password});
+        const token = response.data.token;
+        const user = response.data.user;
+
+        // const userObj = utils.getCleanUser(user);
+        return res.json({user, token});
 
         // return 401 status if the credential does not match.
-        if(await bcrypt.compare(req.body.password, user.password)) {
-            res.status(200);
-            res.set("Connection", "close");
-
-            // todo save token in the database
-            // generate token, get basic user details and return the token along with user details
-            const token = utils.generateToken(user);
-            const userObj = utils.getCleanUser(user);
-            return res.json({ user: userObj, token });
-        } else {
-            return res.status(401).json({
-                error: true,
-                message: "Username or Password is Wrong."
-            });
-        }
+        // if(await bcrypt.compare(req.body.password, user.password)) {
+        //     res.status(200);
+        //     res.set("Connection", "close");
+        //
+        //     // todo save token in the database
+        //     // generate token, get basic user details and return the token along with user details
+        //     const token = utils.generateToken(user);
+        //     const userObj = utils.getCleanUser(user);
+        //     return res.json({user: userObj, token});
+        // } else {
+        //     return res.status(401).json({
+        //         error: true,
+        //         message: "Username or Password is Wrong."
+        //     });
+        // }
     } catch(error) {
         res.status(500);
         res.json("Error occurred: " + error);
@@ -222,25 +231,27 @@ app.get('/verifyToken', function (req, res) {
         });
     }
 
+    return res.json({ user: {}, token });
+
     // check token that was passed by decoding token using secret
-    jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-        if (err) return res.status(401).json({
-            error: true,
-            message: "Invalid token."
-        });
-
-        // todo: retrieve the token from the database and compare tokens
-        // return 401 status if the userId does not match.
-        if (user.userId !== userData.userId) {
-            return res.status(401).json({
-                error: true,
-                message: "Invalid user."
-            });
-        }
-
-        const userObj = utils.getCleanUser(userData);
-        return res.json({ user: userObj, token });
-    });
+    // jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+    //     if (err) return res.status(401).json({
+    //         error: true,
+    //         message: "Invalid token."
+    //     });
+    //
+    //     // todo: retrieve the token from the database and compare tokens
+    //     // return 401 status if the userId does not match.
+    //     if (user.userId !== userData.userId) {
+    //         return res.status(401).json({
+    //             error: true,
+    //             message: "Invalid user."
+    //         });
+    //     }
+    //
+    //     const userObj = utils.getCleanUser(userData);
+    //     return res.json({ user: userObj, token });
+    // });
 });
 
 app.listen(port, () => {

@@ -43,7 +43,7 @@ function App() {
         }
 
         axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
-            setUserSession(response.data.token, response.data.user);
+            // setUserSession(response.data.token, response.data.user);
             setAuthLoading(false);
         }).catch(error => {
             removeUserSession();

@@ -40,9 +40,10 @@ app.post('/REST/signup', async (req, res, next)=>{
     console.log('user: ', req.body);
 
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = req.body;
-        user.password = hashedPassword;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
         const response = await axios.post("http://localhost:8080/REST/signup", user);
 
         // res.status(200);
@@ -188,7 +189,7 @@ app.post('/REST/auth/signin', async (req, res) => {
     }
 
     try {
-        const response = await axios.post("http://localhost:8080/REST/signin/auth", {email, password});
+        const response = await axios.post("http://localhost:8080/REST/auth", {email, password});
         const token = response.data.token;
         const user = response.data.user;
 

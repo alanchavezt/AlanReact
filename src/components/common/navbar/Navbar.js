@@ -7,8 +7,8 @@ import Avatar from "../avatar";
 const Navbar = (props) => {
 
     return (
-        <section className="navbar">
-            <div className="navbar-flex-item-container">
+        <section className="navbar-top">
+            <div className="navbar-top-item">
                 <Link className="navbar-item" to='/home'>
                     <span>Home</span>
                 </Link>
@@ -29,7 +29,7 @@ const Navbar = (props) => {
                 </Link>
             </div>
 
-            <div className="navbar-flex-item-container">
+            <div className="navbar-top-item">
                 {getToken() ?
                     <React.Fragment>
                         <Link className="navbar-item" to='/dashboard'>
@@ -57,7 +57,7 @@ const Navbar = (props) => {
                 {getToken() ? <div className="navbar-item"><Avatar/></div> : null}
             </div>
 
-            {/*<div className="navbar-flex-item-container">*/}
+            {/*<div className="navbar-top-item">*/}
             {/*    {getToken() ? <div className="navbar-item"><Avatar/></div> : null}*/}
             {/*</div>*/}
         </section>

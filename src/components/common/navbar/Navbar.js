@@ -7,7 +7,7 @@ import Avatar from "../avatar";
 const Navbar = (props) => {
 
     return (
-        <section className="navbar-top">
+        <div className="navbar">
             <div className="navbar-top-item">
                 <Link className="navbar-item" to='/home'>
                     <span>Home</span>
@@ -60,7 +60,7 @@ const Navbar = (props) => {
             {/*<div className="navbar-top-item">*/}
             {/*    {getToken() ? <div className="navbar-item"><Avatar/></div> : null}*/}
             {/*</div>*/}
-        </section>
+        </div>
     );
 };
 

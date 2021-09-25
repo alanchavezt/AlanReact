@@ -58,7 +58,7 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <Header></Header>
+                <Header/>
 
                 {/*todo: add the side bar to display the admin pages list*/}
                 {/*<Sidebar/>*/}

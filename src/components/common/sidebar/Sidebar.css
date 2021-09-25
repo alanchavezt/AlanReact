@@ -1,0 +1,14 @@
+.sidebar {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    height: 100%;
+    width: 285px;
+    bottom: 0;
+    transition: all ease-in-out 0.5s;
+    z-index: 9997;
+    padding: 0 15px;
+    background-color: #212529;
+    overflow-y: auto;
+    color: white
+}

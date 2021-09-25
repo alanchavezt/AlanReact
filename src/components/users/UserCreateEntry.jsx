@@ -54,7 +54,7 @@ export default class UserCreateEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div style={{paddingTop: "40px"}}>
+            <div style={{paddingTop: "20px"}}>
                 <h1>Add User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <button type="submit" className="btn btn-outline-primary float-right" onClick={this.handleCreate} disabled={!this.isFormValid()}>Create</button>

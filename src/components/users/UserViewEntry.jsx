@@ -24,7 +24,7 @@ export default class UserViewEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div style={{paddingTop: "40px"}}>
+            <div style={{paddingTop: "20px"}}>
                 <h1>User</h1>
                 <form>
                     <div className="form-group">

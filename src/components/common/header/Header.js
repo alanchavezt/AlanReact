@@ -1,9 +1,8 @@
 import React from 'react';
 import { Navbar } from '../../common';
-
 import './Header.css';
 
-function Header () {
+const Header = (props) => {
     return (
         <section className="header">
             {/*Header Top section*/}
@@ -11,12 +10,9 @@ function Header () {
                 <section className="header-top__logo">
                     <a href="/" className="header-logo">AC</a>
                 </section>
-                {/*<hr style={{borderRight: "1px solid"}}/>*/}
+
                 <section className="header-top__navbar">
-                    <section className="header-top__navigation">
-                        <Navbar/>
-                    </section>
-                    {/*<hr className="header-top__seperator"/>*/}
+                    <Navbar/>
                 </section>
             </section>
 

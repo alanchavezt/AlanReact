@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const utils = require('./utils');
 const axios = require("axios");
+const bcrypt = require('bcrypt');
 
 const app = express();
 const router = express.Router();
@@ -14,10 +15,12 @@ const port = process.env.PORT || 4000;
 
 // static user details
 const userData = {
-    userId: "117711",
+    userId: "5ea7f096-a107-48e1-bb35-98c448778935",
     password: "123456",
-    name: "Alan Chavez",
+    firstName: "Alan",
+    lastName: "Chavez",
     username: "alanch",
+    email: "alanchavez1@gmail.com",
     isAdmin: true
 };
 
@@ -31,14 +34,41 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// Sign Up request API handlers
+app.post('/REST/signup', async (req, res, next)=>{
+
+    console.log('user: ', req.body);
+
+    try {
+        const user = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.post("http://localhost:8080/REST/signup", user);
+
+        // res.status(200);
+        res.status(201).send();
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
 // User request API handlers
 app.get('/REST/users', (req, res) => {
-    axios.get("http://localhost:8080/REST/users").then(response => {
+    // axios.get("http://localhost:8080/REST/users",{
+    //     headers: {
+    //         'authorization': "Bearer " + req.headers.authorization
+    //     }
+    // }).then(response => {
+    axios.get("http://localhost:8080/REST/users",).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
     }).catch(error => {
-        res.json("Error occurred!")
+        res.json("Error occurred: " + error);
     });
 });
 
@@ -55,32 +85,46 @@ app.get('/REST/users/:id', (req, res) => {
     });
 });
 
-app.put('/REST/users/:id', (req, res)=>{
+app.put('/REST/users/:id', async (req, res)=>{
     console.log('id: ', req.params.id);
-    const userId = req.params.id;
-    const user = req.body;
 
-    axios.put("http://localhost:8080/REST/users/" + userId, user).then(response => {
-        res.status(200);
+    try {
+        const userId = req.params.id;
+        const user = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.put("http://localhost:8080/REST/users/" + userId, user);
+
+        // res.status(200);
+        res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
 });
 
 
-app.post('/REST/users', (req, res, next)=>{
+app.post('/REST/users', async (req, res, next)=>{
     console.log('user: ', req.body);
-    const user = req.body;
 
-    axios.post("http://localhost:8080/REST/users", user).then(response => {
-        res.status(200);
+    try {
+        const user = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.post("http://localhost:8080/REST/users", user);
+
+        // res.status(200);
+        res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
 });
 
 app.delete('/REST/users/:id', (req, res)=>{
@@ -99,31 +143,32 @@ app.delete('/REST/users/:id', (req, res)=>{
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
 //In all future routes, this helps to know if the request is authenticated or not.
-app.use(function (req, res, next) {
+app.use( (req, res, next) => {
     // check header or url parameters or post parameters for token
     let token = req.headers['authorization'];
     if (!token) return next(); //if no token, continue
+    next();
 
-    token = token.replace('Bearer ', '');
-    jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-        if (err) {
-            return res.status(401).json({
-                error: true,
-                message: "Invalid user."
-            });
-        } else {
-            //set the user to req so other routes can use it
-            req.user = user;
-            next();
-        }
-    });
+    // token = token.replace('Bearer ', '');
+    // jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+    //     if (err) {
+    //         return res.status(401).json({
+    //             error: true,
+    //             message: "(Unauthorized) Invalid user."
+    //         });
+    //     } else {
+    //         //set the user to req so other routes can use it
+    //         req.user = user;
+    //         next();
+    //     }
+    // });
 });
 
 // Error-handling middleware
-// app.use(function (err, req, res, next) {
-//     console.error(err.stack)
-//     res.status(500).send('Something broke!')
-// })
+app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+})
 
 // request handlers
 app.get('/', (req, res) => {
@@ -132,33 +177,48 @@ app.get('/', (req, res) => {
 });
 
 
-// validate the user credentials
-app.post('/users/signin', function (req, res) {
-    const user = req.body.username;
-    const pwd = req.body.password;
+// Sign In request: validate the user credentials
+app.post('/REST/auth/signin', async (req, res) => {
+    // const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
 
     // return 400 status if username/password does not exist
-    if (!user || !pwd) {
+    if (!email || !password) {
         return res.status(400).json({
             error: true,
             message: "Username or Password required."
         });
     }
 
-    // return 401 status if the credential does not match.
-    if (user !== userData.username || pwd !== userData.password) {
-        return res.status(401).json({
-            error: true,
-            message: "Username or Password is Wrong."
-        });
-    }
+    try {
+        const response = await axios.post("http://localhost:8080/REST/auth", {email, password});
+        const token = response.data.token;
+        const user = response.data.user;
 
-    // generate token
-    const token = utils.generateToken(userData);
-    // get basic user details
-    const userObj = utils.getCleanUser(userData);
-    // return the token along with user details
-    return res.json({ user: userObj, token });
+        // const userObj = utils.getCleanUser(user);
+        return res.json({user, token});
+
+        // return 401 status if the credential does not match.
+        // if(await bcrypt.compare(req.body.password, user.password)) {
+        //     res.status(200);
+        //     res.set("Connection", "close");
+        //
+        //     // todo save token in the database
+        //     // generate token, get basic user details and return the token along with user details
+        //     const token = utils.generateToken(user);
+        //     const userObj = utils.getCleanUser(user);
+        //     return res.json({user: userObj, token});
+        // } else {
+        //     return res.status(401).json({
+        //         error: true,
+        //         message: "Username or Password is Wrong."
+        //     });
+        // }
+    } catch(error) {
+        res.status(500);
+        res.json("Error occurred: " + error);
+    };
 });
 
 
@@ -166,7 +226,8 @@ app.post('/users/signin', function (req, res) {
 app.get('/verifyToken', function (req, res) {
 
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token;
+    const token = req.body.token || req.query.token;
+
     if (!token) {
         return res.status(400).json({
             error: true,
@@ -174,24 +235,27 @@ app.get('/verifyToken', function (req, res) {
         });
     }
 
-    // check token that was passed by decoding token using secret
-    jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-        if (err) return res.status(401).json({
-            error: true,
-            message: "Invalid token."
-        });
+    return res.json({ user: {}, token });
 
-        // return 401 status if the userId does not match.
-        if (user.userId !== userData.userId) {
-            return res.status(401).json({
-                error: true,
-                message: "Invalid user."
-            });
-        }
-        // get basic user details
-        var userObj = utils.getCleanUser(userData);
-        return res.json({ user: userObj, token });
-    });
+    // check token that was passed by decoding token using secret
+    // jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+    //     if (err) return res.status(401).json({
+    //         error: true,
+    //         message: "Invalid token."
+    //     });
+    //
+    //     // todo: retrieve the token from the database and compare tokens
+    //     // return 401 status if the userId does not match.
+    //     if (user.userId !== userData.userId) {
+    //         return res.status(401).json({
+    //             error: true,
+    //             message: "Invalid user."
+    //         });
+    //     }
+    //
+    //     const userObj = utils.getCleanUser(userData);
+    //     return res.json({ user: userObj, token });
+    // });
 });
 
 app.listen(port, () => {

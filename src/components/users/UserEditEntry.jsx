@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './Users.css';
 import UserFormEntry from './UserFormEntry';
 import UserService from "./UserService";
 import Loading from "../common/Loading";
+import {confirm} from "../common/modal/confirm";
 
 export default class UserEditEntry extends React.Component {
 
@@ -10,7 +11,9 @@ export default class UserEditEntry extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            modalShow: false
+        };
     }
 
     componentDidMount() {
@@ -35,18 +38,13 @@ export default class UserEditEntry extends React.Component {
 
     handleDelete = (e) => {
         const userId = this.state.user.userId;
-
-        this.userService.deleteUser(userId).then(data => {
-            window.location.pathname = `/users`;
-        });
-
-        // confirm("Are you sure you want to delete this user?", (res) => {
-        //     if (res) {
-        //         this.http.delete(`/api/edit/user/${this.props.itemSummaries.user.id}`).then(res => {
-        //             window.location.pathname = `/admin/user/admin/all`;
-        //         });
-        //     }
-        // })
+        confirm("Are you sure you want to delete this user?", (res) => {
+            if (res) {
+                this.userService.deleteUser(userId).then(data => {
+                    window.location.pathname = `/users`;
+                });
+            }
+        })
     }
 
     isFormValid = () => {
@@ -72,7 +70,7 @@ export default class UserEditEntry extends React.Component {
             return <Loading />
         }
         return (
-            <div style={{paddingTop: "40px"}}>
+            <div style={{paddingTop: "20px"}}>
                 <h1>Edit User</h1>
                 <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
                 <div className="form-group">

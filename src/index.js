@@ -1,9 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from "axios";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import "bootstrap/dist/css/bootstrap.css";
+import {getToken} from "./utils/Common";
+
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+
+
+axios.interceptors.request.use(
+    request => {
+        const token = getToken();
+        request.headers.Authorization = token || null;
+        return request;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 ReactDOM.render(
   <React.StrictMode>

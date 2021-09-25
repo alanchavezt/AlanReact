@@ -14,9 +14,9 @@ code {
 
 body {
   margin: 0;
-  font-family: 'RobotoRegular', 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Optima', 'Optima Bold', 'RobotoRegular', 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,19 +31,29 @@ body {
   src: url('./fonts/Roboto-Thin.ttf');
 }
 
+@font-face {
+  font-family: 'Optima';
+  src: url('./fonts/optima/OPTIMA.ttf');
+}
+
+@font-face {
+  font-family: 'Optima Bold';
+  src: url('./fonts/optima/OPTIMA_B.ttf');
+}
+
 .header {
   padding: 10px;
-  background: #e0e0e0;
-  border-bottom: 1px solid #999;
+  background: #343a40 !important;
+  color: white;
 }
 .header a {
-  color: #0072ff;
+  /*color: #0072ff;*/
   text-decoration: none;
-  margin-left: 20px;
-  margin-right: 5px;
+  /*margin-left: 20px;*/
+  /*margin-right: 5px;*/
 }
 .header a:hover {
-  color: #8a0f53;
+  /*color: #8a0f53;*/
 }
 .header small {
   color: #666;

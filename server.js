@@ -12,19 +12,8 @@ const bcrypt = require('bcrypt');
 const app = express();
 const router = express.Router();
 const port = process.env.PORT || 4000;
-
 const API = "http://localhost:8080";
 
-// static user details
-const userData = {
-    userId: "5ea7f096-a107-48e1-bb35-98c448778935",
-    password: "123456",
-    firstName: "Alan",
-    lastName: "Chavez",
-    username: "alanch",
-    email: "alanchavez1@gmail.com",
-    isAdmin: true
-};
 
 // enable CORS
 app.use(cors());

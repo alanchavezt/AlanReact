@@ -13,6 +13,8 @@ const app = express();
 const router = express.Router();
 const port = process.env.PORT || 4000;
 
+const API = "http://localhost:8080";
+
 // static user details
 const userData = {
     userId: "5ea7f096-a107-48e1-bb35-98c448778935",
@@ -36,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Sign Up request API handlers
 app.post('/REST/signup', async (req, res, next)=>{
-
     console.log('user: ', req.body);
 
     try {
@@ -56,14 +57,16 @@ app.post('/REST/signup', async (req, res, next)=>{
     }
 });
 
+
+
+
 // User request API handlers
 app.get('/REST/users', (req, res) => {
-    // axios.get("http://localhost:8080/REST/users",{
-    //     headers: {
-    //         'authorization': "Bearer " + req.headers.authorization
-    //     }
-    // }).then(response => {
-    axios.get("http://localhost:8080/REST/users",).then(response => {
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.get(`${API}/REST/users`,{
+        headers: {'authorization': authorization}
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
@@ -75,8 +78,11 @@ app.get('/REST/users', (req, res) => {
 app.get('/REST/users/:id', (req, res) => {
     console.log('User ID:', req.params.id)
     const userId =  req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
 
-    axios.get("http://localhost:8080/REST/users/" + userId).then(response => {
+    axios.get(`${API}/REST/users/${userId}`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
@@ -87,6 +93,7 @@ app.get('/REST/users/:id', (req, res) => {
 
 app.put('/REST/users/:id', async (req, res)=>{
     console.log('id: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
 
     try {
         const userId = req.params.id;
@@ -94,7 +101,9 @@ app.put('/REST/users/:id', async (req, res)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.put("http://localhost:8080/REST/users/" + userId, user);
+        const response = await axios.put(`${API}/REST/users/${userId}`, user, {
+            headers: {'authorization': authorization}
+        });
 
         // res.status(200);
         res.status(201);
@@ -109,13 +118,16 @@ app.put('/REST/users/:id', async (req, res)=>{
 
 app.post('/REST/users', async (req, res, next)=>{
     console.log('user: ', req.body);
+    const authorization = "Bearer " + req.headers.authorization;
 
     try {
         const user = req.body;
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.post("http://localhost:8080/REST/users", user);
+        const response = await axios.post(`${API}/REST/users`, user, {
+            headers: {'authorization': authorization}
+        });
 
         // res.status(200);
         res.status(201);
@@ -130,8 +142,11 @@ app.post('/REST/users', async (req, res, next)=>{
 app.delete('/REST/users/:id', (req, res)=>{
     console.log('userId: ', req.params.id);
     const userId = req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
 
-    axios.delete(`http://localhost:8080/REST/users/${userId}`).then(response => {
+    axios.delete(`${API}/REST/users/${userId}`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);

@@ -30,18 +30,6 @@ const Navbar = (props) => {
             </div>
 
             <div className="navbar-top-item">
-                {getToken() ?
-                    <React.Fragment>
-                        <Link className="navbar-item" to='/dashboard'>
-                            <span>Dashboard</span>
-                        </Link>
-                        <Link className="navbar-item" to='/users'>
-                            <span>Users</span>
-                        </Link>
-                    </React.Fragment>
-                    : null
-                }
-
                 {!getToken() ?
                     <React.Fragment>
                         <Link className="navbar-item" to='/signin'>

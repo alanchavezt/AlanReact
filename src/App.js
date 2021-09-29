@@ -101,7 +101,7 @@ function App() {
                         </nav>
                     </div>
 
-                    <section>
+                    <section id="layoutSidenav_content">
                         <Suspense fallback={<div>Loading...</div>}>
                             <Switch>
                                 <Route path="/signup" exact component={SignUp}/>

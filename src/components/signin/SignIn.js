@@ -19,7 +19,7 @@ const SignIn = (props) => {
         setLoading(true);
 
         // axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
-        axios.post('/REST/auth/signin', {email: email, password: password}).then(response => {
+        axios.post('/API/auth/signin', {email: email, password: password}).then(response => {
             setLoading(false);
             setUserSession(response.data.token, response.data.user);
             // todo: check the difference between push and href

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default class UserService {
 
-    apiEndpoint = "/REST/users";
+    apiEndpoint = "/API/users";
 
     createUser(user) {
         return axios.post(`${this.apiEndpoint}`, user).then(res => res.data);

@@ -1,7 +1,7 @@
 import './App.css';
 import './css/styles.css';
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Link, Routes, Route} from "react-router-dom";
 import axios from 'axios';
 
 import { Header } from './components/common';
@@ -30,6 +30,13 @@ const Shop = lazy(() => import('./components/shop/Shop'));
 const Contact = lazy(() => import('./components/contact/Contact'));
 
 const ItemView = lazy(() => import('./components/shop/ItemView'));
+
+
+/** User Components */
+const UserListEntry = lazy(() => import('./components/users/UserListEntry'));
+const UserCreateEntry = lazy(() => import('./components/users/UserCreateEntry'));
+const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
+const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
 
 function App() {
@@ -103,23 +110,41 @@ function App() {
 
                     <section id="layoutSidenav_content">
                         <Suspense fallback={<div>Loading...</div>}>
-                            <Switch>
-                                <Route path="/signup" exact component={SignUp}/>
-                                <PublicRoute path="/signin" exact component={SignIn}/>
-                                <PrivateRoute path="/dashboard" exact component={Dashboard}/>
+                            <Routes>
+                                <Route path="/signup" exact element={<SignUp/>}/>
 
-                                <Route path="/" exact component={Home}/>
-                                <Route path="/home" exact component={Home}/>
-                                <Route path="/about" component={About}/>
-                                <Route path="/shop" exact component={Shop}/>
-                                <Route path="/contact" component={Contact}/>
+                                <Route
+                                    path="/signin"
+                                    exact
+                                    element={
+                                       <PublicRoute>
+                                           <SignIn/>
+                                       </PublicRoute>
+                                    }
+                                />
+                                {/*<PrivateRoute path="/dashboard" exact component={Dashboard}/>*/}
+                                <Route
+                                    path="/dashboard"
+                                    exact
+                                    element={
+                                        <PrivateRoute>
+                                            <Dashboard/>
+                                        </PrivateRoute>
+                                    }
+                                />
+
+                                <Route path="/" exact element={<Home/>}/>
+                                <Route path="/home" exact element={<Home/>}/>
+                                <Route path="/about" element={<About/>}/>
+                                <Route path="/shop" exact element={<Shop/>}/>
+                                <Route path="/contact" element={<Contact/>}/>
 
                                 {/*User routes*/}
-                                {/*<Route exact path="/users" component={UserListEntry}/>*/}
+                                <Route exact path="/users" element={<UserListEntry/>}/>
                                 {/*/!*<PrivateRoute path="/users" component={UserListEntry}/>*!/*/}
-                                {/*<Route exact path="/users/create" component={UserCreateEntry}/>*/}
-                                {/*<Route exact path="/users/:id" component={UserViewEntry}/>*/}
-                                {/*<Route exact path="/users/:id/edit" component={UserEditEntry}/>*/}
+                                <Route exact path="/users/create" element={<UserCreateEntry/>}/>
+                                <Route exact path="/users/:id" element={<UserViewEntry/>}/>
+                                <Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>
                                 {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
 
                                 {routes.map(({ path, name, Component }, key) => (
@@ -158,8 +183,8 @@ function App() {
                                 ))}
 
                                 {/*Routing to an specific item*/}
-                                <Route path="/shop/:id" component={ItemView}/>
-                            </Switch>
+                                <Route path="/shop/:id" element={<ItemView/>}/>
+                            </Routes>
                         </Suspense>
                     </section>
                 </div>

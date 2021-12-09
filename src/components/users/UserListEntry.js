@@ -66,12 +66,12 @@ const UserListEntry = (props) => {
                         <td>{user.userId}</td>
                         <td>{user.username}</td>
                         {/*<td>{user.password}</td>*/}
-                        <td><Link to={`users/${user.userId}`}>{user.firstName}</Link></td>
+                        <td><Link to={`/users/${user.userId}`}>{user.firstName}</Link></td>
                         <td>{user.middleName}</td>
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>
                         <td>
-                            <Link to={`users/${user.userId}/edit`}>
+                            <Link to={`/users/${user.userId}/edit`}>
                                     <span className="pl-md-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">
                                             <path

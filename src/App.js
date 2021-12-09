@@ -7,16 +7,16 @@ import axios from 'axios';
 import { Header } from './components/common';
 import Sidebar from "./components/common/sidebar";
 
-// Authentication
+/** Authentication */
 import { getToken, removeUserSession, setUserSession } from './utils/Common';
 
-// Routes
+/** Routes */
 import routes from "./components/users/routes";
 
-// Breadcrumbs Component
+/** Breadcrumbs Component */
 const Breadcrumbs = lazy(() => import('./components/common/breadcrumbs/Breadcrumbs'));
 
-// SignIn Component
+/** SignIn Component */
 const SignUp = lazy(() => import('./components/signup/SignUp'));
 const SignIn = lazy(() => import('./components/signin/SignIn'));
 
@@ -69,7 +69,7 @@ function App() {
                 <Header/>
 
                 <div id="layoutSidenav">
-                    {/*todo: add the side bar to display the admin pages list*/}
+                    {/** todo: add the side bar to display the admin pages list */}
                     <div id="layoutSidenav_nav">
                         <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                             <div className="sb-sidenav-menu">
@@ -113,6 +113,7 @@ function App() {
                             <Routes>
                                 <Route path="/signup" exact element={<SignUp/>}/>
 
+                                {/*<PublicRoute path="/signin" exact component={SignIn}/>*/}
                                 <Route
                                     path="/signin"
                                     exact
@@ -122,6 +123,7 @@ function App() {
                                        </PublicRoute>
                                     }
                                 />
+
                                 {/*<PrivateRoute path="/dashboard" exact component={Dashboard}/>*/}
                                 <Route
                                     path="/dashboard"
@@ -139,7 +141,7 @@ function App() {
                                 <Route path="/shop" exact element={<Shop/>}/>
                                 <Route path="/contact" element={<Contact/>}/>
 
-                                {/*User routes*/}
+                                {/** User routes */}
                                 <Route exact path="/users" element={<UserListEntry/>}/>
                                 {/*/!*<PrivateRoute path="/users" component={UserListEntry}/>*!/*/}
                                 <Route exact path="/users/create" element={<UserCreateEntry/>}/>
@@ -182,7 +184,7 @@ function App() {
                                     />
                                 ))}
 
-                                {/*Routing to an specific item*/}
+                                {/** Routing to an specific item */}
                                 <Route path="/shop/:id" element={<ItemView/>}/>
                             </Routes>
                         </Suspense>

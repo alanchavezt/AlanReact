@@ -1,38 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Users.css';
 import UserFormEntry from './UserFormEntry';
 import UserService from "./UserService";
 import Loading from "../common/Loading";
 
-export default class UserCreateEntry extends React.Component {
+const UserCreateEntry =  (props) => {
 
-    userService = new UserService();
+    const userService = new UserService();
+    const [user, setUser] = useState({});
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: {}
-        };
+    const handleFormChange = (user) => {
+        setUser(user);
     }
 
-    onFormChange = (user) => {
-        this.setState({user});
-    }
-
-    handleCreate = (e) => {
-        const user = this.state.user;
-
-        this.userService.createUser(user).then(data => {
+    const handleCreate = (e) => {
+        userService.createUser(user).then(data => {
             window.location.href = `/users/${data.userId}/edit`;
         });
     }
 
-    handleCancel = (e) => {
+    const handleCancel = (e) => {
         window.location.href = `/users`;
     }
 
-    isFormValid = () => {
-        let formData = this.state.user;
+    const isFormValid = () => {
+        let formData = user;
 
         if (!formData.username) {
             return false;
@@ -49,18 +41,19 @@ export default class UserCreateEntry extends React.Component {
         return true;
     }
 
-    render () {
-        if (!this.state.user) {
-            return <Loading />
-        }
-        return (
-            <div style={{paddingTop: "20px"}}>
-                <h1>Add User</h1>
-                <UserFormEntry user={this.state.user} onChange={this.onFormChange}/>
-                <button type="submit" className="btn btn-outline-primary float-right" onClick={this.handleCreate} disabled={!this.isFormValid()}>Create</button>
-                <button type="submit" className="btn btn-outline-secondary float-right mr-1" onClick={this.handleCancel}>Cancel</button>
-            </div>
-        );
+    if (!user) {
+        return <Loading />
     }
+
+    return (
+        <div style={{paddingTop: "20px"}}>
+            <h1>Add User</h1>
+            <UserFormEntry user={user} onChange={handleFormChange}/>
+            <button type="submit" className="btn btn-outline-primary float-right" onClick={handleCreate} disabled={!isFormValid()}>Create</button>
+            <button type="submit" className="btn btn-outline-secondary float-right mr-1" onClick={handleCancel}>Cancel</button>
+        </div>
+    );
 }
+
+export default UserCreateEntry;
 

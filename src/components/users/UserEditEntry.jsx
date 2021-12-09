@@ -20,7 +20,7 @@ const UserEditEntry = (props) => {
         });
     },[]);
 
-    const onFormChange = (user) => {
+    const handleFormChange = (user) => {
         setUser(user);
     }
 
@@ -67,7 +67,7 @@ const UserEditEntry = (props) => {
     return (
         <div style={{paddingTop: "20px"}}>
             <h1>Edit User</h1>
-            <UserFormEntry user={user} onChange={onFormChange}/>
+            <UserFormEntry user={user} onChange={handleFormChange}/>
             <div className="form-group">
                 <button type="button" className="btn btn-outline-primary float-right" onClick={handleSave} disabled={!isFormValid()}>Save</button>
                 <button type="button" className="btn btn-outline-danger float-right mr-1" onClick={handleDelete}>Delete</button>

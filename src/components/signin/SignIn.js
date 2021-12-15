@@ -63,14 +63,17 @@ const SignIn = (props) => {
                         </div>
                     )}
 
-                    <button
-                        type="submit"
-                        className="btn btn-outline-primary btn-lg btn-block"
-                        value={loading ? 'Loading...' : 'Login'}
-                        onClick={handleSignIn}
-                        disabled={loading}
-                    >Sign In
-                    </button>
+                    <div className="d-grid col">
+                        <button
+                            type="submit"
+                            className="btn btn-outline-primary btn-lg btn-block"
+                            value={loading ? 'Loading...' : 'Login'}
+                            onClick={handleSignIn}
+                            disabled={loading}
+                        >Sign In
+                        </button>
+                    </div>
+
 
                     {/*<div>*/}
                     {/*    Username<br/>*/}

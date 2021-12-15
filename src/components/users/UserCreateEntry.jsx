@@ -46,11 +46,14 @@ const UserCreateEntry =  (props) => {
     }
 
     return (
-        <div style={{paddingTop: "20px"}}>
+        <div className="p-4">
             <h1>Add User</h1>
             <UserFormEntry user={user} onChange={handleFormChange}/>
-            <button type="submit" className="btn btn-outline-primary float-right" onClick={handleCreate} disabled={!isFormValid()}>Create</button>
-            <button type="submit" className="btn btn-outline-secondary float-right mr-1" onClick={handleCancel}>Cancel</button>
+
+            <div className="mb-3">
+                <button type="button" className="btn btn-outline-primary float-end" onClick={handleCreate} disabled={!isFormValid()}>Create</button>
+                <button type="button" className="btn btn-outline-secondary float-end me-1" onClick={handleCancel}>Cancel</button>
+            </div>
         </div>
     );
 }

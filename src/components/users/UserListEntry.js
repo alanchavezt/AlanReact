@@ -37,11 +37,13 @@ const UserListEntry = (props) => {
     }
 
     return (
-        <div>
+        <div className="p-4">
             <div className="row row-cols-2">
-                <div className="col"><h1 className="float-left">User List</h1></div>
                 <div className="col">
-                    <button type="submit" className="btn btn-outline-primary float-right" onClick={handleAdd}>Add</button>
+                    <h1>User List</h1>
+                </div>
+                <div className="col">
+                    <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAdd}>Add</button>
                 </div>
             </div>
 

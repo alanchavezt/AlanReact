@@ -13,7 +13,7 @@ export default class Select extends React.Component {
 
     render() {
         return (
-            <div className="form-group">
+            <div className="mb-3">
                 <label className="float-left" htmlFor={this.props.id}>{this.props.label}</label>
                 <select
                     className={`form-control ${this.props.className}`}

@@ -9,7 +9,7 @@ function Home () {
             <div>
                 <h1>Welcome To My Personal Portfolio</h1>
                 <p>The purpose of JavaScript Mastery is to help aspiring and established developers to take their development skills to the next level and build awesome apps.</p>
-                <div className="form-group">
+                <div className="mb-3">
                     <button type="button" className="btn btn-primary">Learn more</button>
                 </div>
             </div>

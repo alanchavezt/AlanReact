@@ -13,7 +13,7 @@ export default class CheckBox extends React.Component {
 
     render() {
         return (
-            <div className="form-group form-check">
+            <div className="mb-3 form-check">
                 <input
                     type={this.props.type}
                     className={`form-check-input ${this.props.className}`}

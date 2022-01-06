@@ -20,7 +20,7 @@ module.exports = {
         port: port,
         historyApiFallback: true,
         open: false,
-        proxy: {"/REST/*": {target: 'http://localhost:4000', secure: false }}
+        proxy: {"/API/*": {target: 'http://localhost:4000', secure: false }}
     },
     module: {
         rules: [

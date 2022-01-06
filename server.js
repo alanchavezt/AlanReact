@@ -12,17 +12,7 @@ const bcrypt = require('bcrypt');
 const app = express();
 const router = express.Router();
 const port = process.env.PORT || 4000;
-
-// static user details
-const userData = {
-    userId: "5ea7f096-a107-48e1-bb35-98c448778935",
-    password: "123456",
-    firstName: "Alan",
-    lastName: "Chavez",
-    username: "alanch",
-    email: "alanchavez1@gmail.com",
-    isAdmin: true
-};
+const API = "http://localhost:8080";
 
 // enable CORS
 app.use(cors());
@@ -35,8 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Sign Up request API handlers
-app.post('/REST/signup', async (req, res, next)=>{
-
+app.post('/API/signup', async (req, res, next)=>{
     console.log('user: ', req.body);
 
     try {
@@ -44,7 +33,7 @@ app.post('/REST/signup', async (req, res, next)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.post("http://localhost:8080/REST/signup", user);
+        const response = await axios.post(`${API}/API/signup`, user);
 
         // res.status(200);
         res.status(201).send();
@@ -56,14 +45,40 @@ app.post('/REST/signup', async (req, res, next)=>{
     }
 });
 
+/** Password request API Handlers */
+app.put('/API/passwords/:id', async (req, res)=>{
+    console.log('Password - User ID: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
+
+    try {
+        const userId = req.params.id;
+        const changePassword = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.put(`${API}/API/passwords/${userId}`, changePassword, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
+
 // User request API handlers
-app.get('/REST/users', (req, res) => {
-    // axios.get("http://localhost:8080/REST/users",{
-    //     headers: {
-    //         'authorization': "Bearer " + req.headers.authorization
-    //     }
-    // }).then(response => {
-    axios.get("http://localhost:8080/REST/users",).then(response => {
+app.get('/API/users', (req, res) => {
+    console.log('User List')
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.get(`${API}/API/users`,{
+        headers: {'authorization': authorization}
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
@@ -72,11 +87,14 @@ app.get('/REST/users', (req, res) => {
     });
 });
 
-app.get('/REST/users/:id', (req, res) => {
-    console.log('User ID:', req.params.id)
+app.get('/API/users/:id', (req, res) => {
+    console.log('GET - User ID:', req.params.id)
     const userId =  req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
 
-    axios.get("http://localhost:8080/REST/users/" + userId).then(response => {
+    axios.get(`${API}/API/users/${userId}`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
@@ -85,8 +103,9 @@ app.get('/REST/users/:id', (req, res) => {
     });
 });
 
-app.put('/REST/users/:id', async (req, res)=>{
-    console.log('id: ', req.params.id);
+app.put('/API/users/:id', async (req, res)=>{
+    console.log('PUT - User ID: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
 
     try {
         const userId = req.params.id;
@@ -94,7 +113,9 @@ app.put('/REST/users/:id', async (req, res)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.put("http://localhost:8080/REST/users/" + userId, user);
+        const response = await axios.put(`${API}/API/users/${userId}`, user, {
+            headers: {'authorization': authorization}
+        });
 
         // res.status(200);
         res.status(201);
@@ -106,16 +127,18 @@ app.put('/REST/users/:id', async (req, res)=>{
     }
 });
 
-
-app.post('/REST/users', async (req, res, next)=>{
-    console.log('user: ', req.body);
+app.post('/API/users', async (req, res, next)=>{
+    console.log('POST - User: ', req.body);
+    const authorization = "Bearer " + req.headers.authorization;
 
     try {
         const user = req.body;
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.post("http://localhost:8080/REST/users", user);
+        const response = await axios.post(`${API}/API/users`, user, {
+            headers: {'authorization': authorization}
+        });
 
         // res.status(200);
         res.status(201);
@@ -127,11 +150,14 @@ app.post('/REST/users', async (req, res, next)=>{
     }
 });
 
-app.delete('/REST/users/:id', (req, res)=>{
-    console.log('userId: ', req.params.id);
+app.delete('/API/users/:id', (req, res)=>{
+    console.log('DELETE - User ID: ', req.params.id);
     const userId = req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
 
-    axios.delete(`http://localhost:8080/REST/users/${userId}`).then(response => {
+    axios.delete(`${API}/API/users/${userId}`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
         res.status(200);
         res.set("Connection", "close");
         res.json(response.data);
@@ -178,7 +204,7 @@ app.get('/', (req, res) => {
 
 
 // Sign In request: validate the user credentials
-app.post('/REST/auth/signin', async (req, res) => {
+app.post('/API/auth/signin', async (req, res) => {
     // const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
@@ -192,7 +218,7 @@ app.post('/REST/auth/signin', async (req, res) => {
     }
 
     try {
-        const response = await axios.post("http://localhost:8080/REST/auth", {email, password});
+        const response = await axios.post(`${API}/API/auth`, {email, password});
         const token = response.data.token;
         const user = response.data.user;
 

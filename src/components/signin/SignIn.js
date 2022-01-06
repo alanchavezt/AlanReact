@@ -19,7 +19,7 @@ const SignIn = (props) => {
         setLoading(true);
 
         // axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
-        axios.post('/REST/auth/signin', {email: email, password: password}).then(response => {
+        axios.post('/API/auth/signin', {email: email, password: password}).then(response => {
             setLoading(false);
             setUserSession(response.data.token, response.data.user);
             // todo: check the difference between push and href
@@ -63,14 +63,16 @@ const SignIn = (props) => {
                         </div>
                     )}
 
-                    <button
-                        type="submit"
-                        className="btn btn-outline-primary btn-lg btn-block"
-                        value={loading ? 'Loading...' : 'Login'}
-                        onClick={handleSignIn}
-                        disabled={loading}
-                    >Sign In
-                    </button>
+                    <div className="d-grid col">
+                        <button
+                            type="submit"
+                            className="btn btn-outline-primary btn-lg btn-block"
+                            value={loading ? 'Loading...' : 'Login'}
+                            onClick={handleSignIn}
+                            disabled={loading}
+                        >Sign In
+                        </button>
+                    </div>
 
                     {/*<div>*/}
                     {/*    Username<br/>*/}

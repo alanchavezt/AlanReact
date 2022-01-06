@@ -58,7 +58,7 @@ const Avatar = (props) => {
     return (
         <React.Fragment>
             <div className="dropdown">
-                <div className="dropdown" data-toggle="dropdown">
+                <div className="dropdown" data-bs-toggle="dropdown">
                     <img
                         id="avatar"
                         src={avatar}
@@ -67,7 +67,7 @@ const Avatar = (props) => {
                     />
                     <span className="dropdown-caret"/>
                 </div>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="avatar">
+                <div className="dropdown-menu dropdown-menu-end" aria-labelledby="avatar">
                     <a className="dropdown-item" href="#" style={{display: "block"}}>
                         <span>Signed in as
                             <strong> {user.email}</strong>

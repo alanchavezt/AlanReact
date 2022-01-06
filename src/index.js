@@ -8,8 +8,8 @@ import {getToken} from "./utils/Common";
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/js/bootstrap.js';
-
 
 axios.interceptors.request.use(
     request => {

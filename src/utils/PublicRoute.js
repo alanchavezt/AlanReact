@@ -1,19 +1,25 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import {Route, Navigate} from 'react-router-dom';
 import { getToken } from './Common';
 
 // handle the public routes
-function PublicRoute({ component: Component, ...rest }) {
+function PublicRoute({ children }) {
     return (
-        <Route
-            {...rest}
-            render={(props) => {
-                return (
-                    !getToken() ? <Component {...props} /> : <Redirect to={{pathname: '/dashboard'}}/>
-                );
-            }}
-        />
-    )
+        !getToken() ? children : <Navigate to={{pathname: '/dashboard'}}/>
+    );
 }
+
+// function PublicRoute({ component: Component, ...rest }) {
+//     return (
+//         <Route
+//             {...rest}
+//             render={(props) => {
+//                 return (
+//                     !getToken() ? <Component {...props} /> : <Redirect to={{pathname: '/dashboard'}}/>
+//                 );
+//             }}
+//         />
+//     )
+// }
 
 export default PublicRoute;

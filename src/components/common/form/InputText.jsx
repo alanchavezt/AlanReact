@@ -13,9 +13,9 @@ export default class InputText extends React.Component {
 
     render() {
         return (
-            <div className="form-group">
+            <div className="mb-3">
                 {/*todo: check why the label goes to the middle when removing the "float-left" class*/}
-                <label className="float-left" htmlFor={this.props.id}>{this.props.label}</label>
+                <label className="float-start" htmlFor={this.props.id}>{this.props.label}</label>
                 <input
                     type={this.props.type}
                     className={`form-control ${this.props.className}`}

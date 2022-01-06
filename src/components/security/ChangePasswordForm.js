@@ -9,6 +9,7 @@ const ChangePasswordForm = (props) => {
     const params = useParams();
     const userPasswordService = new UserPasswordService();
     const [user, setUser] = useState({});
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         let user = {...user};
@@ -20,7 +21,10 @@ const ChangePasswordForm = (props) => {
         userPasswordService.resetUserPassword(user).then(data => {
             setUser(data);
             window.location.href = "/users";
-        });
+        }).catch(error => {
+            if (error.response.status === 401) setError(error.response.data.message);
+            else setError("Password change went wrong. Please try again later.");
+        });;
     }
 
     const handleFormChange = (e) => {
@@ -81,6 +85,12 @@ const ChangePasswordForm = (props) => {
                     value={user.confirmPassword}
                     required={true}
                 />
+
+                {error && (
+                    <div className="alert alert-danger" role="alert">
+                        {error}
+                    </div>
+                )}
             </form>
 
             <div className="mb-3">

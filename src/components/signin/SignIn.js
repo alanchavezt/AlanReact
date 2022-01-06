@@ -74,7 +74,6 @@ const SignIn = (props) => {
                         </button>
                     </div>
 
-
                     {/*<div>*/}
                     {/*    Username<br/>*/}
                     {/*    <input type="text" {...username} autoComplete="new-password"/>*/}

@@ -71,7 +71,6 @@ function App() {
         <div className="App">
             <Router>
                 <Header/>
-
                 <div id="layoutSidenav">
                     {/** todo: add the side bar to display the admin pages list */}
                     <div id="layoutSidenav_nav">

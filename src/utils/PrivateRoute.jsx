@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Navigate } from 'react-router-dom';
 import { getToken } from './Common';
 
-// handle the private routes
+/** handle private routes */
 function PrivateRoute({ children, ...rest }) {
     return (
         getToken() ? children : <Navigate to={{pathname: '/signin', state: {from: rest.location}}}/>

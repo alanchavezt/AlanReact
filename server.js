@@ -14,7 +14,6 @@ const router = express.Router();
 const port = process.env.PORT || 4000;
 const API = "http://localhost:8080";
 
-
 // enable CORS
 app.use(cors());
 // parse application/json
@@ -127,7 +126,6 @@ app.put('/API/users/:id', async (req, res)=>{
         res.json("Error occurred!");
     }
 });
-
 
 app.post('/API/users', async (req, res, next)=>{
     console.log('POST - User: ', req.body);

@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'bootstrap/dist/js/bootstrap.js';
 
-
 axios.interceptors.request.use(
     request => {
         const token = getToken();

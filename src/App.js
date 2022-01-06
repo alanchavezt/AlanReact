@@ -11,7 +11,12 @@ import Sidebar from "./components/common/sidebar";
 import { getToken, removeUserSession, setUserSession } from './utils/Common';
 
 /** Routes */
-import routes from "./components/users/routes";
+import userRoutes from "./components/users/routes";
+
+let routes = [];
+routes.push(...userRoutes);
+
+
 
 /** Breadcrumbs Component */
 const Breadcrumbs = lazy(() => import('./components/common/breadcrumbs/Breadcrumbs'));

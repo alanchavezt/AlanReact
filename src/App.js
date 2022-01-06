@@ -145,11 +145,11 @@ function App() {
                                 <Route path="/contact" element={<Contact/>}/>
 
                                 {/** User routes */}
-                                <Route exact path="/users" element={<UserListEntry/>}/>
+                                {/*<Route exact path="/users" element={<UserListEntry/>}/>*/}
                                 {/*/!*<PrivateRoute path="/users" component={UserListEntry}/>*!/*/}
-                                <Route exact path="/users/create" element={<UserCreateEntry/>}/>
-                                <Route exact path="/users/:id" element={<UserViewEntry/>}/>
-                                <Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>
+                                {/*<Route exact path="/users/create" element={<UserCreateEntry/>}/>*/}
+                                {/*<Route exact path="/users/:id" element={<UserViewEntry/>}/>*/}
+                                {/*<Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>*/}
                                 {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
 
                                 {/** Password routes */}
@@ -160,35 +160,48 @@ function App() {
                                         exact
                                         path={path}
                                         key={key}
-                                        render={props => {
-                                            const crumbs = routes
-                                                // Get all routes that contain the current one.
-                                                .filter(({ path }) => props.match.path.includes(path))
-                                                // Swap out any dynamic routes with their param values.
-                                                // E.g. "/users/:userId" will become "/users/1"
-                                                .map(({ path, ...rest }) => ({
-                                                    path: Object.keys(props.match.params).length
-                                                        ? Object.keys(props.match.params).reduce(
-                                                            (path, param) => path.replace(
-                                                                `:${param}`, props.match.params[param]
-                                                            ), path
-                                                        )
-                                                        : path,
-                                                    ...rest
-                                                }));
-
-                                            // console.log(`Generated crumbs for ${props.match.path}`);
-                                            crumbs.map(({ name, path }) => console.log({ name, path }));
-
-                                            return (
-                                                <div className="container" style={{padding: "40px"}}>
-                                                    <Breadcrumbs crumbs={crumbs}/>
-                                                    <Component {...props} />
-                                                </div>
-                                            );
-                                        }}
+                                        element={
+                                            <div className="container">
+                                                <Component/>
+                                            </div>
+                                        }
                                     />
                                 ))}
+
+                                {/*{routes.map(({ path, name, Component }, key) => (*/}
+                                {/*    <Route*/}
+                                {/*        exact*/}
+                                {/*        path={path}*/}
+                                {/*        key={key}*/}
+                                {/*        render={props => {*/}
+                                {/*            const crumbs = routes*/}
+                                {/*                // Get all routes that contain the current one.*/}
+                                {/*                .filter(({ path }) => props.match.path.includes(path))*/}
+                                {/*                // Swap out any dynamic routes with their param values.*/}
+                                {/*                // E.g. "/users/:userId" will become "/users/1"*/}
+                                {/*                .map(({ path, ...rest }) => ({*/}
+                                {/*                    path: Object.keys(props.match.params).length*/}
+                                {/*                        ? Object.keys(props.match.params).reduce(*/}
+                                {/*                            (path, param) => path.replace(*/}
+                                {/*                                `:${param}`, props.match.params[param]*/}
+                                {/*                            ), path*/}
+                                {/*                        )*/}
+                                {/*                        : path,*/}
+                                {/*                    ...rest*/}
+                                {/*                }));*/}
+
+                                {/*            // console.log(`Generated crumbs for ${props.match.path}`);*/}
+                                {/*            crumbs.map(({ name, path }) => console.log({ name, path }));*/}
+
+                                {/*            return (*/}
+                                {/*                <div className="container" style={{padding: "40px"}}>*/}
+                                {/*                    <Breadcrumbs crumbs={crumbs}/>*/}
+                                {/*                    <Component {...props} />*/}
+                                {/*                </div>*/}
+                                {/*            );*/}
+                                {/*        }}*/}
+                                {/*    />*/}
+                                {/*))}*/}
 
                                 {/** Routing to an specific item */}
                                 <Route path="/shop/:id" element={<ItemView/>}/>

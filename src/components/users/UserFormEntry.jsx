@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Users.css';
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
-import {PropTypes} from "prop-types";
+import PropTypes from "prop-types";
 import CheckBox from "../common/form/CheckBox";
 
 const UserFormEntry = (props) => {
@@ -35,14 +35,6 @@ const UserFormEntry = (props) => {
                 id="username"
                 name="username"
                 value={props.user.username}
-                required={true}
-            />
-            <InputText
-                label="Password"
-                type="password"
-                id="password"
-                name="password"
-                value={props.user.password}
                 required={true}
             />
             <InputText

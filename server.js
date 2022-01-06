@@ -46,11 +46,35 @@ app.post('/API/signup', async (req, res, next)=>{
     }
 });
 
+/** Password request API Handlers */
+app.put('/API/passwords/:id', async (req, res)=>{
+    console.log('Password - User ID: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
 
+    try {
+        const userId = req.params.id;
+        const changePassword = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.put(`${API}/API/passwords/${userId}`, changePassword, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
 
 
 // User request API handlers
 app.get('/API/users', (req, res) => {
+    console.log('User List')
     const authorization = "Bearer " + req.headers.authorization;
 
     axios.get(`${API}/API/users`,{
@@ -65,7 +89,7 @@ app.get('/API/users', (req, res) => {
 });
 
 app.get('/API/users/:id', (req, res) => {
-    console.log('User ID:', req.params.id)
+    console.log('GET - User ID:', req.params.id)
     const userId =  req.params.id;
     const authorization = "Bearer " + req.headers.authorization;
 
@@ -81,7 +105,7 @@ app.get('/API/users/:id', (req, res) => {
 });
 
 app.put('/API/users/:id', async (req, res)=>{
-    console.log('id: ', req.params.id);
+    console.log('PUT - User ID: ', req.params.id);
     const authorization = "Bearer " + req.headers.authorization;
 
     try {
@@ -106,7 +130,7 @@ app.put('/API/users/:id', async (req, res)=>{
 
 
 app.post('/API/users', async (req, res, next)=>{
-    console.log('user: ', req.body);
+    console.log('POST - User: ', req.body);
     const authorization = "Bearer " + req.headers.authorization;
 
     try {
@@ -129,7 +153,7 @@ app.post('/API/users', async (req, res, next)=>{
 });
 
 app.delete('/API/users/:id', (req, res)=>{
-    console.log('userId: ', req.params.id);
+    console.log('DELETE - User ID: ', req.params.id);
     const userId = req.params.id;
     const authorization = "Bearer " + req.headers.authorization;
 

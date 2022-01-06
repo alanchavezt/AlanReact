@@ -39,6 +39,10 @@ const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
 const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
 
+/** Password */
+const Security = lazy(() => import('./components/security/ChangePasswordForm'));
+
+
 function App() {
 
     const [authLoading, setAuthLoading] = useState(true);
@@ -148,6 +152,9 @@ function App() {
                                 <Route exact path="/users/:id" element={<UserViewEntry/>}/>
                                 <Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>
                                 {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
+
+                                {/** Password routes */}
+                                <Route exact path="/users/:id/password" element={<Security/>}/>
 
                                 {routes.map(({ path, name, Component }, key) => (
                                     <Route

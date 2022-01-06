@@ -48,9 +48,6 @@ const UserEditEntry = (props) => {
         if (!formData.username) {
             return false;
         }
-        if (!formData.password) {
-            return false;
-        }
         if (!formData.firstName) {
             return false;
         }

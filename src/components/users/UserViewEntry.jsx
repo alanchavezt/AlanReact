@@ -34,10 +34,6 @@ const UserViewEntry = (props) => {
                     <input type="text" className="form-control" id="username" value={user.username} readOnly={true}/>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" id="password" value={user.password} readOnly={true}/>
-                </div>
-                <div className="mb-3">
                     <label htmlFor="firstName">First Name</label>
                     <input type="text" className="form-control" id="firstName" value={user.firstName} readOnly={true}/>
                 </div>

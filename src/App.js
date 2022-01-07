@@ -160,6 +160,8 @@ function App() {
                                 {/** Password routes */}
                                 <Route exact path="/users/:id/password" element={<Security/>}/>
 
+
+                                {/** Rendering routes dynamically */}
                                 {routes.map(({ path, name, Component }, key) => (
                                     <Route
                                         exact
@@ -167,6 +169,8 @@ function App() {
                                         key={key}
                                         element={
                                             <div className="container">
+                                                {/*todo check how to pass down the props without manually doing it, maybe do the crumbs on top and just pass down the crumbs*/}
+                                                <Breadcrumbs routes={routes} currentPath={path}/>
                                                 <Component/>
                                             </div>
                                         }

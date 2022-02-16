@@ -29,13 +29,13 @@ const UserCreateEntry =  (props) => {
         if (!formData.username) {
             return false;
         }
-        if (!formData.password) {
-            return false;
-        }
         if (!formData.firstName) {
             return false;
         }
         if (!formData.lastName) {
+            return false;
+        }
+        if (!formData.email) {
             return false;
         }
         return true;

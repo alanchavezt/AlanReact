@@ -54,6 +54,9 @@ const UserEditEntry = (props) => {
         if (!formData.lastName) {
             return false;
         }
+        if (!formData.email) {
+            return false;
+        }
         return true;
     }
 

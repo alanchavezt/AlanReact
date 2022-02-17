@@ -94,6 +94,6 @@ const UserFormEntry = (props) => {
 
 UserFormEntry.propTypes = {
     user: PropTypes.object
-}
+};
 
 export default UserFormEntry;

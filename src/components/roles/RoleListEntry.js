@@ -21,7 +21,7 @@ const RoleListEntry = (props) => {
         window.location.href = "/roles/create";
     }
 
-    const handleDelete = (userId) => {
+    const handleDelete = (roleId) => {
         confirm("Are you sure you want to delete this role?", (res) => {
             if (res) {
                 roleService.deleteRole(roleId).then(data => {

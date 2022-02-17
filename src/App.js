@@ -12,9 +12,11 @@ import { getToken, removeUserSession, setUserSession } from './utils/Common';
 
 /** Routes */
 import userRoutes from "./components/users/routes";
+import roleRoutes from "./components/roles/routes";
 
 let routes = [];
 routes.push(...userRoutes);
+routes.push(...roleRoutes);
 
 
 
@@ -85,6 +87,7 @@ function App() {
                                     {/*<Sidebar/>*/}
 
 
+                                    {/* todo: this side panel should be render dynamically */}
                                     {getToken() ?
                                         <React.Fragment>
                                             <div className="sb-sidenav-menu-heading">Core</div>
@@ -92,6 +95,11 @@ function App() {
                                                 <div className="sb-nav-link-icon">
                                                     <i className="fas fa-tachometer-alt"/>
                                                 </div>Dashboard
+                                            </Link>
+                                            <Link className="nav-link" to='/roles'>
+                                                <div className="sb-nav-link-icon">
+                                                    <i className="fas fa-tachometer-alt"/>
+                                                </div>Roles
                                             </Link>
                                             <Link className="nav-link" to='/users'>
                                                 <div className="sb-nav-link-icon">

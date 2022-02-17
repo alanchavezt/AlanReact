@@ -1,38 +1,37 @@
-import React, {useEffect, useState} from 'react';
-import './Users.css';
-import {Link} from "react-router-dom";
-import UserService from "./UserService";
-import Loading from '../common/Loading';
-import {confirm} from "../common/modal/confirm";
+import RoleService from "./RoleService";
+import React, {useEffect, useState} from "react";
 import {sortArray} from "../../utils/arrayUtils";
+import Loading from "../common/Loading";
+import {Link} from "react-router-dom";
+import {confirm} from "../common/modal/confirm";
 
-const UserListEntry = (props) => {
+const RoleListEntry = (props) => {
 
-    const userService = new UserService();
-    const [users, setUsers] = useState([]);
+    const roleService = new RoleService();
+    const [roles, setRoles] = useState([]);
 
     useEffect(() => {
-        userService.getUsers().then(data => {
-            const users = sortArray(data, 'firstName');
-            setUsers(users);
-        });
+        roleService.getRoles().then(data => {
+            const roles = sortArray(data, 'name');
+            setRoles(roles);
+        })
     }, []);
 
     const handleAdd = () => {
-        window.location.href = "/users/create";
+        window.location.href = "/roles/create";
     }
 
     const handleDelete = (userId) => {
-        confirm("Are you sure you want to delete this user?", (res) => {
+        confirm("Are you sure you want to delete this role?", (res) => {
             if (res) {
-                userService.deleteUser(userId).then(data => {
-                    window.location.pathname = `/users`;
+                roleService.deleteRole(roleId).then(data => {
+                    window.location.pathname = `/roles`;
                 });
             }
         })
     }
 
-    if (!users) {
+    if (!roles) {
         return <Loading/>;
     }
 
@@ -40,7 +39,7 @@ const UserListEntry = (props) => {
         <div className="p-4">
             <div className="row row-cols-2">
                 <div className="col">
-                    <h1>User List</h1>
+                    <h1>Role List</h1>
                 </div>
                 <div className="col">
                     <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAdd}>Add</button>
@@ -52,26 +51,22 @@ const UserListEntry = (props) => {
                 <tr>
                     <th colSpan="1">#</th>
                     <th colSpan="1">ID</th>
-                    <th colSpan="1">Username</th>
-                    <th colSpan="1">First Name</th>
-                    <th colSpan="1">Middle Name</th>
-                    <th colSpan="1">Last Name</th>
-                    <th colSpan="1">Email</th>
+                    <th colSpan="1">Name</th>
+                    <th colSpan="1">Description</th>
+                    <th colSpan="1">Created At</th>
                     <th colSpan="1">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                {users.length ? users.map((user, index) => (
-                    <tr key={user.userId}>
+                {roles.length ? roles.map((role, index) => (
+                    <tr key={role.roleId}>
                         <td>{(index + 1)}</td>
-                        <td>{user.userId}</td>
-                        <td>{user.username}</td>
-                        <td><Link to={`/users/${user.userId}`}>{user.firstName}</Link></td>
-                        <td>{user.middleName}</td>
-                        <td>{user.lastName}</td>
-                        <td>{user.email}</td>
+                        <td>{role.roleId}</td>
+                        <td><Link to={`/roles/${role.roleId}`}>{role.name}</Link></td>
+                        <td>{role.description}</td>
+                        <td>{role.createdAt}</td>
                         <td>
-                            <Link to={`/users/${user.userId}/edit`}>
+                            <Link to={`/roles/${role.roleId}/edit`}>
                                     <span className="pl-md-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">
                                             <path
@@ -79,7 +74,7 @@ const UserListEntry = (props) => {
                                         </svg>
                                     </span>
                             </Link>
-                            <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDelete(user.userId)}>
+                            <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDelete(role.roleId)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      className="bi bi-trash" viewBox="0 0 16 16">
                                     <path
@@ -92,7 +87,7 @@ const UserListEntry = (props) => {
                     </tr>
                 )) : (
                     <tr>
-                        <td colSpan="9">No users</td>
+                        <td colSpan="9">No roles</td>
                     </tr>
                 )}
                 </tbody>
@@ -101,5 +96,4 @@ const UserListEntry = (props) => {
     );
 }
 
-export default UserListEntry;
-
+export default RoleListEntry;

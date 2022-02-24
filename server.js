@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Sign Up request API handlers
+/** Sign Up request API handlers */
 app.post('/API/signup', async (req, res, next)=>{
     console.log('user: ', req.body);
 
@@ -43,6 +43,23 @@ app.post('/API/signup', async (req, res, next)=>{
         res.status(500).send();
         res.json("Error occurred!");
     }
+});
+
+/** User Roles request API Handlers */
+app.get('/API/users/:id/roles', (req, res) => {
+    console.log('GET User Roles - User ID:', req.params.id)
+    const userId =  req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.get(`${API}/API/users/${userId}/roles`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
 });
 
 /** Password request API Handlers */

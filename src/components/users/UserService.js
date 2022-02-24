@@ -23,4 +23,9 @@ export default class UserService {
     deleteUser(userId) {
         return axios.delete(`${this.apiEndpoint}/${userId}`).then(res => res.data);
     }
+
+    /** User Roles */
+    getUserRoles(userId) {
+        return axios.get(`${this.apiEndpoint}/${userId}/roles`).then(res => res.data);
+    }
 }

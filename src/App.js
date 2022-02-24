@@ -105,6 +105,18 @@ function App() {
                                                 <div className="sb-nav-link-icon">
                                                     <i className="fas fa-tachometer-alt"/>
                                                 </div>Users
+
+                                                {/*<Link className="nav-link" to={`/users/${user.userId}/password`}>*/}
+                                                {/*    <div className="sb-nav-link-icon">*/}
+                                                {/*        <i className="fas fa-tachometer-alt"/>*/}
+                                                {/*    </div>Change Password*/}
+                                                {/*</Link>*/}
+
+                                                {/*<Link className="nav-link" to={`/users/${user.userId}/roles`}>*/}
+                                                {/*    <div className="sb-nav-link-icon">*/}
+                                                {/*        <i className="fas fa-tachometer-alt"/>*/}
+                                                {/*    </div>Roles*/}
+                                                {/*</Link>*/}
                                             </Link>
                                         </React.Fragment>
                                         : null

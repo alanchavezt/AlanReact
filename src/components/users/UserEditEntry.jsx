@@ -5,19 +5,29 @@ import UserFormEntry from './UserFormEntry';
 import UserService from "./UserService";
 import Loading from "../common/Loading";
 import {confirm} from "../common/modal/confirm";
+import RoleService from "../roles/RoleService";
+import {sortArray} from "../../utils/arrayUtils";
 
 const UserEditEntry = (props) => {
 
     const params = useParams();
     const userService = new UserService();
+    const roleService = new RoleService();
+
     const [modalShow, setModalShow] = useState(false);
     const [user, setUser] = useState();
+    const [roles, setRoles] = useState([]);
 
     useEffect(() => {
         const userId = params.id;
         userService.getUser(userId).then(data => {
             setUser(data);
         });
+
+        roleService.getRoles().then(data => {
+            const roles = sortArray(data, 'name');
+            setRoles(roles);
+        })
     },[]);
 
     const handleFormChange = (user) => {
@@ -60,14 +70,14 @@ const UserEditEntry = (props) => {
         return true;
     }
 
-    if (!user) {
+    if (!user || !roles || !roles.length) {
         return <Loading />
     }
 
     return (
         <div className="p-4">
             <h1>Edit User</h1>
-            <UserFormEntry user={user} onChange={handleFormChange}/>
+            <UserFormEntry user={user} roles={roles} onChange={handleFormChange}/>
 
             <div className="mb-3">
                 <button type="button" className="btn btn-outline-primary float-end" onClick={handleSave} disabled={!isFormValid()}>Save</button>

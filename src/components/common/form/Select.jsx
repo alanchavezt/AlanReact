@@ -1,5 +1,5 @@
 import React from "react";
-import {PropTypes} from "prop-types";
+import PropTypes from "prop-types";
 
 const Select = (props) => {
 
@@ -10,6 +10,7 @@ const Select = (props) => {
                 className={`form-select ${props.className}`}
                 id={props.id}
                 name={props.name || props.id}
+                value={props.selected || ""}
                 placeholder={props.placeholder}
                 required={props.required}
                 disabled={props.disabled}
@@ -35,6 +36,7 @@ Select.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
     options: PropTypes.array,
+    selected: PropTypes.string,
     onChange: PropTypes.func,
     onKeyUp: PropTypes.func,
     placeholder: PropTypes.string,
@@ -47,6 +49,7 @@ Select.defaultProps = {
     label: "",
     className: "",
     options: [],
+    selected: null,
     onChange: null,
     onKeyUp: null,
     placeholder: "",

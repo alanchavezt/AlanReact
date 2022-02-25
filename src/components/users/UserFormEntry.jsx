@@ -76,6 +76,7 @@ const UserFormEntry = (props) => {
                 id="roleId"
                 name="name"
                 options={props.roles}
+                selected={props.user.roleId}
                 required={true}
             />
             {/*<InputText*/}

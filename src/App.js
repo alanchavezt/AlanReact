@@ -13,10 +13,12 @@ import { getToken, removeUserSession, setUserSession } from './utils/Common';
 /** Routes */
 import userRoutes from "./components/users/routes";
 import roleRoutes from "./components/roles/routes";
+import securityRoutes from "./components/security/routes";
 
 let routes = [];
 routes.push(...userRoutes);
 routes.push(...roleRoutes);
+routes.push(...securityRoutes);
 
 
 
@@ -46,8 +48,6 @@ const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
 const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
 
-/** Password */
-const Security = lazy(() => import('./components/security/ChangePasswordForm'));
 
 
 function App() {
@@ -178,7 +178,7 @@ function App() {
                                 {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
 
                                 {/** Password routes */}
-                                <Route exact path="/users/:id/password" element={<Security/>}/>
+                                {/*<Route exact path="/users/:id/password" element={<Security/>}/>*/}
 
 
                                 {/** Rendering routes dynamically */}

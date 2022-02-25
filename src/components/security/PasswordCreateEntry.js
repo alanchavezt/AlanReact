@@ -4,10 +4,11 @@ import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import UserPasswordService from "./UserPasswordService";
 
-const ChangePasswordForm = (props) => {
+const PasswordCreateEntry = (props) => {
 
     const params = useParams();
     const userPasswordService = new UserPasswordService();
+
     const [user, setUser] = useState({});
     const [error, setError] = useState(null);
 
@@ -18,8 +19,8 @@ const ChangePasswordForm = (props) => {
     },[]);
 
     const handleSave = (e) => {
-        userPasswordService.resetUserPassword(user).then(data => {
-            setUser(data);
+        userPasswordService.createUserPassword(user).then(data => {
+            // setUser(data);
             window.location.href = "/users";
         }).catch(error => {
             if (error.response.status === 401) setError(error.response.data.message);
@@ -40,10 +41,7 @@ const ChangePasswordForm = (props) => {
     const isFormValid = () => {
         let formData = user;
 
-        if (!formData.currentPassword) {
-            return false;
-        }
-        if (!formData.newPassword) {
+        if (!formData.password) {
             return false;
         }
         if (!formData.confirmPassword) {
@@ -58,23 +56,15 @@ const ChangePasswordForm = (props) => {
 
     return (
         <div className="p-4">
-            <h1>Change User Password</h1>
+            <h1>New Password</h1>
 
             <form onChange={handleFormChange}>
                 <InputText
-                    label="Current Password"
-                    type="password"
-                    id="currentPassword"
-                    name="currentPassword"
-                    value={user.currentPassword}
-                    required={true}
-                />
-                <InputText
                     label="New Password"
                     type="password"
-                    id="newPassword"
-                    name="newPassword"
-                    value={user.newPassword}
+                    id="password"
+                    name="password"
+                    value={user.password}
                     required={true}
                 />
                 <InputText
@@ -101,7 +91,7 @@ const ChangePasswordForm = (props) => {
     );
 }
 
-ChangePasswordForm.propTypes = {
+PasswordCreateEntry.propTypes = {
 };
 
-export default ChangePasswordForm;
+export default PasswordCreateEntry;

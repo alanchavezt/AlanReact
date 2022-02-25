@@ -39,7 +39,7 @@ app.post('/API/signup', async (req, res, next)=>{
         res.status(201).send();
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -63,6 +63,30 @@ app.get('/API/users/:id/roles', (req, res) => {
 });
 
 /** Password request API Handlers */
+app.post('/API/users/:id/password', async (req, res)=>{
+    console.log('New Password - User ID: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
+
+    try {
+        const userId = req.params.id;
+        const createPassword = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.post(`${API}/API/users/${userId}/password`, createPassword, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch (error)  {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
 app.put('/API/passwords/:id', async (req, res)=>{
     console.log('Password - User ID: ', req.params.id);
     const authorization = "Bearer " + req.headers.authorization;
@@ -81,7 +105,7 @@ app.put('/API/passwords/:id', async (req, res)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -138,7 +162,7 @@ app.post('/API/roles', async (req, res, next)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -162,7 +186,7 @@ app.put('/API/roles/:id', async (req, res)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -236,7 +260,7 @@ app.put('/API/users/:id', async (req, res)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -259,7 +283,7 @@ app.post('/API/users', async (req, res, next)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -360,7 +384,7 @@ app.post('/API/auth/signin', async (req, res) => {
         //         message: "Username or Password is Wrong."
         //     });
         // }
-    } catch(error) {
+    } catch (error) {
         res.status(500);
         res.json("Error occurred: " + error);
     };

@@ -3,21 +3,37 @@ import { useParams } from "react-router-dom";
 import './Users.css';
 import UserService from "./UserService";
 import Loading from '../common/Loading';
+import {sortArray} from "../../utils/arrayUtils";
+import RoleService from "../roles/RoleService";
 
 const UserViewEntry = (props) => {
 
     const params = useParams();
     const userService = new UserService();
+    const roleService = new RoleService();
+
     const [user, setUser] = useState();
+    const [roles, setRoles] = useState([]);
+    const [userRole, setUserRole] = useState({});
 
     useEffect(() => {
         const userId = params.id;
         userService.getUser(userId).then(data => {
+            const user = {...data};
             setUser(data);
+
+            /** todo: The user role should be already sent back by the API */
+            roleService.getRoles().then(data => {
+                const roles = sortArray(data, 'name');
+                setRoles(roles);
+
+                const userRole = roles.find(role => role.roleId === user.roleId);
+                setUserRole(userRole)
+            })
         });
     }, []);
 
-    if (!user) {
+    if (!user || !roles.length || !userRole) {
         return <Loading />
     }
 
@@ -48,8 +64,13 @@ const UserViewEntry = (props) => {
                 <div className="mb-3">
                     <label htmlFor="email">Email address</label>
                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={user.email || ""} readOnly={true}/>
-                    <small id="emailHelp" className="form-text text-muted float-right">We'll never share your email
-                        with anyone else.</small>
+                    <small id="emailHelp" className="form-text text-muted float-right">
+                        We'll never share your email with anyone else.
+                    </small>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="role">Role</label>
+                    <input type="text" className="form-control" id="role" value={userRole.name || ""} readOnly={true}/>
                 </div>
                 {/*<div className="mb-3">*/}
                 {/*    <label htmlFor="phone">Phone</label>*/}

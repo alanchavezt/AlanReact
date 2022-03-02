@@ -6,13 +6,16 @@ const About = (props) => {
     return (
         <div className={"container p-4"}>
             <section id="about" className="about">
-                <div className="container">
+                <div className="">
 
                     <div className="section-title">
                         <h2>About</h2>
                         <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.
                             Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit
-                            alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                            alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.
+                        </p>
+                        <br/>
+                        <p>The purpose of JavaScript Mastery is to help aspiring and established developers to take their development skills to the next level and build awesome apps.</p>
                     </div>
 
                     <div className="row">

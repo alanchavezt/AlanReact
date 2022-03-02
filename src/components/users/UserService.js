@@ -28,4 +28,8 @@ export default class UserService {
     getUserRoles(userId) {
         return axios.get(`${this.apiEndpoint}/${userId}/roles`).then(res => res.data);
     }
+
+    createUserRole(user) {
+        return axios.post(`${this.apiEndpoint}/${user.userId}/roles`, user).then(res => res.data);
+    }
 }

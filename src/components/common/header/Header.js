@@ -8,7 +8,9 @@ const Header = (props) => {
             {/*Header Top section*/}
             <div className="header-top">
                 <div className="header-top__logo">
-                    <a href="/" className="header-logo">AC</a>
+                    {/*<a href="/" className="header-logo">AC</a>*/}
+                    <span className="header-logo">AC</span>
+                    <span className={"header-logo-small"}><b>WhiteTower</b></span>
                 </div>
 
                 <div className="header-top__navbar">

@@ -78,63 +78,16 @@ function App() {
         <div className="App">
             <Router>
                 <Header/>
+
                 <div id="layoutSidenav">
-                    {/** todo: add the side bar to display the admin pages list */}
-                    <div id="layoutSidenav_nav">
-                        <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                            <div className="sb-sidenav-menu">
-                                <div className="nav">
-                                    {/*<Sidebar/>*/}
 
-
-                                    {/* todo: this side panel should be render dynamically */}
-                                    {getToken() ?
-                                        <React.Fragment>
-                                            <div className="sb-sidenav-menu-heading">Core</div>
-                                            <Link className="nav-link" to='/dashboard'>
-                                                <div className="sb-nav-link-icon">
-                                                    <i className="fas fa-tachometer-alt"/>
-                                                </div>Dashboard
-                                            </Link>
-                                            <Link className="nav-link" to='/roles'>
-                                                <div className="sb-nav-link-icon">
-                                                    <i className="fas fa-tachometer-alt"/>
-                                                </div>Roles
-                                            </Link>
-                                            <Link className="nav-link" to='/users'>
-                                                <div className="sb-nav-link-icon">
-                                                    <i className="fas fa-tachometer-alt"/>
-                                                </div>Users
-
-                                                {/*<Link className="nav-link" to={`/users/${user.userId}/password`}>*/}
-                                                {/*    <div className="sb-nav-link-icon">*/}
-                                                {/*        <i className="fas fa-tachometer-alt"/>*/}
-                                                {/*    </div>Change Password*/}
-                                                {/*</Link>*/}
-
-                                                {/*<Link className="nav-link" to={`/users/${user.userId}/roles`}>*/}
-                                                {/*    <div className="sb-nav-link-icon">*/}
-                                                {/*        <i className="fas fa-tachometer-alt"/>*/}
-                                                {/*    </div>Roles*/}
-                                                {/*</Link>*/}
-                                            </Link>
-                                        </React.Fragment>
-                                        : null
-                                    }
-
-                                    {/*<div className="sb-sidenav-menu-heading">Interface</div>*/}
-                                    {/*<a className="nav-link collapsed" href="#" data-bs-toggle="collapse"*/}
-                                    {/*   data-bs-target="#collapseLayouts" aria-expanded="false"*/}
-                                    {/*   aria-controls="collapseLayouts">*/}
-                                    {/*    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>*/}
-                                    {/*    Layouts*/}
-                                    {/*    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i>*/}
-                                    {/*    </div>*/}
-                                    {/*</a>*/}
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
+                    {/** todo: add the side bar to display the admin pages list, once authenticated */}
+                    {getToken() ?
+                        <div id="layoutSidenav_nav">
+                             <Sidebar/>
+                        </div>
+                        : null
+                    }
 
                     <section id="layoutSidenav_content">
                         <Suspense fallback={<div>Loading...</div>}>

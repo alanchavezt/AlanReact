@@ -13,17 +13,17 @@ const Sidebar = (props) => {
                         <div className="sb-sidenav-menu-heading">Core</div>
                         <Link className="nav-link" to='/dashboard'>
                             <div className="sb-nav-link-icon">
-                                <i className="fas fa-tachometer-alt"/>
+                                <i className="fa-solid fa-gauge-high"/>
                             </div>Dashboard
                         </Link>
                         <Link className="nav-link" to='/roles'>
                             <div className="sb-nav-link-icon">
-                                <i className="fas fa-tachometer-alt"/>
+                                <i className="fa-solid fa-user-gear"/>
                             </div>Roles
                         </Link>
                         <Link className="nav-link" to='/users'>
                             <div className="sb-nav-link-icon">
-                                <i className="fas fa-tachometer-alt"/>
+                                <i className="fa-solid fa-users"/>
                             </div>Users
 
                             {/*<Link className="nav-link" to={`/users/${user.userId}/password`}>*/}

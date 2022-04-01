@@ -4,30 +4,57 @@ import './Header.css';
 
 const Header = (props) => {
     return (
-        <section className="header">
+        <div className="header">
             {/*Header Top section*/}
-            <section className="header-top">
-                <section className="header-top__logo">
+            <div className="header-top">
+                <div className="header-top__logo">
                     <a href="/" className="header-logo">AC</a>
-                </section>
+                </div>
 
-                <section className="header-top__navbar">
+                <div className="header-top__navbar">
                     <Navbar/>
-                </section>
-            </section>
+                </div>
+            </div>
 
             {/*Header Bottom Section*/}
-            {/*<section className="header-bottom">*/}
-            {/*    <section className="header-bottom__phone">*/}
+            {/*<div className="header-bottom">*/}
+            {/*    <div className="header-bottom__phone">*/}
             {/*        333333333*/}
             {/*    </section>*/}
-            {/*    <section className="header-bottom__email">*/}
+            {/*    <div className="header-bottom__email">*/}
             {/*        resume@gmail.com*/}
             {/*    </section>*/}
 
             {/*</section>*/}
-        </section>
+        </div>
     );
 }
 
 export default Header;
+
+// TODO figure out how to use the sections style in the header without being affected by the other section styles
+// return (
+//     <section className="header">
+//         {/*Header Top section*/}
+//         <section className="header-top">
+//             <section className="header-top__logo">
+//                 <a href="/" className="header-logo">AC</a>
+//             </section>
+//
+//             <section className="header-top__navbar">
+//                 <Navbar/>
+//             </section>
+//         </section>
+//
+//         {/*Header Bottom Section*/}
+//         {/*<section className="header-bottom">*/}
+//         {/*    <section className="header-bottom__phone">*/}
+//         {/*        333333333*/}
+//         {/*    </section>*/}
+//         {/*    <section className="header-bottom__email">*/}
+//         {/*        resume@gmail.com*/}
+//         {/*    </section>*/}
+//
+//         {/*</section>*/}
+//     </section>
+// );

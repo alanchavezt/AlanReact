@@ -4,6 +4,7 @@ import Resume from "../Resume/Resume";
 import {About} from "../about";
 import {Button} from "react-bootstrap";
 import Hero from "../hero/Hero";
+import Skills from "../skills/Skills";
 
 const Home = (props) => {
 
@@ -34,6 +35,8 @@ const Home = (props) => {
                 {/*<div>*/}
                 {/*    <h1>Personal Achievements</h1>*/}
                 {/*</div>*/}
+
+                <Skills/>
 
                 <Resume/>
             </div>

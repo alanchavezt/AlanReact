@@ -14,11 +14,13 @@ import { getToken, removeUserSession, setUserSession } from './utils/Common';
 import userRoutes from "./components/users/routes";
 import roleRoutes from "./components/roles/routes";
 import securityRoutes from "./components/security/routes";
+import resumeRoutes from "./components/Resume/routes";
 
 let routes = [];
 routes.push(...userRoutes);
 routes.push(...roleRoutes);
 routes.push(...securityRoutes);
+routes.push(...resumeRoutes);
 
 
 

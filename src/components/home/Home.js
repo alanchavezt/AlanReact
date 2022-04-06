@@ -12,7 +12,6 @@ const Home = (props) => {
     if (!resume) {
         return <Loading/>;
     }
-
     return (
         <div >
             <div>

@@ -13,16 +13,14 @@ const Skills = (props) => {
                 </div>
 
                 <div className="row skills-content">
-                    {props.skills ? props.skills.map(skill => (
-                        <div className="col-lg-6" data-aos="fade-up">
-
+                    {props.skills ? props.skills.map((skill, index) => (
+                        <div key={index} className="col-lg-6" data-aos="fade-up">
                             <div className="progress">
                                 <span className="skill">{skill.skill} <i className="val">{skill.experience}</i></span>
                                 <div className="progress-bar-wrap">
                                     <div className="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
                                 </div>
                             </div>
-
                         </div>
                     )) : null}
                 </div>

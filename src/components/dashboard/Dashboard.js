@@ -14,8 +14,13 @@ const Dashboard = (props) => {
 
     return (
         <div className="container">
+            <h1 className="mt-4">Dashboard</h1>
+            <ol className="breadcrumb mb-4">
+                <li className="breadcrumb-item active">Dashboard</li>
+            </ol>
+
             <div className="dashboard">
-                <h1>Welcome {user.firstName} {user.lastName}!</h1>
+                <h2>Welcome {user.firstName} {user.lastName}!</h2>
                 <button type="button" className="btn btn-outline-primary" onClick={handleSingOut}>Sign Out</button>
             </div>
         </div>

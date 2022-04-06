@@ -14,7 +14,8 @@ const resume = {
             startDate: "January 2015",
             endDate: "April 2019",
             state: "Utah",
-            city: "Orem"
+            city: "Orem",
+            description: "Heavy focus on full stack engineering with modules on both front end and back end processes"
         },
         {
             school: "Utah Valley University",
@@ -22,7 +23,8 @@ const resume = {
             startDate: "August 2014",
             endDate: "December 2014",
             state: "Utah",
-            city: "Orem"
+            city: "Orem",
+            description: "Passionate about learning new languages"
         },
         {
             school: "Universidad Catolica de Santa Maria",
@@ -30,7 +32,8 @@ const resume = {
             startDate: "March 2008",
             endDate: "December 2012",
             state: "Peru",
-            city: "Arequipa"
+            city: "Arequipa",
+            description: "Object Oriented Programming, Design and Development, Relational Databases"
         },
     ],
     experience: [
@@ -94,6 +97,53 @@ const resume = {
                 "Developed and maintained front-end functionality of websites.",
                 "Designed and developed websites for corporate clients."
             ]
+        }
+    ],
+    skillsHighlight: "As a software engineer, " +
+        "I collaborated with fellow engineers on several applications for our clients. " +
+        "I've worked with a range a technologies in the web development world. From Back-end To Design. " +
+        "I used my knowledge of Java and React to create new features, customize functions, troubleshoot issues and debug platforms. " +
+        "I typically managed diverse tasks on seven to eight projects per sprint using a calendar and time tracker to ensure I remained on-schedule with my responsibilities.",
+    skills: [
+        {
+            skill: "Java",
+            experience: "80%"
+        },
+        {
+            skill: "React",
+            experience: "80%"
+        },
+        {
+            skill: "Postgresql",
+            experience: "80%"
+        },
+        {
+            skill: "Maven",
+            experience: "80%"
+        },
+        {
+            skill: "Gradle",
+            experience: "80%"
+        },
+        {
+            skill: "AWS",
+            experience: "80%"
+        },
+        {
+            skill: "NodeJs",
+            experience: "80%"
+        },
+        {
+            skill: "Html",
+            experience: "80%"
+        },
+        {
+            skill: "Css",
+            experience: "80%"
+        },
+        {
+            skill: "Javascript",
+            experience: "80%"
         }
     ]
 };

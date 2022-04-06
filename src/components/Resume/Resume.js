@@ -35,7 +35,7 @@ const Resume = (props) => {
                                 <h4>{e.degree}</h4>
                                 <h5>{e.startDate} - {e.endDate}</h5>
                                 <p><em>{e.school}, {e.city}, {e.state}</em></p>
-                                <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
+                                <p>{e.description}</p>
                             </div>
                         ))}
 

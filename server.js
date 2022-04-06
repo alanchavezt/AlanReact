@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Sign Up request API handlers
+/** Sign Up request API handlers */
 app.post('/API/signup', async (req, res, next)=>{
     console.log('user: ', req.body);
 
@@ -39,13 +39,54 @@ app.post('/API/signup', async (req, res, next)=>{
         res.status(201).send();
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
 });
 
+/** User Roles request API Handlers */
+app.get('/API/users/:id/roles', (req, res) => {
+    console.log('GET User Roles - User ID:', req.params.id)
+    const userId =  req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.get(`${API}/API/users/${userId}/roles`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
 /** Password request API Handlers */
+app.post('/API/users/:id/password', async (req, res)=>{
+    console.log('New Password - User ID: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
+
+    try {
+        const userId = req.params.id;
+        const createPassword = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.post(`${API}/API/users/${userId}/password`, createPassword, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch (error)  {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
 app.put('/API/passwords/:id', async (req, res)=>{
     console.log('Password - User ID: ', req.params.id);
     const authorization = "Bearer " + req.headers.authorization;
@@ -64,14 +105,112 @@ app.put('/API/passwords/:id', async (req, res)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
 });
 
 
-// User request API handlers
+
+/** Role request API handlers */
+app.get('/API/roles', (req, res) => {
+    console.log('Role List')
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.get(`${API}/API/roles`,{
+        headers: {'authorization': authorization}
+    }).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred: " + error);
+    });
+});
+
+app.get('/API/roles/:id', (req, res) => {
+    console.log('GET - Role ID:', req.params.id)
+    const roleId =  req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.get(`${API}/API/roles/${roleId}`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+app.post('/API/roles', async (req, res, next)=>{
+    console.log('POST - Role: ', req.body);
+    const authorization = "Bearer " + req.headers.authorization;
+
+    try {
+        const role = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.post(`${API}/API/roles`, role, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch (error)  {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
+app.put('/API/roles/:id', async (req, res)=>{
+    console.log('PUT - Role ID: ', req.params.id);
+    const authorization = "Bearer " + req.headers.authorization;
+
+    try {
+        const roleId = req.params.id;
+        const role = req.body;
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // user.password = hashedPassword;
+
+        const response = await axios.put(`${API}/API/roles/${roleId}`, role, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch (error)  {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
+app.delete('/API/roles/:id', (req, res)=>{
+    console.log('DELETE - Role ID: ', req.params.id);
+    const roleId = req.params.id;
+    const authorization = "Bearer " + req.headers.authorization;
+
+    axios.delete(`${API}/API/roles/${roleId}`, {
+        headers: {'authorization': authorization}
+    }).then(response => {
+        res.status(200);
+        res.set("Connection", "close");
+        res.json(response.data);
+    }).catch(error => {
+        res.json("Error occurred!")
+    });
+});
+
+
+
+/** User request API handlers */
 app.get('/API/users', (req, res) => {
     console.log('User List')
     const authorization = "Bearer " + req.headers.authorization;
@@ -121,7 +260,7 @@ app.put('/API/users/:id', async (req, res)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -144,7 +283,7 @@ app.post('/API/users', async (req, res, next)=>{
         res.status(201);
         res.set("Connection", "close");
         res.json(response.data);
-    } catch {
+    } catch (error)  {
         res.status(500).send();
         res.json("Error occurred!");
     }
@@ -167,8 +306,8 @@ app.delete('/API/users/:id', (req, res)=>{
 });
 
 
-//middleware that checks if JWT token exists and verifies it if it does exist.
-//In all future routes, this helps to know if the request is authenticated or not.
+/** Middleware that checks if JWT token exists and verifies it if it does exist.
+* In all future routes, this helps to know if the request is authenticated or not. */
 app.use( (req, res, next) => {
     // check header or url parameters or post parameters for token
     let token = req.headers['authorization'];
@@ -190,20 +329,24 @@ app.use( (req, res, next) => {
     // });
 });
 
-// Error-handling middleware
+
+
+/** Error-handling middleware */
 app.use(function (err, req, res, next) {
     console.error(err.stack)
     res.status(500).send('Something broke!')
 })
 
-// request handlers
+
+
+/** request handlers */
 app.get('/', (req, res) => {
     if (!req.user) return res.status(401).json({ success: false, message: 'Invalid user to access it.' });
     res.send('Welcome to the Node.js! - ' + req.user.name);
 });
 
 
-// Sign In request: validate the user credentials
+/** Sign In request: validate the user credentials */
 app.post('/API/auth/signin', async (req, res) => {
     // const username = req.body.username;
     const email = req.body.email;
@@ -241,14 +384,14 @@ app.post('/API/auth/signin', async (req, res) => {
         //         message: "Username or Password is Wrong."
         //     });
         // }
-    } catch(error) {
+    } catch (error) {
         res.status(500);
         res.json("Error occurred: " + error);
     };
 });
 
 
-// verify the token and return it if it's valid
+/** verify the token and return it if it's valid */
 app.get('/verifyToken', function (req, res) {
 
     // check header or url parameters or post parameters for token

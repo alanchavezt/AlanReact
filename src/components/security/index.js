@@ -1,3 +1,4 @@
-import Security from "./ChangePasswordForm";
+import ChangePasswordForm from "./ChangePasswordForm";
+import PasswordCreateEntry from "./PasswordCreateEntry";
 
-export { Security };
+export { ChangePasswordForm, PasswordCreateEntry };

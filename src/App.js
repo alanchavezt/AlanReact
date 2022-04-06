@@ -11,7 +11,16 @@ import Sidebar from "./components/common/sidebar";
 import { getToken, removeUserSession, setUserSession } from './utils/Common';
 
 /** Routes */
-import routes from "./components/users/routes";
+import userRoutes from "./components/users/routes";
+import roleRoutes from "./components/roles/routes";
+import securityRoutes from "./components/security/routes";
+
+let routes = [];
+routes.push(...userRoutes);
+routes.push(...roleRoutes);
+routes.push(...securityRoutes);
+
+
 
 /** Breadcrumbs Component */
 const Breadcrumbs = lazy(() => import('./components/common/breadcrumbs/Breadcrumbs'));
@@ -39,8 +48,6 @@ const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
 const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
 
-/** Password */
-const Security = lazy(() => import('./components/security/ChangePasswordForm'));
 
 
 function App() {
@@ -71,45 +78,16 @@ function App() {
         <div className="App">
             <Router>
                 <Header/>
+
                 <div id="layoutSidenav">
-                    {/** todo: add the side bar to display the admin pages list */}
-                    <div id="layoutSidenav_nav">
-                        <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                            <div className="sb-sidenav-menu">
-                                <div className="nav">
-                                    {/*<Sidebar/>*/}
 
-
-                                    {getToken() ?
-                                        <React.Fragment>
-                                            <div className="sb-sidenav-menu-heading">Core</div>
-                                            <Link className="nav-link" to='/dashboard'>
-                                                <div className="sb-nav-link-icon">
-                                                    <i className="fas fa-tachometer-alt"/>
-                                                </div>Dashboard
-                                            </Link>
-                                            <Link className="nav-link" to='/users'>
-                                                <div className="sb-nav-link-icon">
-                                                    <i className="fas fa-tachometer-alt"/>
-                                                </div>Users
-                                            </Link>
-                                        </React.Fragment>
-                                        : null
-                                    }
-
-                                    {/*<div className="sb-sidenav-menu-heading">Interface</div>*/}
-                                    {/*<a className="nav-link collapsed" href="#" data-bs-toggle="collapse"*/}
-                                    {/*   data-bs-target="#collapseLayouts" aria-expanded="false"*/}
-                                    {/*   aria-controls="collapseLayouts">*/}
-                                    {/*    <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>*/}
-                                    {/*    Layouts*/}
-                                    {/*    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i>*/}
-                                    {/*    </div>*/}
-                                    {/*</a>*/}
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
+                    {/** todo: add the side bar to display the admin pages list, once authenticated */}
+                    {getToken() ?
+                        <div id="layoutSidenav_nav">
+                             <Sidebar/>
+                        </div>
+                        : null
+                    }
 
                     <section id="layoutSidenav_content">
                         <Suspense fallback={<div>Loading...</div>}>
@@ -145,50 +123,67 @@ function App() {
                                 <Route path="/contact" element={<Contact/>}/>
 
                                 {/** User routes */}
-                                <Route exact path="/users" element={<UserListEntry/>}/>
+                                {/*<Route exact path="/users" element={<UserListEntry/>}/>*/}
                                 {/*/!*<PrivateRoute path="/users" component={UserListEntry}/>*!/*/}
-                                <Route exact path="/users/create" element={<UserCreateEntry/>}/>
-                                <Route exact path="/users/:id" element={<UserViewEntry/>}/>
-                                <Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>
+                                {/*<Route exact path="/users/create" element={<UserCreateEntry/>}/>*/}
+                                {/*<Route exact path="/users/:id" element={<UserViewEntry/>}/>*/}
+                                {/*<Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>*/}
                                 {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
 
                                 {/** Password routes */}
-                                <Route exact path="/users/:id/password" element={<Security/>}/>
+                                {/*<Route exact path="/users/:id/password" element={<Security/>}/>*/}
 
+
+                                {/** Rendering routes dynamically */}
                                 {routes.map(({ path, name, Component }, key) => (
                                     <Route
                                         exact
                                         path={path}
                                         key={key}
-                                        render={props => {
-                                            const crumbs = routes
-                                                // Get all routes that contain the current one.
-                                                .filter(({ path }) => props.match.path.includes(path))
-                                                // Swap out any dynamic routes with their param values.
-                                                // E.g. "/users/:userId" will become "/users/1"
-                                                .map(({ path, ...rest }) => ({
-                                                    path: Object.keys(props.match.params).length
-                                                        ? Object.keys(props.match.params).reduce(
-                                                            (path, param) => path.replace(
-                                                                `:${param}`, props.match.params[param]
-                                                            ), path
-                                                        )
-                                                        : path,
-                                                    ...rest
-                                                }));
-
-                                            // console.log(`Generated crumbs for ${props.match.path}`);
-                                            crumbs.map(({ name, path }) => console.log({ name, path }));
-
-                                            return (
-                                                <div className="container" style={{padding: "40px"}}>
-                                                    <Breadcrumbs crumbs={crumbs}/>
-                                                    <Component {...props} />
-                                                </div>
-                                            );
-                                        }}
+                                        element={
+                                            <div className="container">
+                                                {/*todo check how to pass down the props without manually doing it, maybe do the crumbs on top and just pass down the crumbs*/}
+                                                <Breadcrumbs routes={routes} currentPath={path}/>
+                                                <Component/>
+                                            </div>
+                                        }
                                     />
                                 ))}
+
+                                {/*{routes.map(({ path, name, Component }, key) => (*/}
+                                {/*    <Route*/}
+                                {/*        exact*/}
+                                {/*        path={path}*/}
+                                {/*        key={key}*/}
+                                {/*        render={props => {*/}
+                                {/*            const crumbs = routes*/}
+                                {/*                // Get all routes that contain the current one.*/}
+                                {/*                .filter(({ path }) => props.match.path.includes(path))*/}
+                                {/*                // Swap out any dynamic routes with their param values.*/}
+                                {/*                // E.g. "/users/:userId" will become "/users/1"*/}
+                                {/*                .map(({ path, ...rest }) => ({*/}
+                                {/*                    path: Object.keys(props.match.params).length*/}
+                                {/*                        ? Object.keys(props.match.params).reduce(*/}
+                                {/*                            (path, param) => path.replace(*/}
+                                {/*                                `:${param}`, props.match.params[param]*/}
+                                {/*                            ), path*/}
+                                {/*                        )*/}
+                                {/*                        : path,*/}
+                                {/*                    ...rest*/}
+                                {/*                }));*/}
+
+                                {/*            // console.log(`Generated crumbs for ${props.match.path}`);*/}
+                                {/*            crumbs.map(({ name, path }) => console.log({ name, path }));*/}
+
+                                {/*            return (*/}
+                                {/*                <div className="container" style={{padding: "40px"}}>*/}
+                                {/*                    <Breadcrumbs crumbs={crumbs}/>*/}
+                                {/*                    <Component {...props} />*/}
+                                {/*                </div>*/}
+                                {/*            );*/}
+                                {/*        }}*/}
+                                {/*    />*/}
+                                {/*))}*/}
 
                                 {/** Routing to an specific item */}
                                 <Route path="/shop/:id" element={<ItemView/>}/>

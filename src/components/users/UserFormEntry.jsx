@@ -4,12 +4,18 @@ import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import PropTypes from "prop-types";
 import CheckBox from "../common/form/CheckBox";
+import Select from "../common/form/Select";
 
 const UserFormEntry = (props) => {
 
     const onFormChange = (e) => {
         let user = {...props.user};
-        user[e.target.name] = e.target.value;
+
+        if (e.target.type === 'select-one') {
+            user[e.target.id] = e.target.value;
+        } else {
+            user[e.target.name] = e.target.value;
+        }
 
         if (props.onChange) {
             props.onChange(user);
@@ -65,6 +71,14 @@ const UserFormEntry = (props) => {
                 value={props.user.email}
                 required={true}
             />
+            <Select
+                label="Roles"
+                id="roleId"
+                name="name"
+                options={props.roles}
+                selected={props.user.roleId}
+                required={true}
+            />
             {/*<InputText*/}
             {/*    label="Phone"*/}
             {/*    id="phone"*/}
@@ -93,7 +107,8 @@ const UserFormEntry = (props) => {
 }
 
 UserFormEntry.propTypes = {
-    user: PropTypes.object
-}
+    user: PropTypes.object,
+    roles: PropTypes.array
+};
 
 export default UserFormEntry;

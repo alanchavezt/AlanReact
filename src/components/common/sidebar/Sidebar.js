@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sidebar.css"
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Sidebar = (props) => {
     return (
@@ -11,33 +11,33 @@ const Sidebar = (props) => {
 
                         {/* todo: this side panel should be render dynamically */}
                         <div className="sb-sidenav-menu-heading">Core</div>
-                        <Link className="nav-link" to='/dashboard'>
+                        <NavLink className="nav-link" to='/dashboard'>
                             <div className="sb-nav-link-icon">
                                 <i className="fa-solid fa-gauge-high"/>
                             </div>Dashboard
-                        </Link>
-                        <Link className="nav-link" to='/roles'>
+                        </NavLink>
+                        <NavLink className="nav-link" to='/roles'>
                             <div className="sb-nav-link-icon">
                                 <i className="fa-solid fa-user-gear"/>
                             </div>Roles
-                        </Link>
-                        <Link className="nav-link" to='/users'>
+                        </NavLink>
+                        <NavLink className="nav-link" to='/users'>
                             <div className="sb-nav-link-icon">
                                 <i className="fa-solid fa-users"/>
                             </div>Users
 
-                            {/*<Link className="nav-link" to={`/users/${user.userId}/password`}>*/}
+                            {/*<NavLink className="nav-link" to={`/users/${user.userId}/password`}>*/}
                             {/*    <div className="sb-nav-link-icon">*/}
                             {/*        <i className="fas fa-tachometer-alt"/>*/}
                             {/*    </div>Change Password*/}
-                            {/*</Link>*/}
+                            {/*</NavLink>*/}
 
-                            {/*<Link className="nav-link" to={`/users/${user.userId}/roles`}>*/}
+                            {/*<NavLink className="nav-link" to={`/users/${user.userId}/roles`}>*/}
                             {/*    <div className="sb-nav-link-icon">*/}
                             {/*        <i className="fas fa-tachometer-alt"/>*/}
                             {/*    </div>Roles*/}
-                            {/*</Link>*/}
-                        </Link>
+                            {/*</NavLink>*/}
+                        </NavLink>
 
 
                         {/*<div className="sb-sidenav-menu-heading">Interface</div>*/}

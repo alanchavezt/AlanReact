@@ -5,9 +5,13 @@ import {About} from "../about";
 import {Button} from "react-bootstrap";
 import Hero from "../hero/Hero";
 import Skills from "../skills/Skills";
+import {resume} from "../Resume/resumeMock";
+import Loading from "../common/Loading";
 
 const Home = (props) => {
-
+    if (!resume) {
+        return <Loading/>;
+    }
     return (
         <div >
             <div>
@@ -36,7 +40,7 @@ const Home = (props) => {
                 {/*    <h1>Personal Achievements</h1>*/}
                 {/*</div>*/}
 
-                <Skills/>
+                <Skills skills={resume.skills} skillsHighlight={resume.skillsHighlight}/>
 
                 <Resume/>
             </div>

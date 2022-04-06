@@ -18,7 +18,14 @@ const Skills = (props) => {
                             <div className="progress">
                                 <span className="skill">{skill.skill} <i className="val">{skill.experience}</i></span>
                                 <div className="progress-bar-wrap">
-                                    <div className="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
+                                    <div
+                                        className="progress-bar"
+                                        role="progressbar"
+                                        aria-valuenow="100"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        style={{width: skill.experience}}
+                                    />
                                 </div>
                             </div>
                         </div>

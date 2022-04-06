@@ -45,6 +45,8 @@ const resume = {
             state: "Utah",
             city: "Salt Lake City",
             jobDescription: [
+                "Supporting Web Services Using Jersey and Fauxjo Technologies for Acres Authoring App",
+                "Supporting Micro Services by using Spring Boot and Hibernate technologies for Poligy App",
                 "Build Acres A6 web application using Java technologies in the back end and React js framework in the front end.",
                 "React lead, migrating Acres A6 from backbone js framework to React js framework.",
                 "Designed front end architecture to run backbone js and react js simultaneously while migrating the modules from one framework to another.",

@@ -2,9 +2,11 @@ import React, {useEffect, useState} from "react";
 import resumeJson from "./local-json/resume.json";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
+import TextArea from "../common/form/TextArea";
 import Education from "./Education";
 import Experience from "./Experience";
 import Skills from "./Skills";
+
 
 const ResumeEditEntry = (props) => {
 
@@ -89,17 +91,21 @@ const ResumeEditEntry = (props) => {
                     value={resume.email}
                     required={true}
                 />
-                <InputText
+                <TextArea
                     label="Summary"
                     id="summary"
                     name="summary"
+                    cols={30}
+                    rows={10}
                     value={resume.summary}
                     required={true}
                 />
-                <InputText
+                <TextArea
                     label="Objective"
                     id="objective"
                     name="objective"
+                    cols={30}
+                    rows={10}
                     value={resume.objective}
                     required={true}
                 />

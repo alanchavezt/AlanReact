@@ -1,6 +1,6 @@
 import React from "react";
 import './resume.css';
-import {resume} from "./resumeMock";
+import {resume} from "./mock/resumeMock";
 import Loading from "../common/Loading";
 
 const Resume = (props) => {

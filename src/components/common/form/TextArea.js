@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const InputText = (props) => {
+const TextArea = (props) => {
 
     return (
         <div className="mb-3">
             <label className="float-start" htmlFor={props.id}>{props.label}</label>
-            <input
-                type={props.type}
+            <textarea
                 className={`form-control ${props.className}`}
                 id={props.id}
                 name={props.name || props.id}
+                cols={props.cols}
+                rows={props.rows}
                 value={props.value || ""}
                 onChange={(e) => {
                     if (props.onChange) {
@@ -27,12 +28,13 @@ const InputText = (props) => {
     );
 }
 
-InputText.propTypes = {
+TextArea.propTypes = {
     label: PropTypes.string,
-    type: PropTypes.string,
     className: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string,
+    cols: PropTypes.number,
+    rows: PropTypes.number,
     value: PropTypes.any,
     onChange: PropTypes.func,
     onKeyUp: PropTypes.func,
@@ -42,10 +44,11 @@ InputText.propTypes = {
     readOnly: PropTypes.bool
 }
 
-InputText.defaultProps = {
+TextArea.defaultProps = {
     label: "",
-    type: "text",
     className: "",
+    cols: 30,
+    rows: 10,
     onChange: null,
     onKeyUp: null,
     placeholder: "",
@@ -54,4 +57,4 @@ InputText.defaultProps = {
     readOnly: false
 }
 
-export default InputText;
+export default TextArea;

@@ -8,7 +8,6 @@ import Experience from "./experience/Experience";
 import Skills from "./skills/Skills";
 // import fs from "fs";
 
-
 const ResumeEditEntry = (props) => {
 
     const [resume,setResume] = useState([]);

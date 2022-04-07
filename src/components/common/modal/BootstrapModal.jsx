@@ -1,7 +1,6 @@
 import React, {useRef} from "react";
 import PropTypes from "prop-types";
 import {Modal, Button} from "react-bootstrap";
-import "bootstrap";
 
 class BootstrapModal extends React.Component {
 
@@ -74,20 +73,8 @@ class BootstrapModal extends React.Component {
     renderDialog = () => {
         return (
             <Modal.Dialog>
-                <Modal.Header>
-                    <span style={{float: "right"}}>
-                        <button
-                            className="close"
-                            type="button"
-                            data-dismiss="modal"
-                            style={{marginTop: "0"}}
-                            onClick={() => {
-                                this.setState({hidden: true});
-                                this.props.callback(false);
-                            }}>&times;
-                        </button>
-                    </span>
-                    <span className="modal-title" style={{fontSize: "12px", overflowWrap: "normal"}}>{this.props.title}</span>
+                <Modal.Header closeButton>
+                    <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{this.renderComponent()}</Modal.Body>
                 <Modal.Footer>{this.renderFooter()}</Modal.Footer>
@@ -130,14 +117,14 @@ class BootstrapModal extends React.Component {
                         this.setState({hidden: true});
                         this.props.callback(true);
                     }}
-                    bsStyle="primary">OK
+                    variant="primary">OK
                 </Button>
                 <Button
                     onClick={(e) => {
                         this.setState({hidden: true});
                         this.props.callback(false);
                     }}
-                    bsStyle="default">Cancel
+                    variant="secondary">Cancel
                 </Button>
             </React.Fragment>
         );
@@ -150,7 +137,7 @@ class BootstrapModal extends React.Component {
                     this.setState({hidden: true});
                     this.props.callback(true);
                 }}
-                bsStyle="primary">OK
+                variant="primary">OK
             </Button>
         );
     }
@@ -163,14 +150,14 @@ class BootstrapModal extends React.Component {
                         this.setState({hidden: true});
                         this.props.callback(this.state.data || true);
                     }}
-                    bsStyle="primary">OK
+                    variant="primary">OK
                 </Button>
                 <Button
                     onClick={(e) => {
                         this.setState({hidden: true});
                         this.props.callback(false);
                     }}
-                    bsStyle="default">Cancel
+                    variant="secondary">Cancel
                 </Button>
             </React.Fragment>
         );

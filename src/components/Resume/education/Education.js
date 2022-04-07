@@ -1,14 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 import Loading from "../../common/Loading";
 import {Link} from "react-router-dom";
+import {BootstrapModal} from "../../common/modal/BootstrapModal";
+import {Button, Form, Modal} from "react-bootstrap";
+import ACModal from "../../common/modal/ACModal";
+import EducationForm from "./EducationForm";
 
 const Education = (props) => {
+
+    const [isEducationModalVisible, setEducationModalVisible] = useState(false);
+    const [show, setShow] = useState(false);
+
+    const [education, setEducation] = useState({});
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     if (!props.education || !props.education.length) {
         return <Loading/>;
     }
 
-    const handleAddEducation = () => {
+    const handleEditEducation = (index, education) => {
+        setEducation(education);
+        handleShow();
+    }
 
+    const onFormEducationChange = (education) => {
+        setEducation(education);
+    }
+
+    const handleAddEducation = () => {
+        handleShow();
+        // setEducationModalVisible(true);
     }
 
     const handleDeleteEducation = (userId) => {
@@ -59,9 +82,9 @@ const Education = (props) => {
                         <td>{ed.description}</td>
                         <td>
                             <div className={"float-end"}>
-                                <Link to={`/resume/education/edit`}>
+                                <a className="pl-md-1" style={{cursor: "pointer"}} onClick={() => handleEditEducation(index, ed)}>
                                     <i className="fa-regular fa-pen-to-square pe-2"/>
-                                </Link>
+                                </a>
                                 <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDeleteEducation(index)}>
                                     <i className="fa-regular fa-trash-can pe-2"/>
                                 </a>
@@ -75,6 +98,23 @@ const Education = (props) => {
                 )}
                 </tbody>
             </table>
+
+            <ACModal
+                title={"Add Education"}
+                show={show}
+                onHide={handleClose}
+                callback={(res) => {
+                    console.log(res);
+                }}
+            >
+                <EducationForm
+                    education={education}
+                    onChange={(res) => {
+                        console.log(res);
+                        onFormEducationChange(res);
+                    }}
+                />
+            </ACModal>
         </div>
     )
 }

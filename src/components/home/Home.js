@@ -5,7 +5,7 @@ import {About} from "../about";
 import {Button} from "react-bootstrap";
 import Hero from "../hero/Hero";
 import Skills from "../skills/Skills";
-import {resume} from "../Resume/resumeMock";
+import {resume} from "../Resume/mock/resumeMock";
 import Loading from "../common/Loading";
 
 const Home = (props) => {

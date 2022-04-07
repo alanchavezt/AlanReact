@@ -1,17 +1,17 @@
 import React from "react";
-import Loading from "../common/Loading";
+import Loading from "../../common/Loading";
 import {Link} from "react-router-dom";
 
-const Education = (props) => {
-    if (!props.education || !props.education.length) {
+const Skills = (props) => {
+    if (!props.skills || !props.skills.length) {
         return <Loading/>;
     }
 
-    const handleAddEducation = () => {
+    const handleAddSkill = () => {
 
     }
 
-    const handleDeleteEducation = (userId) => {
+    const handleDeleteSkill = (userId) => {
         // confirm("Are you sure you want to delete this user?", (res) => {
         //     if (res) {
         //         userService.deleteUser(userId).then(data => {
@@ -25,10 +25,10 @@ const Education = (props) => {
         <div className="p-4">
             <div className="row row-cols-2">
                 <div className="col">
-                    <h1>Education List</h1>
+                    <h1>Skill List</h1>
                 </div>
                 <div className="col">
-                    <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAddEducation}>Add</button>
+                    <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAddSkill}>Add</button>
                 </div>
             </div>
 
@@ -36,33 +36,23 @@ const Education = (props) => {
                 <thead className="thead-dark">
                 <tr>
                     <th colSpan="1">#</th>
-                    <th colSpan="1">School</th>
-                    <th colSpan="1">Degree</th>
-                    <th colSpan="1">Start Date</th>
-                    <th colSpan="1">End Date</th>
-                    <th colSpan="1">State</th>
-                    <th colSpan="1">City</th>
-                    <th colSpan="1">Description</th>
+                    <th colSpan="1">Skill</th>
+                    <th colSpan="1">Experience</th>
                     <th colSpan="1">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                {props.education.length ? props.education.map((ed, index) => (
+                {props.skills.length ? props.skills.map((s, index) => (
                     <tr key={index}>
                         <td>{(index + 1)}</td>
-                        <td>{ed.school}</td>
-                        <td>{ed.degree}</td>
-                        <td>{ed.startDate}</td>
-                        <td>{ed.endDate}</td>
-                        <td>{ed.state}</td>
-                        <td>{ed.city}</td>
-                        <td>{ed.description}</td>
+                        <td>{s.skill}</td>
+                        <td>{s.experience}</td>
                         <td>
                             <div className={"float-end"}>
-                                <Link to={`/resume/education/edit`}>
+                                <Link to={`/resume/skills/edit`}>
                                     <i className="fa-regular fa-pen-to-square pe-2"/>
                                 </Link>
-                                <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDeleteEducation(index)}>
+                                <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDeleteSkill(index)}>
                                     <i className="fa-regular fa-trash-can pe-2"/>
                                 </a>
                             </div>
@@ -70,7 +60,7 @@ const Education = (props) => {
                     </tr>
                 )) : (
                     <tr>
-                        <td colSpan="9">No Education</td>
+                        <td colSpan="9">No Skills</td>
                     </tr>
                 )}
                 </tbody>
@@ -79,4 +69,4 @@ const Education = (props) => {
     )
 }
 
-export default Education;
+export default Skills;

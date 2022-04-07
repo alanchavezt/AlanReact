@@ -3,10 +3,10 @@ import resumeJson from "./local-json/resume.json";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import TextArea from "../common/form/TextArea";
-import Education from "./Education";
-import Experience from "./Experience";
-import Skills from "./Skills";
-
+import Education from "./education/Education";
+import Experience from "./experience/Experience";
+import Skills from "./skills/Skills";
+// import fs from "fs";
 
 const ResumeEditEntry = (props) => {
 
@@ -28,7 +28,15 @@ const ResumeEditEntry = (props) => {
     }
 
     const handleSave = (e) => {
+        const updatedResume = JSON.stringify(resume);
 
+        // TODO figure out how to use the file system library with React
+        // fs.writeFile('./myFile.json', updatedResume, function(err) {
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //     console.log("The file was saved!");
+        // });
     }
 
     const isFormValid = () => {

@@ -1,17 +1,17 @@
 import React from "react";
-import Loading from "../common/Loading";
+import Loading from "../../common/Loading";
 import {Link} from "react-router-dom";
 
-const Experience = (props) => {
-    if (!props.experience || !props.experience.length) {
+const Education = (props) => {
+    if (!props.education || !props.education.length) {
         return <Loading/>;
     }
 
-    const handleAddExperience = () => {
+    const handleAddEducation = () => {
 
     }
 
-    const handleDeleteExperience = (userId) => {
+    const handleDeleteEducation = (userId) => {
         // confirm("Are you sure you want to delete this user?", (res) => {
         //     if (res) {
         //         userService.deleteUser(userId).then(data => {
@@ -25,10 +25,10 @@ const Experience = (props) => {
         <div className="p-4">
             <div className="row row-cols-2">
                 <div className="col">
-                    <h1>Experience List</h1>
+                    <h1>Education List</h1>
                 </div>
                 <div className="col">
-                    <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAddExperience}>Add</button>
+                    <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAddEducation}>Add</button>
                 </div>
             </div>
 
@@ -36,8 +36,8 @@ const Experience = (props) => {
                 <thead className="thead-dark">
                 <tr>
                     <th colSpan="1">#</th>
-                    <th colSpan="1">Employer</th>
-                    <th colSpan="1">Job Title</th>
+                    <th colSpan="1">School</th>
+                    <th colSpan="1">Degree</th>
                     <th colSpan="1">Start Date</th>
                     <th colSpan="1">End Date</th>
                     <th colSpan="1">State</th>
@@ -47,22 +47,22 @@ const Experience = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                {props.experience.length ? props.experience.map((ex, index) => (
+                {props.education.length ? props.education.map((ed, index) => (
                     <tr key={index}>
                         <td>{(index + 1)}</td>
-                        <td>{ex.employer}</td>
-                        <td>{ex.jobTitle}</td>
-                        <td>{ex.startDate}</td>
-                        <td>{ex.endDate}</td>
-                        <td>{ex.state}</td>
-                        <td>{ex.city}</td>
-                        <td>{ex.jobDescription}</td>
+                        <td>{ed.school}</td>
+                        <td>{ed.degree}</td>
+                        <td>{ed.startDate}</td>
+                        <td>{ed.endDate}</td>
+                        <td>{ed.state}</td>
+                        <td>{ed.city}</td>
+                        <td>{ed.description}</td>
                         <td>
                             <div className={"float-end"}>
-                                <Link to={`/resume/experience/edit`}>
+                                <Link to={`/resume/education/edit`}>
                                     <i className="fa-regular fa-pen-to-square pe-2"/>
                                 </Link>
-                                <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDeleteExperience(index)}>
+                                <a className="pl-md-1 text-danger" style={{cursor: "pointer"}} onClick={() => handleDeleteEducation(index)}>
                                     <i className="fa-regular fa-trash-can pe-2"/>
                                 </a>
                             </div>
@@ -70,7 +70,7 @@ const Experience = (props) => {
                     </tr>
                 )) : (
                     <tr>
-                        <td colSpan="9">No Experience</td>
+                        <td colSpan="9">No Education</td>
                     </tr>
                 )}
                 </tbody>
@@ -79,4 +79,4 @@ const Experience = (props) => {
     )
 }
 
-export default Experience;
+export default Education;

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Loading from "../../common/Loading";
-import {BootstrapModal} from "../../common/modal/BootstrapModal";
 import ACModal from "../../common/modal/ACModal";
+import {confirm} from "../../common/modal/confirm";
 import EducationForm from "./EducationForm";
 
 const Education = (props) => {
@@ -49,14 +49,13 @@ const Education = (props) => {
         handleClose();
     }
 
-    const handleDeleteEducation = (userId) => {
-        // confirm("Are you sure you want to delete this user?", (res) => {
-        //     if (res) {
-        //         userService.deleteUser(userId).then(data => {
-        //             window.location.pathname = `/users`;
-        //         });
-        //     }
-        // })
+    const handleDeleteEducation = (index) => {
+        confirm("Are you sure you want to delete this education?", (res) => {
+            if (res) {
+                let educationList = props.education.filter((e,i) => i !== index);
+                props.onChange(educationList);
+            }
+        })
     }
 
     return (

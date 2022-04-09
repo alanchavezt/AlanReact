@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import resumeJson from "./local-json/resume.json";
+import resumeJson from "./local-json/myResumeFile.json";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import TextArea from "../common/form/TextArea";
 import Education from "./education/Education";
 import Experience from "./experience/Experience";
 import Skills from "./skills/Skills";
-// import fs from "fs";
+import axios from "axios";
 
 const ResumeEditEntry = (props) => {
 
@@ -28,21 +28,19 @@ const ResumeEditEntry = (props) => {
     }
 
     const handleSave = (e) => {
-        const updatedResume = JSON.stringify(resume);
 
-        // TODO figure out how to use the file system library with React
-        // fs.writeFile('./myFile.json', updatedResume, function(err) {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     console.log("The file was saved!");
-        // });
     }
 
     const handleEducationListChange = (educationList) => {
         let updatedResume = {...resume};
         updatedResume.education = educationList;
         setResume(updatedResume);
+
+        axios.post(`http://localhost:4000/writeFile`, updatedResume).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     const isFormValid = () => {

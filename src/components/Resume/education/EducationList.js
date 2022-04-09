@@ -4,19 +4,20 @@ import ACModal from "../../common/modal/ACModal";
 import {confirm} from "../../common/modal/confirm";
 import EducationForm from "./EducationForm";
 
-const Education = (props) => {
+const EducationList = (props) => {
 
     const [show, setShow] = useState(false);
     const [education, setEducation] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const [index, setIndex] = useState();
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setEducation({});
+        setIsEditing(false);
+        setShow(false)
+    };
 
-    if (!props.education || !props.education.length) {
-        return <Loading/>;
-    }
+    const handleShow = () => setShow(true);
 
     const handleFormEducationChange = (education) => {
         setEducation(education);
@@ -46,6 +47,7 @@ const Education = (props) => {
         educationList[index] = education;
         props.onChange(educationList);
         setEducation({});
+        setIsEditing(false);
         handleClose();
     }
 
@@ -56,6 +58,10 @@ const Education = (props) => {
                 props.onChange(educationList);
             }
         })
+    }
+
+    if (!props.education || !props.education.length) {
+        return <Loading/>;
     }
 
     return (
@@ -116,7 +122,7 @@ const Education = (props) => {
             </table>
 
             <ACModal
-                title={"Add Education"}
+                title={isEditing ? "Edit Education" : "Add Education"}
                 show={show}
                 onHide={handleClose}
                 callback={(res) => {
@@ -142,4 +148,4 @@ const Education = (props) => {
     )
 }
 
-export default Education;
+export default EducationList;

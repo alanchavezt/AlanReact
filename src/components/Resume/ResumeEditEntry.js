@@ -3,7 +3,7 @@ import resumeJson from "./local-json/myResumeFile.json";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import TextArea from "../common/form/TextArea";
-import Education from "./education/Education";
+import EducationList from "./education/EducationList";
 import Experience from "./experience/Experience";
 import Skills from "./skills/Skills";
 import axios from "axios";
@@ -123,7 +123,7 @@ const ResumeEditEntry = (props) => {
                 />
             </form>
 
-            <Education education={resume.education} onChange={handleEducationListChange}/>
+            <EducationList education={resume.education} onChange={handleEducationListChange}/>
 
             <Experience experience={resume.experience}/>
 

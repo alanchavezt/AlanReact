@@ -1,17 +1,15 @@
 import React, {useState} from "react";
 import Loading from "../../common/Loading";
-import {Link} from "react-router-dom";
 import {BootstrapModal} from "../../common/modal/BootstrapModal";
-import {Button, Form, Modal} from "react-bootstrap";
 import ACModal from "../../common/modal/ACModal";
 import EducationForm from "./EducationForm";
 
 const Education = (props) => {
 
-    const [isEducationModalVisible, setEducationModalVisible] = useState(false);
     const [show, setShow] = useState(false);
-
     const [education, setEducation] = useState({});
+    const [isEditing, setIsEditing] = useState(false);
+    const [index, setIndex] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,18 +18,35 @@ const Education = (props) => {
         return <Loading/>;
     }
 
-    const handleEditEducation = (index, education) => {
-        setEducation(education);
-        handleShow();
-    }
-
-    const onFormEducationChange = (education) => {
+    const handleFormEducationChange = (education) => {
         setEducation(education);
     }
 
     const handleAddEducation = () => {
         handleShow();
-        // setEducationModalVisible(true);
+    }
+
+    const handleEditEducation = (index, education) => {
+        setIndex(index);
+        setEducation(education);
+        setIsEditing(true);
+        handleShow();
+    }
+
+    const handleCreateEducation = () => {
+        let educationList = [...props.education];
+        educationList.push(education);
+        props.onChange(educationList);
+        setEducation({});
+        handleClose();
+    }
+
+    const handleUpdateEducation = () => {
+        let educationList = [...props.education];
+        educationList[index] = education;
+        props.onChange(educationList);
+        setEducation({});
+        handleClose();
     }
 
     const handleDeleteEducation = (userId) => {
@@ -59,6 +74,7 @@ const Education = (props) => {
                 <thead className="thead-dark">
                 <tr>
                     <th colSpan="1">#</th>
+                    <th colSpan="1">ID</th>
                     <th colSpan="1">School</th>
                     <th colSpan="1">Degree</th>
                     <th colSpan="1">Start Date</th>
@@ -73,6 +89,7 @@ const Education = (props) => {
                 {props.education.length ? props.education.map((ed, index) => (
                     <tr key={index}>
                         <td>{(index + 1)}</td>
+                        <td>{ed.educationId}</td>
                         <td>{ed.school}</td>
                         <td>{ed.degree}</td>
                         <td>{ed.startDate}</td>
@@ -104,14 +121,21 @@ const Education = (props) => {
                 show={show}
                 onHide={handleClose}
                 callback={(res) => {
-                    console.log(res);
+                    if (!res) {
+                        return;
+                    }
+                    if (isEditing) {
+                        handleUpdateEducation();
+                        setIsEditing(false);
+                    } else {
+                        handleCreateEducation();
+                    }
                 }}
             >
                 <EducationForm
                     education={education}
-                    onChange={(res) => {
-                        console.log(res);
-                        onFormEducationChange(res);
+                    onChange={(ed) => {
+                        handleFormEducationChange(ed);
                     }}
                 />
             </ACModal>

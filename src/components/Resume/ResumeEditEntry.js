@@ -39,6 +39,12 @@ const ResumeEditEntry = (props) => {
         // });
     }
 
+    const handleEducationListChange = (educationList) => {
+        let updatedResume = {...resume};
+        updatedResume.education = educationList;
+        setResume(updatedResume);
+    }
+
     const isFormValid = () => {
         let formData = resume;
 
@@ -119,7 +125,7 @@ const ResumeEditEntry = (props) => {
                 />
             </form>
 
-            <Education education={resume.education}/>
+            <Education education={resume.education} onChange={handleEducationListChange}/>
 
             <Experience experience={resume.experience}/>
 

@@ -2,20 +2,23 @@ import React, {useState} from "react";
 import {Form} from "react-bootstrap";
 import InputText from "../../common/form/InputText";
 import TextArea from "../../common/form/TextArea";
+import * as uuid from 'uuid';
 
 const EducationForm = (props) => {
 
-    const [education, setDegree] = useState({});
+    const handleFormEducationChange = (e) => {
+        let updatedDegree = {...props.education};
 
-    const onFormEducationChange = (e) => {
-        let updatedDegree = {...education};
+        if (updatedDegree && !updatedDegree.educationId) {
+            updatedDegree.educationId = uuid.v4();
+        }
+
         updatedDegree[e.target.name] = e.target.value;
-        setDegree(updatedDegree);
         props.onChange(updatedDegree);
     }
 
     return (
-        <Form onChange={onFormEducationChange}>
+        <Form onChange={handleFormEducationChange}>
             <InputText
                 label="School"
                 type="text"

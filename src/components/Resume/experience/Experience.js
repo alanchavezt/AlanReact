@@ -22,7 +22,7 @@ const Experience = (props) => {
     }
 
     return (
-        <div className="p-4">
+        <div className="pt-4">
             <div className="row row-cols-2">
                 <div className="col">
                     <h1>Experience List</h1>
@@ -56,7 +56,14 @@ const Experience = (props) => {
                         <td>{ex.endDate}</td>
                         <td>{ex.state}</td>
                         <td>{ex.city}</td>
-                        <td>{ex.jobDescription}</td>
+                        {/* TODO list items for job description (map) */}
+                        <td>
+                            <ul>
+                                {ex.jobDescription ? ex.jobDescription.map((d, index) => (
+                                    <li key={index}>{d}</li>
+                                )) : null}
+                            </ul>
+                        </td>
                         <td>
                             <div className={"float-end"}>
                                 <Link to={`/resume/experience/edit`}>

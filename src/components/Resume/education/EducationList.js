@@ -65,7 +65,7 @@ const EducationList = (props) => {
     }
 
     return (
-        <div className="p-4">
+        <div className="pt-4">
             <div className="row row-cols-2">
                 <div className="col">
                     <h1>Education List</h1>

@@ -21,11 +21,13 @@ const ResumeEditEntry = (props) => {
         setResume(resume);
     }
 
-    const onFormChange = (e) => {
+    const handleFormChange = (e) => {
         let updatedResume = {...resume};
         updatedResume[e.target.name] = e.target.value;
         setResume(updatedResume);
     }
+
+    const handleKeyUp = (e) => {}
 
     const handleSave = (e) => {
 
@@ -60,7 +62,7 @@ const ResumeEditEntry = (props) => {
         <div className="p-4">
             <h1>Edit Resume</h1>
 
-            <form onChange={onFormChange}>
+            <form onChange={handleFormChange} onKeyUp={handleKeyUp}>
                 <InputText
                     label="First Name"
                     id="firstName"
@@ -108,7 +110,7 @@ const ResumeEditEntry = (props) => {
                     id="summary"
                     name="summary"
                     cols={30}
-                    rows={10}
+                    rows={5}
                     value={resume.summary}
                     required={true}
                 />
@@ -117,7 +119,7 @@ const ResumeEditEntry = (props) => {
                     id="objective"
                     name="objective"
                     cols={30}
-                    rows={10}
+                    rows={5}
                     value={resume.objective}
                     required={true}
                 />

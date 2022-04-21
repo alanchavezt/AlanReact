@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const utils = require('./utils');
 const axios = require("axios");
 const bcrypt = require('bcrypt');
+const fs = require("fs");
 
 const app = express();
 const router = express.Router();
@@ -425,6 +426,22 @@ app.get('/verifyToken', function (req, res) {
     //     const userObj = utils.getCleanUser(userData);
     //     return res.json({ user: userObj, token });
     // });
+});
+
+/** Write file */
+app.post('/writeFile', async (req, res) => {
+    const authorization = "Bearer " + req.headers.authorization;
+    const resume = req.body;
+    const updatedResume = JSON.stringify(resume);
+    const filePath = path.join(__dirname, 'src/components/Resume/local-json/myResumeFile.json')
+
+    // TODO figure out how to use the file system library with React
+    fs.writeFile(filePath, updatedResume, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    });
 });
 
 app.listen(port, () => {

@@ -50,8 +50,6 @@ const UserViewEntry = lazy(() => import('./components/users/UserViewEntry'));
 const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 
 
-
-
 function App() {
 
     const [authLoading, setAuthLoading] = useState(true);

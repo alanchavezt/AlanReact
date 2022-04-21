@@ -1,8 +1,7 @@
 import React from 'react';
 import './Home.css';
-import Resume from "../Resume/Resume";
+import ResumeViewEntry from "../Resume/ResumeViewEntry";
 import {About} from "../about";
-import {Button} from "react-bootstrap";
 import Hero from "../hero/Hero";
 import Skills from "../skills/Skills";
 import {resume} from "../Resume/mock/resumeMock";
@@ -42,7 +41,7 @@ const Home = (props) => {
 
                 <Skills skills={resume.skills} skillsHighlight={resume.skillsHighlight}/>
 
-                <Resume/>
+                <ResumeViewEntry/>
             </div>
         </div>
     );

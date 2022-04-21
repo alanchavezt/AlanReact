@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import resumeJson from "./local-json/resume.json";
+import resumeJson from "./local-json/myResumeFile.json";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import TextArea from "../common/form/TextArea";
-import Education from "./education/Education";
+import EducationList from "./education/EducationList";
 import Experience from "./experience/Experience";
 import Skills from "./skills/Skills";
-// import fs from "fs";
+import axios from "axios";
 
 const ResumeEditEntry = (props) => {
 
@@ -21,11 +21,13 @@ const ResumeEditEntry = (props) => {
         setResume(resume);
     }
 
-    const onFormChange = (e) => {
+    const handleFormChange = (e) => {
         let updatedResume = {...resume};
         updatedResume[e.target.name] = e.target.value;
         setResume(updatedResume);
     }
+
+    const handleKeyUp = (e) => {}
 
     const handleSave = (e) => {
         const updatedResume = JSON.stringify(resume);
@@ -37,6 +39,18 @@ const ResumeEditEntry = (props) => {
         //     }
         //     console.log("The file was saved!");
         // });
+    }
+
+    const handleEducationListChange = (educationList) => {
+        let updatedResume = {...resume};
+        updatedResume.education = educationList;
+        setResume(updatedResume);
+
+        axios.post(`http://localhost:4000/writeFile`, updatedResume).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     const isFormValid = () => {
@@ -56,7 +70,7 @@ const ResumeEditEntry = (props) => {
         <div className="p-4">
             <h1>Edit Resume</h1>
 
-            <form onChange={onFormChange}>
+            <form onChange={handleFormChange} onKeyUp={handleKeyUp}>
                 <InputText
                     label="First Name"
                     id="firstName"
@@ -104,7 +118,7 @@ const ResumeEditEntry = (props) => {
                     id="summary"
                     name="summary"
                     cols={30}
-                    rows={10}
+                    rows={5}
                     value={resume.summary}
                     required={true}
                 />
@@ -113,13 +127,13 @@ const ResumeEditEntry = (props) => {
                     id="objective"
                     name="objective"
                     cols={30}
-                    rows={10}
+                    rows={5}
                     value={resume.objective}
                     required={true}
                 />
             </form>
 
-            <Education education={resume.education}/>
+            <EducationList education={resume.education} onChange={handleEducationListChange}/>
 
             <Experience experience={resume.experience}/>
 

@@ -1,9 +1,9 @@
 import React from "react";
 import './resume.css';
-import {resume} from "./mock/resumeMock";
+import resume from "./local-json/myResumeFile.json";
 import Loading from "../common/Loading";
 
-const Resume = (props) => {
+const ResumeViewEntry = (props) => {
     if (!resume) {
         return <Loading/>;
     }
@@ -62,4 +62,4 @@ const Resume = (props) => {
     );
 }
 
-export default Resume;
+export default ResumeViewEntry;

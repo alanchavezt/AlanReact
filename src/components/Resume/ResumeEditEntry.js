@@ -30,7 +30,15 @@ const ResumeEditEntry = (props) => {
     const handleKeyUp = (e) => {}
 
     const handleSave = (e) => {
+        const updatedResume = JSON.stringify(resume);
 
+        // TODO figure out how to use the file system library with React
+        // fs.writeFile('./myFile.json', updatedResume, function(err) {
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //     console.log("The file was saved!");
+        // });
     }
 
     const handleEducationListChange = (educationList) => {

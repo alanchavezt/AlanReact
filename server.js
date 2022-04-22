@@ -63,6 +63,27 @@ app.get('/API/users/:id/roles', (req, res) => {
     });
 });
 
+app.post('/API/users/:id/roles', async (req, res, next)=>{
+    console.log('POST - User: ', req.body);
+    const authorization = "Bearer " + req.headers.authorization;
+    const userId =  req.params.id;
+    const role = req.body;
+
+    try {
+        const response = await axios.post(`${API}/API/users/${userId}/roles`, role, {
+            headers: {'authorization': authorization}
+        });
+
+        // res.status(200);
+        res.status(201);
+        res.set("Connection", "close");
+        res.json(response.data);
+    } catch (error)  {
+        res.status(500).send();
+        res.json("Error occurred!");
+    }
+});
+
 /** Password request API Handlers */
 app.post('/API/users/:id/password', async (req, res)=>{
     console.log('New Password - User ID: ', req.params.id);
@@ -239,7 +260,7 @@ app.get('/API/users/:id', (req, res) => {
         res.set("Connection", "close");
         res.json(response.data);
     }).catch(error => {
-        res.json("Error occurred!")
+        res.json("Error occurred!" + error);
     });
 });
 

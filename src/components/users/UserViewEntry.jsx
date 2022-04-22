@@ -27,7 +27,8 @@ const UserViewEntry = (props) => {
                 const roles = sortArray(data, 'name');
                 setRoles(roles);
 
-                const userRole = roles.find(role => role.roleId === user.roleId);
+                let userRole = roles.find(role => role.roleId === user.roleId);
+                userRole = userRole ? userRole : {};
                 setUserRole(userRole)
             })
         });

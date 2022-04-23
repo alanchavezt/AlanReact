@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import resumeJson from "./local-json/myResumeFile.json";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
 import TextArea from "../common/form/TextArea";
@@ -17,8 +16,13 @@ const ResumeEditEntry = (props) => {
     },[])
 
     const getResume=()=>{
-        let resume = resumeJson;
-        setResume(resume);
+        axios.get(`http://localhost:4000/getResume`).then(response => {
+            const resume = response.data;
+            setResume(resume);
+            console.log(resume);
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     const handleFormChange = (e) => {

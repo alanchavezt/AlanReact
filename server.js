@@ -449,7 +449,25 @@ app.get('/verifyToken', function (req, res) {
     // });
 });
 
-/** Write file */
+/** File request API handlers*/
+app.get('/getResume', (req, res) => {
+    console.log('GET - Get Resume');
+    const filePath = path.join(__dirname, 'src/components/Resume/local-json/myResumeFile.json')
+
+    fs.readFile(filePath, 'utf8' , (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(403).json({
+                error: true,
+                message: "File not found!"
+            });
+        }
+        console.log(data);
+        const resume = JSON.parse(data);
+        return res.json(resume);
+    })
+});
+
 app.post('/writeFile', async (req, res) => {
     const authorization = "Bearer " + req.headers.authorization;
     const resume = req.body;

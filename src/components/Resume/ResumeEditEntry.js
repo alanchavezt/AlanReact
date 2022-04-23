@@ -9,7 +9,7 @@ import axios from "axios";
 
 const ResumeEditEntry = (props) => {
 
-    const [resume,setResume] = useState([]);
+    const [resume, setResume] = useState({});
 
     useEffect(()=>{
         getResume()

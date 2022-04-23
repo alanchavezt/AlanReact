@@ -1,9 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './resume.css';
-import resume from "./local-json/myResumeFile.json";
 import Loading from "../common/Loading";
+import axios from "axios";
 
 const ResumeViewEntry = (props) => {
+
+    const [resume, setResume] = useState();
+
+    useEffect(()=>{
+        getResume()
+    },[])
+
+    const getResume=()=>{
+        axios.get(`http://localhost:4000/getResume`).then(response => {
+            const resume = response.data;
+            setResume(resume);
+            console.log(resume);
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
     if (!resume) {
         return <Loading/>;
     }

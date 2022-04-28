@@ -10,8 +10,8 @@ module.exports = {
     context: __dirname,
     entry: path.resolve(__dirname, 'src/index.js'),
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public/build'),
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
         publicPath: "/"
     },
     devtool: 'inline-source-map',

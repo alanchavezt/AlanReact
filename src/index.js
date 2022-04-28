@@ -1,10 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {getToken} from "./utils/Common";
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,6 +15,11 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 // Add all icons to the library, so you can use it in your page
 library.add(fas, far, fab)
+
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import {getToken} from "./utils/Common";
 
 
 axios.interceptors.request.use(

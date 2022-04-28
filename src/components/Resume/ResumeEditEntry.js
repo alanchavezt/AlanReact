@@ -5,11 +5,18 @@ import TextArea from "../common/form/TextArea";
 import EducationList from "./education/EducationList";
 import Experience from "./experience/Experience";
 import Skills from "./skills/Skills";
+import Toast from "../common/toast/Toast";
+import checkIcon from '../common/assets/check.svg';
+import errorIcon from '../common/assets/error.svg';
+import infoIcon from '../common/assets/info.svg';
+import warningIcon from '../common/assets/warning.svg';
 import axios from "axios";
 
 const ResumeEditEntry = (props) => {
 
     const [resume, setResume] = useState({});
+    const [list, setList] = useState([]);
+    let toastProperties = null;
 
     useEffect(()=>{
         getResume()
@@ -66,6 +73,52 @@ const ResumeEditEntry = (props) => {
         return true;
     }
 
+    const showToast = type => {
+        switch(type) {
+            case 'success':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Success',
+                    description: 'This is a success toast component',
+                    backgroundColor: '#5cb85c',
+                    icon: checkIcon
+                }
+                break;
+            case 'danger':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Danger',
+                    description: 'This is a error toast component',
+                    backgroundColor: '#d9534f',
+                    icon: errorIcon
+                }
+                break;
+            case 'info':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Info',
+                    description: 'This is an info toast component',
+                    backgroundColor: '#5bc0de',
+                    icon: infoIcon
+                }
+                break;
+            case 'warning':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Warning',
+                    description: 'This is a warning toast component',
+                    backgroundColor: '#f0ad4e',
+                    icon: warningIcon
+                }
+                break;
+
+            default:
+                setList([]);
+        }
+
+        setList([...list, toastProperties]);
+    }
+
     if (!resume) {
         return <Loading />
     }
@@ -73,6 +126,17 @@ const ResumeEditEntry = (props) => {
     return (
         <div className="p-4">
             <h1>Edit Resume</h1>
+            <button onClick={() => showToast("success")}>Success</button>
+            <button onClick={() => showToast("danger")}>Danger</button>
+            <button onClick={() => showToast("info")}>Info</button>
+            <button onClick={() => showToast("warning")}>Warning</button>
+            <Toast
+                toastList={list}
+                position="bottom-right"
+                autoDelete={true}
+                dismissTime={3000}
+                setList={setList}
+            />
 
             <form onChange={handleFormChange} onKeyUp={handleKeyUp}>
                 <InputText

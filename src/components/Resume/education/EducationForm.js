@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Form} from "react-bootstrap";
 import InputText from "../../common/form/InputText";
 import TextArea from "../../common/form/TextArea";
 import * as uuid from 'uuid';
@@ -18,7 +17,7 @@ const EducationForm = (props) => {
     }
 
     return (
-        <Form onChange={handleFormEducationChange}>
+        <form onChange={handleFormEducationChange}>
             <InputText
                 label="School"
                 type="text"
@@ -76,7 +75,7 @@ const EducationForm = (props) => {
                 rows={3}
                 value={props.education.description}
             />
-        </Form>
+        </form>
     );
 }
 

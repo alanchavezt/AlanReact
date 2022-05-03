@@ -10,7 +10,13 @@ const axios = require("axios");
 const bcrypt = require('bcrypt');
 const fs = require("fs");
 
+const signupRoutes = require('./src/routes/signupRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const userPasswordRoutes = require('./src/routes/userPasswordRoutes');
 const userRoutes = require('./src/routes/userRoutes');
+const roleRoutes = require('./src/routes/roleRoutes');
+const userRolesRoutes = require('./src/routes/userRolesRoutes');
+const resumeRoutes = require('./src/routes/resumeRoutes');
 
 const app = express();
 const router = express.Router();
@@ -27,215 +33,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-/** Sign Up request API handlers */
-app.post('/API/signup', async (req, res, next)=>{
-    console.log('user: ', req.body);
-
-    try {
-        const user = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
-
-        const response = await axios.post(`${API}/API/signup`, user);
-
-        // res.status(200);
-        res.status(201).send();
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-/** User Roles request API Handlers */
-app.get('/API/users/:id/roles', (req, res) => {
-    console.log('GET User Roles - User ID:', req.params.id)
-    const userId =  req.params.id;
-    const authorization = "Bearer " + req.headers.authorization;
-
-    axios.get(`${API}/API/users/${userId}/roles`, {
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
-});
-
-app.post('/API/users/:id/roles', async (req, res, next)=>{
-    console.log('POST - User: ', req.body);
-    const authorization = "Bearer " + req.headers.authorization;
-    const userId =  req.params.id;
-    const role = req.body;
-
-    try {
-        const response = await axios.post(`${API}/API/users/${userId}/roles`, role, {
-            headers: {'authorization': authorization}
-        });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-/** Password request API Handlers */
-app.post('/API/users/:id/password', async (req, res)=>{
-    console.log('New Password - User ID: ', req.params.id);
-    const authorization = "Bearer " + req.headers.authorization;
-
-    try {
-        const userId = req.params.id;
-        const createPassword = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
-
-        const response = await axios.post(`${API}/API/users/${userId}/password`, createPassword, {
-            headers: {'authorization': authorization}
-        });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-app.put('/API/passwords/:id', async (req, res)=>{
-    console.log('Password - User ID: ', req.params.id);
-    const authorization = "Bearer " + req.headers.authorization;
-
-    try {
-        const userId = req.params.id;
-        const changePassword = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
-
-        const response = await axios.put(`${API}/API/passwords/${userId}`, changePassword, {
-            headers: {'authorization': authorization}
-        });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-
-
-/** Role request API handlers */
-app.get('/API/roles', (req, res) => {
-    console.log('Role List')
-    const authorization = "Bearer " + req.headers.authorization;
-
-    axios.get(`${API}/API/roles`,{
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred: " + error);
-    });
-});
-
-app.get('/API/roles/:id', (req, res) => {
-    console.log('GET - Role ID:', req.params.id)
-    const roleId =  req.params.id;
-    const authorization = "Bearer " + req.headers.authorization;
-
-    axios.get(`${API}/API/roles/${roleId}`, {
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
-});
-
-app.post('/API/roles', async (req, res, next)=>{
-    console.log('POST - Role: ', req.body);
-    const authorization = "Bearer " + req.headers.authorization;
-
-    try {
-        const role = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
-
-        const response = await axios.post(`${API}/API/roles`, role, {
-            headers: {'authorization': authorization}
-        });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-app.put('/API/roles/:id', async (req, res)=>{
-    console.log('PUT - Role ID: ', req.params.id);
-    const authorization = "Bearer " + req.headers.authorization;
-
-    try {
-        const roleId = req.params.id;
-        const role = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
-
-        const response = await axios.put(`${API}/API/roles/${roleId}`, role, {
-            headers: {'authorization': authorization}
-        });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-app.delete('/API/roles/:id', (req, res)=>{
-    console.log('DELETE - Role ID: ', req.params.id);
-    const roleId = req.params.id;
-    const authorization = "Bearer " + req.headers.authorization;
-
-    axios.delete(`${API}/API/roles/${roleId}`, {
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
-    });
-});
-
-
-
-/** User request API handlers */
+/** Handling routes request API handlers */
+app.use(signupRoutes);
+app.use(authRoutes);
+app.use(userPasswordRoutes);
+app.use(userRolesRoutes);
+app.use(roleRoutes);
 app.use(userRoutes);
+app.use(resumeRoutes);
+
 
 
 /** Middleware that checks if JWT token exists and verifies it if it does exist.
@@ -278,51 +84,6 @@ app.get('/', (req, res) => {
 });
 
 
-/** Sign In request: validate the user credentials */
-app.post('/API/auth/signin', async (req, res) => {
-    // const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    // return 400 status if username/password does not exist
-    if (!email || !password) {
-        return res.status(400).json({
-            error: true,
-            message: "Username or Password required."
-        });
-    }
-
-    try {
-        const response = await axios.post(`${API}/API/auth`, {email, password});
-        const token = response.data.token;
-        const user = response.data.user;
-
-        // const userObj = utils.getCleanUser(user);
-        return res.json({user, token});
-
-        // return 401 status if the credential does not match.
-        // if(await bcrypt.compare(req.body.password, user.password)) {
-        //     res.status(200);
-        //     res.set("Connection", "close");
-        //
-        //     // todo save token in the database
-        //     // generate token, get basic user details and return the token along with user details
-        //     const token = utils.generateToken(user);
-        //     const userObj = utils.getCleanUser(user);
-        //     return res.json({user: userObj, token});
-        // } else {
-        //     return res.status(401).json({
-        //         error: true,
-        //         message: "Username or Password is Wrong."
-        //     });
-        // }
-    } catch (error) {
-        res.status(500);
-        res.json("Error occurred: " + error);
-    };
-});
-
-
 /** verify the token and return it if it's valid */
 app.get('/verifyToken', function (req, res) {
 
@@ -357,40 +118,6 @@ app.get('/verifyToken', function (req, res) {
     //     const userObj = utils.getCleanUser(userData);
     //     return res.json({ user: userObj, token });
     // });
-});
-
-/** File request API handlers*/
-app.get('/getResume', (req, res) => {
-    console.log('GET - Get Resume');
-    const filePath = path.join(__dirname, 'src/components/Resume/local-json/myResumeFile.json')
-
-    fs.readFile(filePath, 'utf8' , (err, data) => {
-        if (err) {
-            console.error(err);
-            return res.status(403).json({
-                error: true,
-                message: "File not found!"
-            });
-        }
-        console.log(data);
-        const resume = JSON.parse(data);
-        return res.json(resume);
-    })
-});
-
-app.post('/writeFile', async (req, res) => {
-    const authorization = "Bearer " + req.headers.authorization;
-    const resume = req.body;
-    const updatedResume = JSON.stringify(resume);
-    const filePath = path.join(__dirname, 'src/components/Resume/local-json/myResumeFile.json')
-
-    // TODO figure out how to use the file system library with React
-    fs.writeFile(filePath, updatedResume, function(err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("The file was saved!");
-    });
 });
 
 app.listen(port, () => {

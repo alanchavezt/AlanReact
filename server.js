@@ -33,17 +33,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-/** Handling routes request API handlers */
-app.use(signupRoutes);
-app.use(authRoutes);
-app.use(userPasswordRoutes);
-app.use(userRolesRoutes);
-app.use(roleRoutes);
-app.use(userRoutes);
-app.use(resumeRoutes);
-
-
-
 /** Middleware that checks if JWT token exists and verifies it if it does exist.
 * In all future routes, this helps to know if the request is authenticated or not. */
 app.use( (req, res, next) => {
@@ -68,20 +57,22 @@ app.use( (req, res, next) => {
 });
 
 
-
-/** Error-handling middleware */
-app.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.status(500).send('Something broke!')
-})
-
-
-
 /** request handlers */
 app.get('/', (req, res) => {
-    if (!req.user) return res.status(401).json({ success: false, message: 'Invalid user to access it.' });
+    if (!req.user) {
+        return res.status(401).json({success: false, message: 'Invalid user to access it.'});
+    }
     res.send('Welcome to the Node.js! - ' + req.user.name);
 });
+
+/** Handling routes request API handlers */
+app.use('/API/signup', signupRoutes);
+app.use('/API/auth/signin', authRoutes);
+app.use(userPasswordRoutes);
+app.use(userRolesRoutes);
+app.use('/API/roles', roleRoutes);
+app.use('/API/users', userRoutes);
+app.use(resumeRoutes);
 
 
 /** verify the token and return it if it's valid */
@@ -119,6 +110,12 @@ app.get('/verifyToken', function (req, res) {
     //     return res.json({ user: userObj, token });
     // });
 });
+
+/** Error-handling middleware */
+app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+})
 
 app.listen(port, () => {
     console.log('Server started on: ' + port);

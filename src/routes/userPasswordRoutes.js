@@ -28,8 +28,8 @@ routes.post('/API/users/:id/password', async (req, res)=>{
     }
 });
 
-routes.put('/API/passwords/:id', async (req, res)=>{
-    console.log('Password - User ID: ', req.params.id);
+routes.put('/API/users/:id/password', async (req, res)=>{
+    console.log('Resetting Password - User ID: ', req.params.id);
     const authorization = "Bearer " + req.headers.authorization;
 
     try {
@@ -38,7 +38,6 @@ routes.put('/API/passwords/:id', async (req, res)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        // TODO this request is failing. gotta figure out why ?
         const response = await axios.put(`${API}/API/passwords/${userId}`, changePassword, {
             headers: {'authorization': authorization}
         });
@@ -48,8 +47,8 @@ routes.put('/API/passwords/:id', async (req, res)=>{
         res.set("Connection", "close");
         res.json(response.data);
     } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
+        // res.status(500).send();
+        res.json("Error occurred resetting password!" + error);
     }
 });
 

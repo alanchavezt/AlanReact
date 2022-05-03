@@ -4,7 +4,7 @@ const axios = require("axios");
 const routes = express.Router();
 const API = "http://localhost:8080";
 
-routes.get('/API/roles', (req, res) => {
+routes.get('/', (req, res) => {
     console.log('Role List')
     const authorization = "Bearer " + req.headers.authorization;
 
@@ -19,7 +19,7 @@ routes.get('/API/roles', (req, res) => {
     });
 });
 
-routes.get('/API/roles/:id', (req, res) => {
+routes.get('/:id', (req, res) => {
     console.log('GET - Role ID:', req.params.id)
     const roleId =  req.params.id;
     const authorization = "Bearer " + req.headers.authorization;
@@ -35,7 +35,7 @@ routes.get('/API/roles/:id', (req, res) => {
     });
 });
 
-routes.post('/API/roles', async (req, res, next)=>{
+routes.post('/', async (req, res, next)=>{
     console.log('POST - Role: ', req.body);
     const authorization = "Bearer " + req.headers.authorization;
 
@@ -58,7 +58,7 @@ routes.post('/API/roles', async (req, res, next)=>{
     }
 });
 
-routes.put('/API/roles/:id', async (req, res)=>{
+routes.put('/:id', async (req, res)=>{
     console.log('PUT - Role ID: ', req.params.id);
     const authorization = "Bearer " + req.headers.authorization;
 
@@ -82,7 +82,7 @@ routes.put('/API/roles/:id', async (req, res)=>{
     }
 });
 
-routes.delete('/API/roles/:id', (req, res)=>{
+routes.delete('/:id', (req, res)=>{
     console.log('DELETE - Role ID: ', req.params.id);
     const roleId = req.params.id;
     const authorization = "Bearer " + req.headers.authorization;

@@ -4,7 +4,7 @@ const axios = require("axios");
 const routes = express.Router();
 const API = "http://localhost:8080";
 
-routes.post('/API/signup', async (req, res, next)=>{
+routes.post('/', async (req, res, next)=>{
     console.log('user: ', req.body);
 
     try {

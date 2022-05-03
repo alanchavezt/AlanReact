@@ -15,6 +15,11 @@ import userRoutes from "./components/users/routes";
 import roleRoutes from "./components/roles/routes";
 import securityRoutes from "./components/security/routes";
 import resumeRoutes from "./components/Resume/routes";
+import checkIcon from "./components/common/assets/check.svg";
+import errorIcon from "./components/common/assets/error.svg";
+import infoIcon from "./components/common/assets/info.svg";
+import warningIcon from "./components/common/assets/warning.svg";
+import Toast from "./components/common/toast/Toast";
 
 let routes = [];
 routes.push(...userRoutes);
@@ -53,6 +58,8 @@ const UserEditEntry = lazy(() => import('./components/users/UserEditEntry'));
 function App() {
 
     const [authLoading, setAuthLoading] = useState(true);
+    const [list, setList] = useState([]);
+    let toastProperties = null;
 
     useEffect(() => {
         const token = getToken();
@@ -63,12 +70,60 @@ function App() {
 
         axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
             // setUserSession(response.data.token, response.data.user);
+            showToast("success");
             setAuthLoading(false);
         }).catch(error => {
             removeUserSession();
+            showToast("info")
             setAuthLoading(false);
         });
     }, []);
+
+    const showToast = type => {
+        switch(type) {
+            case 'success':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Success',
+                    description: 'This is a success toast component',
+                    backgroundColor: '#5cb85c',
+                    icon: checkIcon
+                }
+                break;
+            case 'danger':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Danger',
+                    description: 'This is a error toast component',
+                    backgroundColor: '#d9534f',
+                    icon: errorIcon
+                }
+                break;
+            case 'info':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Info',
+                    description: 'This is an info toast component',
+                    backgroundColor: '#5bc0de',
+                    icon: infoIcon
+                }
+                break;
+            case 'warning':
+                toastProperties = {
+                    id: list.length + 1,
+                    title: 'Warning',
+                    description: 'This is a warning toast component',
+                    backgroundColor: '#f0ad4e',
+                    icon: warningIcon
+                }
+                break;
+
+            default:
+                setList([]);
+        }
+
+        setList([...list, toastProperties]);
+    }
 
     if (authLoading && getToken()) {
         return <div className="content">Checking Authentication...</div>
@@ -78,6 +133,14 @@ function App() {
         <div className="App">
             <Router>
                 <Header/>
+
+                <Toast
+                    toastList={list}
+                    position="bottom-right"
+                    autoDelete={true}
+                    dismissTime={3000}
+                    setList={setList}
+                />
 
                 <div id="layoutSidenav">
 

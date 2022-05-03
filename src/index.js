@@ -33,6 +33,16 @@ axios.interceptors.request.use(
     }
 );
 
+axios.interceptors.response.use(response => {
+        if (response) {
+            response.success = response.status === 200;
+            return response;
+        }
+    }, error => {
+        return Promise.reject(error);
+    }
+);
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

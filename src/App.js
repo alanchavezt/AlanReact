@@ -15,10 +15,15 @@ import userRoutes from "./components/users/routes";
 import roleRoutes from "./components/roles/routes";
 import securityRoutes from "./components/security/routes";
 import resumeRoutes from "./components/Resume/routes";
+import testRoutes from "./components/test/routes";
+
+/** Assets */
 import checkIcon from "./components/common/assets/check.svg";
 import errorIcon from "./components/common/assets/error.svg";
 import infoIcon from "./components/common/assets/info.svg";
 import warningIcon from "./components/common/assets/warning.svg";
+
+/** ACTModal */
 import Toast from "./components/common/toast/Toast";
 
 let routes = [];
@@ -26,6 +31,7 @@ routes.push(...userRoutes);
 routes.push(...roleRoutes);
 routes.push(...securityRoutes);
 routes.push(...resumeRoutes);
+routes.push(...testRoutes);
 
 
 

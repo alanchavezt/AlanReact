@@ -5,11 +5,13 @@ import UserService from "./UserService";
 import Loading from '../common/Loading';
 import {confirm} from "../common/modal/confirm";
 import {sortArray} from "../../utils/arrayUtils";
+import ACTModal from "../common/actModal/ACTModal";
 
 const UserListEntry = (props) => {
 
     const userService = new UserService();
     const [users, setUsers] = useState([]);
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         userService.getUsers().then(data => {
@@ -42,6 +44,16 @@ const UserListEntry = (props) => {
                 <div className="col">
                     <h1>User List</h1>
                 </div>
+
+                <button onClick={() => setShow(true)}>Show Modal</button>
+                <ACTModal
+                    title={"My Modal"}
+                    show={show}
+                    onClose={() => setShow(false)}
+                >
+                    <p>This is the modal body</p>
+                </ACTModal>
+
                 <div className="col">
                     <button type="submit" className="btn btn-outline-primary float-end" onClick={handleAdd}>Add</button>
                 </div>

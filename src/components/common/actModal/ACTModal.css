@@ -18,15 +18,23 @@
     pointer-events: visible;
 }
 
+.hide {
+    opacity: 0;
+}
+
 .act-modal-content {
     width: 500px;
     background-color: #fff;
-    transform: translateY(-200px);
     transition: all 0.3s ease-in-out;
+    transform: translateY(-200px);
 }
 
 .act-modal.show .act-modal-content {
     transform: translateY(0);
+}
+
+.hide .act-modal-content {
+    transform: translateY(-200px);
 }
 
 .act-modal-header, .act-modal-footer {

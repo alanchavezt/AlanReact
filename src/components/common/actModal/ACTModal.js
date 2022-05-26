@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react';
+import ReactDOM from "react-dom";
 import './ACTModal.css';
+import PropTypes from "prop-types";
 
 const ACTModal = props =>  {
-
-    if (!props.show) {
-        return null;
-    }
 
     const closeOnEscapeKeyDown = (e) => {
         if ((e.charCode || e.keyCode) === 27) {
@@ -21,8 +19,12 @@ const ACTModal = props =>  {
         }
     }, [])
 
-    return (
-        <div className={`act-modal ${props.show ? 'show' : ''}`} onClick={props.onClose}>
+    const showHideClassName = `${props.show ? 'act-modal show' : 'hide'}`;
+
+    /** TODO: Use import { CSSTransition } from "react-transition-group"; */
+
+    return ReactDOM.createPortal(
+        <div className={showHideClassName} onClick={props.onClose}>
             <div className={"act-modal-content"} onClick={e => e.stopPropagation()}>
                 <div className={"act-modal-header"}>
                     <h4 className={"act-modal-title"}>{props.title}</h4>
@@ -32,9 +34,15 @@ const ACTModal = props =>  {
                     <button className={"button"} onClick={props.onClose}>Close</button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.getElementById("root")
     );
 
 }
+
+ACTModal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired
+};
 
 export default ACTModal;

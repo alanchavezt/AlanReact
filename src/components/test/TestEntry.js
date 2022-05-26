@@ -10,7 +10,9 @@ const TestEntry = (props) => {
             <h1>Test Component</h1>
 
             <h4>This is the test for the new ACTModal</h4>
+
             <button onClick={() => setShow(true)}>Show Modal</button>
+
             <ACTModal
                 title={"My Modal"}
                 show={show}

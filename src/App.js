@@ -254,7 +254,7 @@ function App() {
                                 {/*    />*/}
                                 {/*))}*/}
 
-                                {/** Routing to an specific item */}
+                                {/** Routing to a specific item */}
                                 <Route path="/shop/:id" element={<ItemView/>}/>
                             </Routes>
                         </Suspense>

@@ -1,8 +1,10 @@
 import axios from 'axios';
+import HttpClient from "../../api/http-client";
 
 export default class UserService {
 
     apiEndpoint = "/API/users";
+    httpClient = new HttpClient('/API/users');
 
     createUser(user) {
         return axios.post(`${this.apiEndpoint}`, user).then(res => res.data);
@@ -13,7 +15,7 @@ export default class UserService {
     }
 
     getUsers() {
-        return axios.get(`${this.apiEndpoint}`).then(res => res.data);
+        return this.httpClient.get(`${this.apiEndpoint}`).then(data => data);
     }
 
     updateUser(user) {

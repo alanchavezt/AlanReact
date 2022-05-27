@@ -1,101 +1,81 @@
 const express = require('express');
 const axios = require("axios");
 
-const routes = express.Router();
+const router = express.Router();
 const API = "http://localhost:8080";
+let config = {
+    headers: {
+        'authorization': ""
+    }
+};
 
-routes.get('/', (req, res) => {
-    console.log('User List')
+router.use( (req, res, next) => {
     const authorization = "Bearer " + req.headers.authorization;
-
-    axios.get(`${API}/API/users`,{
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred: " + error);
-    });
+    config.headers.authorization = authorization;
+    next();
 });
 
-routes.get('/:id', (req, res) => {
-    console.log('GET - User ID:', req.params.id)
-    const userId =  req.params.id;
-    const authorization = "Bearer " + req.headers.authorization;
+router.route('/')
+    .get((req, res) => {
+        console.log('GET Users')
+        const url = `${API}/API/users`;
 
-    axios.get(`${API}/API/users/${userId}`, {
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!" + error);
+        axios.get(url, config).then(response => {
+            res.status(200).json(response.data);
+        }).catch(error => {
+            res.json("Error occurred: " + error);
+        });
+    })
+    .post(async (req, res, next)=>{
+        console.log('Create User: ', req.body);
+        const url = `${API}/API/users`;
+        // const user = req.body;
+
+        try {
+            const response = await axios.post(url, req.body, config);
+
+            res.status(200).json(response.data);
+        } catch (error)  {
+            res.json("Error occurred: " + error);
+        }
     });
-});
 
-routes.put('/:id', async (req, res)=>{
-    console.log('PUT - User ID: ', req.params.id);
-    const authorization = "Bearer " + req.headers.authorization;
+router.route('/:id')
+    .get((req, res) => {
+        console.log('GET User - User ID:', req.params.id)
+        const userId =  req.params.id;
+        const url = `${API}/API/users/${userId}`;
 
-    try {
+        axios.get(url, config).then(response => {
+            res.status(200).json(response.data);
+        }).catch(error => {
+            res.json("Error occurred!" + error);
+        });
+    })
+    .put(async (req, res)=>{
+        console.log('PUT - User ID: ', req.params.id);
         const userId = req.params.id;
-        const user = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
+        const url = `${API}/API/users/${userId}`;
+        // const user = req.body;
 
-        const response = await axios.put(`${API}/API/users/${userId}`, user, {
-            headers: {'authorization': authorization}
+        try {
+            const response = await axios.put(url, req.body, config);
+
+            res.status(200).json(response.data);
+        } catch (error)  {
+            res.json("Error occurred!" + error);
+        }
+    })
+    .delete((req, res)=>{
+        console.log('DELETE - User ID: ', req.params.id);
+        const userId = req.params.id;
+        const url = `${API}/API/users/${userId}`;
+
+        axios.delete(url, config).then(response => {
+            res.status(200).json(response.data);
+        }).catch(error => {
+            res.json("Error occurred!" + error);
         });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-routes.post('/', async (req, res, next)=>{
-    console.log('POST - User: ', req.body);
-    const authorization = "Bearer " + req.headers.authorization;
-
-    try {
-        const user = req.body;
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        // user.password = hashedPassword;
-
-        const response = await axios.post(`${API}/API/users`, user, {
-            headers: {'authorization': authorization}
-        });
-
-        // res.status(200);
-        res.status(201);
-        res.set("Connection", "close");
-        res.json(response.data);
-    } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
-    }
-});
-
-routes.delete('/:id', (req, res)=>{
-    console.log('DELETE - User ID: ', req.params.id);
-    const userId = req.params.id;
-    const authorization = "Bearer " + req.headers.authorization;
-
-    axios.delete(`${API}/API/users/${userId}`, {
-        headers: {'authorization': authorization}
-    }).then(response => {
-        res.status(200);
-        res.set("Connection", "close");
-        res.json(response.data);
-    }).catch(error => {
-        res.json("Error occurred!")
     });
-});
 
-module.exports = routes;
+module.exports = router;

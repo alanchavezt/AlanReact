@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /** Middleware that checks if JWT token exists and verifies it if it does exist.
-* In all future routes, this helps to know if the request is authenticated or not. */
+ * In all future routes, this helps to know if the request is authenticated or not. */
 app.use( (req, res, next) => {
     // check header or url parameters or post parameters for token
     let token = req.headers['authorization'];
@@ -64,16 +64,6 @@ app.get('/', (req, res) => {
     }
     res.send('Welcome to the Node.js! - ' + req.user.name);
 });
-
-/** Handling routes request API handlers */
-app.use('/API/signup', signupRoutes);
-app.use('/API/auth/signin', authRoutes);
-app.use(userPasswordRoutes);
-app.use(userRolesRoutes);
-app.use('/API/roles', roleRoutes);
-app.use('/API/users', userRoutes);
-app.use(resumeRoutes);
-
 
 /** verify the token and return it if it's valid */
 app.get('/verifyToken', function (req, res) {
@@ -110,6 +100,15 @@ app.get('/verifyToken', function (req, res) {
     //     return res.json({ user: userObj, token });
     // });
 });
+
+/** Handling routes request API handlers */
+app.use('/API/signup', signupRoutes);
+app.use('/API/auth/signin', authRoutes);
+app.use(userPasswordRoutes);
+app.use(userRolesRoutes);
+app.use('/API/roles', roleRoutes);
+app.use('/API/users', userRoutes);
+app.use(resumeRoutes);
 
 /** Error-handling middleware */
 app.use(function (err, req, res, next) {

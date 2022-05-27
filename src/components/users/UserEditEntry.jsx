@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import './Users.css';
 import UserFormEntry from './UserFormEntry';
-import UserService from "./UserService";
+import UserService from "../../services/UserService";
 import Loading from "../common/Loading";
 import {confirm} from "../common/modal/confirm";
 import RoleService from "../roles/RoleService";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Users.css';
 import {Link} from "react-router-dom";
-import UserService from "./UserService";
+import UserService from "../../services/UserService";
 import Loading from '../common/Loading';
 import {confirm} from "../common/modal/confirm";
 import {sortArray} from "../../utils/arrayUtils";

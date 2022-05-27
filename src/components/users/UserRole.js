@@ -4,7 +4,7 @@ import Loading from "../common/Loading";
 import RoleService from "../roles/RoleService";
 import {sortArray} from "../../utils/arrayUtils";
 import {useParams} from "react-router-dom";
-import UserService from "./UserService";
+import UserService from "../../services/UserService";
 
 const UserRole = (props) => {
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Users.css';
 import UserFormEntry from './UserFormEntry';
-import UserService from "./UserService";
+import UserService from "../../services/UserService";
 import Loading from "../common/Loading";
 import {sortArray} from "../../utils/arrayUtils";
 import RoleService from "../roles/RoleService";

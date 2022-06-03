@@ -1,4 +1,3 @@
-import axios from 'axios';
 import HttpClient from "../api/http-client";
 
 export default class UserService {

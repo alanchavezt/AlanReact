@@ -9,7 +9,8 @@ const fetchResource = (path, userOptions = {}) => {
     /** TODO: Figure out how to setHeaders and set the Token, this is just a sample to insert it for now */
     // Define default headers
     const defaultHeaders = {
-        Authorization: getToken() || null
+        Authorization: getToken() || null,
+        'Content-Type': 'application/json'
     };
 
     const options = {

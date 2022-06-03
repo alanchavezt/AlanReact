@@ -13,12 +13,12 @@
     pointer-events: none;
 }
 
-.act-modal.show {
+.act-modal.enter-done {
     opacity: 1;
     pointer-events: visible;
 }
 
-.hide {
+.act-modal.exit {
     opacity: 0;
 }
 
@@ -29,11 +29,11 @@
     transform: translateY(-200px);
 }
 
-.act-modal.show .act-modal-content {
+.act-modal.enter-done .act-modal-content {
     transform: translateY(0);
 }
 
-.hide .act-modal-content {
+.act-modal.exit .act-modal-content {
     transform: translateY(-200px);
 }
 

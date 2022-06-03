@@ -11,7 +11,7 @@ export default class UserService {
     }
 
     getUser(userId) {
-        return axios.get(`${this.apiEndpoint}/${userId}`).then(res => res.data);
+        return this.httpClient.get(`${this.apiEndpoint}/${userId}`).then(data => data);
     }
 
     getUsers() {
@@ -19,19 +19,19 @@ export default class UserService {
     }
 
     updateUser(user) {
-        return axios.put(`${this.apiEndpoint}/${user.userId}`, user).then(res => res.data);
+        return this.httpClient.put(`${this.apiEndpoint}/${user.userId}`, user).then(data => data);
     }
 
     deleteUser(userId) {
-        return axios.delete(`${this.apiEndpoint}/${userId}`).then(res => res.data);
+        return this.httpClient.delete(`${this.apiEndpoint}/${userId}`).then(data => data);
     }
 
     /** User Roles */
     getUserRoles(userId) {
-        return axios.get(`${this.apiEndpoint}/${userId}/roles`).then(res => res.data);
+        return this.httpClient.get(`${this.apiEndpoint}/${userId}/roles`).then(data => data);
     }
 
     createUserRole(user) {
-        return axios.post(`${this.apiEndpoint}/${user.userId}/roles`, user).then(res => res.data);
+        return this.httpClient.post(`${this.apiEndpoint}/${user.userId}/roles`, user).then(data => data);
     }
 }

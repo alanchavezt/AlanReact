@@ -7,7 +7,7 @@ export default class UserService {
     httpClient = new HttpClient('/API/users');
 
     createUser(user) {
-        return axios.post(`${this.apiEndpoint}`, user).then(res => res.data);
+        return this.httpClient.post(`${this.apiEndpoint}`, user).then(data => data);
     }
 
     getUser(userId) {

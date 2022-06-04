@@ -1,5 +1,6 @@
 import {API_URL, ApiError} from "./ApiError";
 import {getToken} from "../utils/Common";
+import {toast} from "../components/common/toast/toast";
 
 // API wrapper function
 const fetchResource = (path, userOptions = {}) => {
@@ -22,6 +23,12 @@ const fetchResource = (path, userOptions = {}) => {
             ...defaultHeaders,
             ...userOptions.headers,
         },
+    };
+
+    const toastOptions = {
+        position: "bottom-right",
+        autoDelete: true,
+        dismissTime: 3000
     };
 
     // Build Url
@@ -69,14 +76,20 @@ const fetchResource = (path, userOptions = {}) => {
             }
 
             // Request succeeded
+            const message = "Http request has been successfully executed";
+            toast.success(message, toastOptions);
             return parsedResponse;
         })
         .catch(error => {
             // Throw custom API error
             // If response exists it means HTTP error occurred
             if (response) {
+                const message = `Request failed with status ${ response.status }.`;
+                toast.success(message, toastOptions);
                 throw new ApiError(`Request failed with status ${ response.status }.`, error, response.status);
             } else {
+                const message = 'REQUEST_FAILED';
+                toast.success(message, toastOptions);
                 throw new ApiError(error, null, 'REQUEST_FAILED');
             }
         });

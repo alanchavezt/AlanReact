@@ -34,9 +34,7 @@ const ACTModal = props =>  {
                 <div className={"act-modal-content"} onClick={e => e.stopPropagation()}>
                     <div className={"act-modal-header"}>
                         <h4 className={"act-modal-title"}>{props.title}</h4>
-                        <span type="button" className="close" onClick={props.onClose}>
-                            <i className="fa-solid fa-x pe-2"/>
-                        </span>
+                        <button type="button" className="btn-close" aria-label="Close" onClick={props.onClose}/>
                     </div>
                     <div className={"act-modal-body"}>{props.children}</div>
                     <div className={"act-modal-footer"}>

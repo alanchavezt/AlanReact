@@ -23,8 +23,16 @@
 }
 
 .act-modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 500px;
+    pointer-events: auto;
     background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
     transition: all 0.3s ease-in-out;
     transform: translateY(-200px);
 }
@@ -37,8 +45,31 @@
     transform: translateY(-200px);
 }
 
-.act-modal-header, .act-modal-footer {
-    padding: 10px;
+.act-modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.act-modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+    border-bottom-right-radius: calc(0.3rem - 1px);
+    border-bottom-left-radius: calc(0.3rem - 1px);
+}
+
+.act-modal-footer > * {
+    margin: 0.25rem;
 }
 
 .act-modal-title {
@@ -46,7 +77,7 @@
 }
 
 .act-modal-body {
-    padding: 10px;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
 }

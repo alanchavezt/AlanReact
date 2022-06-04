@@ -3,6 +3,7 @@ import {CSSTransition} from "react-transition-group";
 import ReactDOM from "react-dom";
 import './ACTModal.css';
 import PropTypes from "prop-types";
+import {Button} from "react-bootstrap";
 
 const ACTModal = props =>  {
 
@@ -33,10 +34,21 @@ const ACTModal = props =>  {
                 <div className={"act-modal-content"} onClick={e => e.stopPropagation()}>
                     <div className={"act-modal-header"}>
                         <h4 className={"act-modal-title"}>{props.title}</h4>
+                        <span type="button" className="close" onClick={props.onClose}>
+                            <i className="fa-solid fa-x pe-2"/>
+                        </span>
                     </div>
                     <div className={"act-modal-body"}>{props.children}</div>
                     <div className={"act-modal-footer"}>
-                        <button className={"button"} onClick={props.onClose}>Close</button>
+                        <Button
+                            variant="secondary"
+                            onClick={props.onClose}
+                        >Close
+                        </Button>
+                        <Button
+                            variant="primary"
+                        >Save
+                        </Button>
                     </div>
                 </div>
             </div>

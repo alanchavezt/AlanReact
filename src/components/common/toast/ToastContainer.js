@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import './Toast.css';
 
-const Toast = props => {
+const ToastContainer = props => {
     const { toastList, position, autoDelete, dismissTime, setList } = props;
 
     useEffect(() => {
@@ -48,11 +48,11 @@ const Toast = props => {
     );
 }
 
-Toast.propTypes = {
+ToastContainer.propTypes = {
     toastList: PropTypes.array.isRequired,
     position: PropTypes.string,
     autoDelete: PropTypes.bool,
     dismissTime: PropTypes.number
 }
 
-export default Toast;
+export default ToastContainer;

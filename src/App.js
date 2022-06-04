@@ -24,7 +24,7 @@ import infoIcon from "./components/common/assets/info.svg";
 import warningIcon from "./components/common/assets/warning.svg";
 
 /** ACTModal */
-import Toast from "./components/common/toast/Toast";
+import ToastContainer from "./components/common/toast/ToastContainer";
 
 let routes = [];
 routes.push(...userRoutes);
@@ -140,7 +140,7 @@ function App() {
             <Router>
                 <Header/>
 
-                <Toast
+                <ToastContainer
                     toastList={list}
                     position="bottom-right"
                     autoDelete={true}

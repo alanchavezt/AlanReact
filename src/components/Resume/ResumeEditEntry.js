@@ -5,7 +5,7 @@ import TextArea from "../common/form/TextArea";
 import EducationList from "./education/EducationList";
 import Experience from "./experience/Experience";
 import Skills from "./skills/Skills";
-import Toast from "../common/toast/Toast";
+import ToastContainer from "../common/toast/ToastContainer";
 import checkIcon from '../common/assets/check.svg';
 import errorIcon from '../common/assets/error.svg';
 import infoIcon from '../common/assets/info.svg';
@@ -130,7 +130,7 @@ const ResumeEditEntry = (props) => {
             <button onClick={() => showToast("danger")}>Danger</button>
             <button onClick={() => showToast("info")}>Info</button>
             <button onClick={() => showToast("warning")}>Warning</button>
-            <Toast
+            <ToastContainer
                 toastList={list}
                 position="bottom-right"
                 autoDelete={true}

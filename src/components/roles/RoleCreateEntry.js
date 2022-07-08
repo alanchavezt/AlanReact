@@ -1,4 +1,4 @@
-import RoleService from "./RoleService";
+import RoleService from "../../services/RoleService";
 import React, {useState} from "react";
 import Loading from "../common/Loading";
 import RoleFormEntry from "./RoleFormEntry";

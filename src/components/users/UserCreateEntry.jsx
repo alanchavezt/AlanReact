@@ -4,7 +4,7 @@ import UserFormEntry from './UserFormEntry';
 import UserService from "../../services/UserService";
 import Loading from "../common/Loading";
 import {sortArray} from "../../utils/arrayUtils";
-import RoleService from "../roles/RoleService";
+import RoleService from "../../services/RoleService";
 
 const UserCreateEntry =  (props) => {
 

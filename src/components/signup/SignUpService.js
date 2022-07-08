@@ -1,10 +1,11 @@
-import axios from 'axios';
+import HttpClient from "../../api/http-client";
 
 export default class SignUpService {
 
     apiEndpoint = "/API/signup";
+    httpClient = new HttpClient(this.apiEndpoint);
 
     signUpUser(user) {
-        return axios.post(`${this.apiEndpoint}`, user).then(res => res.data);
+        return this.httpClient.post(`${this.apiEndpoint}`, user).then(data => data);
     }
 }

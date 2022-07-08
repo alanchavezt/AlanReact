@@ -5,7 +5,7 @@ import UserFormEntry from './UserFormEntry';
 import UserService from "../../services/UserService";
 import Loading from "../common/Loading";
 import {confirm} from "../common/modal/confirm";
-import RoleService from "../roles/RoleService";
+import RoleService from "../../services/RoleService";
 import {sortArray} from "../../utils/arrayUtils";
 
 const UserEditEntry = (props) => {

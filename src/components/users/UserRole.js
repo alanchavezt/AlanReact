@@ -1,7 +1,7 @@
 import Select from "../common/form/Select";
 import React, {useEffect, useState} from "react";
 import Loading from "../common/Loading";
-import RoleService from "../roles/RoleService";
+import RoleService from "../../services/RoleService";
 import {sortArray} from "../../utils/arrayUtils";
 import {useParams} from "react-router-dom";
 import UserService from "../../services/UserService";

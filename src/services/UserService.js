@@ -3,7 +3,7 @@ import HttpClient from "../api/http-client";
 export default class UserService {
 
     apiEndpoint = "/API/users";
-    httpClient = new HttpClient('/API/users');
+    httpClient = new HttpClient(this.apiEndpoint);
 
     createUser(user) {
         return this.httpClient.post(`${this.apiEndpoint}`, user).then(data => data);

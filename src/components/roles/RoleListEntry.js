@@ -1,4 +1,4 @@
-import RoleService from "./RoleService";
+import RoleService from "../../services/RoleService";
 import React, {useEffect, useState} from "react";
 import {sortArray} from "../../utils/arrayUtils";
 import Loading from "../common/Loading";

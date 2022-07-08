@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import SignInService from "../../services/SignInService";
 import {setUserSession} from '../../utils/Common';
-import "./SignIn.css";
 import InputText from "../common/form/InputText";
+import "./SignIn.css";
 
 const SignIn = (props) => {
+
+    const signInService = new SignInService();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,9 +21,9 @@ const SignIn = (props) => {
         setLoading(true);
 
         // axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
-        axios.post('/API/auth/signin', {email: email, password: password}).then(response => {
+        signInService.signIn({email: email, password: password}).then(data => {
             setLoading(false);
-            setUserSession(response.data.token, response.data.user);
+            setUserSession(data.token, data.user);
             // todo: check the difference between push and href
             // props.history.push('/dashboard');
             window.location.href = "/dashboard";

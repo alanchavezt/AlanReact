@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import InputText from "../common/form/InputText";
-import SignUpService from "./SignUpService";
+import SignUpService from "../../services/SignUpService";
 import "./SignUp.css";
 
 const SignUp = (props) => {

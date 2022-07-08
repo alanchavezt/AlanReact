@@ -19,7 +19,8 @@ const About = (props) => {
 
                 <div className="row">
                     <div className="col-lg-4" data-aos="fade-right">
-                        <img src="assets/img/profile-img.jpg" className="img-fluid" alt=""/>
+                        {/** Find a picture for my profile */}
+                        {/*<img src="assets/img/profile-img.jpg" className="img-fluid" alt=""/>*/}
                     </div>
                     <div className="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
                         <h3>UI/UX Designer &amp; Web Developer.</h3>

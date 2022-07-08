@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import Loading from "../common/Loading";
 import InputText from "../common/form/InputText";
-import UserPasswordService from "./UserPasswordService";
+import UserPasswordService from "../../services/UserPasswordService";
 
 const ChangePasswordForm = (props) => {
 

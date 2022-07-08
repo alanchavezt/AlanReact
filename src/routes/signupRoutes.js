@@ -15,12 +15,9 @@ routes.post('/', async (req, res, next)=>{
         const response = await axios.post(`${API}/API/signup`, user);
 
         // res.status(200);
-        res.status(201).send();
-        res.set("Connection", "close");
-        res.json(response.data);
+        res.status(201).json(response.data);
     } catch (error)  {
-        res.status(500).send();
-        res.json("Error occurred!");
+        res.json("Error occurred!" + error);
     }
 });
 

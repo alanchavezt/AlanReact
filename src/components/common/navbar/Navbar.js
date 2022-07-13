@@ -1,8 +1,6 @@
 import React from 'react';
 import './Navbar.css';
 import { Link } from "react-router-dom";
-import {getToken} from "../../../utils/Common";
-import Avatar from "../avatar";
 
 const Navbar = (props) => {
 
@@ -28,26 +26,6 @@ const Navbar = (props) => {
                     <span>Contact</span>
                 </Link>
             </div>
-
-            <div className="navbar-top-item">
-                {!getToken() ?
-                    <React.Fragment>
-                        <Link className="navbar-item" to='/signin'>
-                            <span>Sign In</span>
-                        </Link>
-                        <Link className="navbar-item" to='/signup'>
-                            <span>Sign up</span>
-                        </Link>
-                    </React.Fragment>
-                    : null
-                }
-
-                {getToken() ? <div className="navbar-item"><Avatar/></div> : null}
-            </div>
-
-            {/*<div className="navbar-top-item">*/}
-            {/*    {getToken() ? <div className="navbar-item"><Avatar/></div> : null}*/}
-            {/*</div>*/}
         </div>
     );
 };

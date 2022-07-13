@@ -1,11 +1,12 @@
-import './App.css';
-import './css/styles.css';
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import {BrowserRouter as Router, Link, Routes, Route} from "react-router-dom";
 import axios from 'axios';
 
+import './App.css';
+import './css/styles.css';
+
 import { Header } from './components/common';
-import Sidebar from "./components/common/sidebar";
+import {Sidebar} from "./components/common/sidebar";
 
 /** Authentication */
 import { getToken, removeUserSession, setUserSession } from './utils/Common';
@@ -25,6 +26,7 @@ import warningIcon from "./components/common/assets/warning.svg";
 
 /** Toast */
 import {toast} from "./components/common/toast/toast";
+import SidebarRight from "./components/common/sidebar/SidebarRight";
 
 let routes = [];
 routes.push(...userRoutes);
@@ -96,122 +98,138 @@ function App() {
 
     return (
         <div className="App">
-            <Router>
-                <Header/>
+            <main>
+                <Router>
 
-                <div id="layoutSidenav">
-
-                    {/** todo: add the side bar to display the admin pages list, once authenticated */}
-                    {getToken() ?
-                        <div id="layoutSidenav_nav">
-                             <Sidebar/>
-                        </div>
-                        : null
-                    }
-
-                    <section id="layoutSidenav_content">
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <Routes>
-                                <Route path="/signup" exact element={<SignUp/>}/>
-
-                                {/*<PublicRoute path="/signin" exact component={SignIn}/>*/}
-                                <Route
-                                    path="/signin"
-                                    exact
-                                    element={
-                                       <PublicRoute>
-                                           <SignIn/>
-                                       </PublicRoute>
-                                    }
-                                />
-
-                                {/*<PrivateRoute path="/dashboard" exact component={Dashboard}/>*/}
-                                <Route
-                                    path="/dashboard"
-                                    exact
-                                    element={
-                                        <PrivateRoute>
-                                            <Dashboard/>
-                                        </PrivateRoute>
-                                    }
-                                />
-
-                                <Route path="/" exact element={<Home/>}/>
-                                <Route path="/home" exact element={<Home/>}/>
-                                <Route path="/about" element={<About/>}/>
-                                <Route path="/shop" exact element={<Shop/>}/>
-                                <Route path="/contact" element={<Contact/>}/>
-
-                                {/** User routes */}
-                                {/*<Route exact path="/users" element={<UserListEntry/>}/>*/}
-                                {/*/!*<PrivateRoute path="/users" component={UserListEntry}/>*!/*/}
-                                {/*<Route exact path="/users/create" element={<UserCreateEntry/>}/>*/}
-                                {/*<Route exact path="/users/:id" element={<UserViewEntry/>}/>*/}
-                                {/*<Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>*/}
-                                {/*/!*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*!/*/}
-
-                                {/** Password routes */}
-                                {/*<Route exact path="/users/:id/password" element={<Security/>}/>*/}
+                    <header className={"header"}>
+                        <Header/>
+                    </header>
 
 
-                                {/** Rendering routes dynamically */}
-                                {routes.map(({ path, name, Component }, key) => (
+                    <div id="layoutSidenav">
+
+                        {/** todo: add the side bar to display the admin pages list, once authenticated */}
+                        {getToken() ?
+                            <>
+                                <div className={"ac-sidebar"} id="layoutSidenav_nav">
+                                    <Sidebar/>
+                                </div>
+                                {/*<div id="layoutSidenav_nav_right">*/}
+                                {/*    <SidebarRight/>*/}
+                                {/*</div>*/}
+                            </>
+
+                            : null
+                        }
+
+                        <section className={"ac-content"} id="layoutSidenav_content">
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Routes>
+                                    <Route path="/signup" exact element={<SignUp/>}/>
+
+                                    {/*<PublicRoute path="/signin" exact component={SignIn}/>*/}
                                     <Route
+                                        path="/signin"
                                         exact
-                                        path={path}
-                                        key={key}
                                         element={
-                                            <div className="container">
-                                                {/*todo check how to pass down the props without manually doing it, maybe do the crumbs on top and just pass down the crumbs*/}
-                                                <Breadcrumbs routes={routes} currentPath={path}/>
-                                                <Component/>
-                                            </div>
+                                           <PublicRoute>
+                                               <SignIn/>
+                                           </PublicRoute>
                                         }
                                     />
-                                ))}
 
-                                {/*{routes.map(({ path, name, Component }, key) => (*/}
-                                {/*    <Route*/}
-                                {/*        exact*/}
-                                {/*        path={path}*/}
-                                {/*        key={key}*/}
-                                {/*        render={props => {*/}
-                                {/*            const crumbs = routes*/}
-                                {/*                // Get all routes that contain the current one.*/}
-                                {/*                .filter(({ path }) => props.match.path.includes(path))*/}
-                                {/*                // Swap out any dynamic routes with their param values.*/}
-                                {/*                // E.g. "/users/:userId" will become "/users/1"*/}
-                                {/*                .map(({ path, ...rest }) => ({*/}
-                                {/*                    path: Object.keys(props.match.params).length*/}
-                                {/*                        ? Object.keys(props.match.params).reduce(*/}
-                                {/*                            (path, param) => path.replace(*/}
-                                {/*                                `:${param}`, props.match.params[param]*/}
-                                {/*                            ), path*/}
-                                {/*                        )*/}
-                                {/*                        : path,*/}
-                                {/*                    ...rest*/}
-                                {/*                }));*/}
+                                    {/*<PrivateRoute path="/dashboard" exact component={Dashboard}/>*/}
+                                    <Route
+                                        path="/dashboard"
+                                        exact
+                                        element={
+                                            <PrivateRoute>
+                                                <Dashboard/>
+                                            </PrivateRoute>
+                                        }
+                                    />
 
-                                {/*            // console.log(`Generated crumbs for ${props.match.path}`);*/}
-                                {/*            crumbs.map(({ name, path }) => console.log({ name, path }));*/}
+                                    <Route path="/" exact element={<Home/>}/>
+                                    <Route path="/home" exact element={<Home/>}/>
+                                    <Route path="/about" element={<About/>}/>
+                                    <Route path="/shop" exact element={<Shop/>}/>
+                                    <Route path="/contact" element={<Contact/>}/>
 
-                                {/*            return (*/}
-                                {/*                <div className="container" style={{padding: "40px"}}>*/}
-                                {/*                    <Breadcrumbs crumbs={crumbs}/>*/}
-                                {/*                    <Component {...props} />*/}
-                                {/*                </div>*/}
-                                {/*            );*/}
-                                {/*        }}*/}
-                                {/*    />*/}
-                                {/*))}*/}
+                                    {/** User routes */}
+                                    {/*<Route exact path="/users" element={<UserListEntry/>}/>*/}
+                                    {/*<PrivateRoute path="/users" component={UserListEntry}/>*/}
+                                    {/*<Route exact path="/users/create" element={<UserCreateEntry/>}/>*/}
+                                    {/*<Route exact path="/users/:id" element={<UserViewEntry/>}/>*/}
+                                    {/*<Route exact path="/users/:id/edit" element={<UserEditEntry/>}/>*/}
+                                    {/*<PrivateRoute exact path="/users/:id/edit" component={UserEditEntry}/>*/}
 
-                                {/** Routing to a specific item */}
-                                <Route path="/shop/:id" element={<ItemView/>}/>
-                            </Routes>
-                        </Suspense>
-                    </section>
-                </div>
-            </Router>
+                                    {/** Password routes */}
+                                    {/*<Route exact path="/users/:id/password" element={<Security/>}/>*/}
+
+
+                                    {/** Rendering routes dynamically */}
+                                    {routes.map(({ path, name, Component }, key) => (
+                                        <Route
+                                            exact
+                                            path={path}
+                                            key={key}
+                                            element={
+                                                <div className="container">
+                                                    {/*todo check how to pass down the props without manually doing it, maybe do the crumbs on top and just pass down the crumbs*/}
+                                                    <Breadcrumbs routes={routes} currentPath={path}/>
+                                                    <Component/>
+                                                </div>
+                                            }
+                                        />
+                                    ))}
+
+                                    {/*{routes.map(({ path, name, Component }, key) => (*/}
+                                    {/*    <Route*/}
+                                    {/*        exact*/}
+                                    {/*        path={path}*/}
+                                    {/*        key={key}*/}
+                                    {/*        render={props => {*/}
+                                    {/*            const crumbs = routes*/}
+                                    {/*                // Get all routes that contain the current one.*/}
+                                    {/*                .filter(({ path }) => props.match.path.includes(path))*/}
+                                    {/*                // Swap out any dynamic routes with their param values.*/}
+                                    {/*                // E.g. "/users/:userId" will become "/users/1"*/}
+                                    {/*                .map(({ path, ...rest }) => ({*/}
+                                    {/*                    path: Object.keys(props.match.params).length*/}
+                                    {/*                        ? Object.keys(props.match.params).reduce(*/}
+                                    {/*                            (path, param) => path.replace(*/}
+                                    {/*                                `:${param}`, props.match.params[param]*/}
+                                    {/*                            ), path*/}
+                                    {/*                        )*/}
+                                    {/*                        : path,*/}
+                                    {/*                    ...rest*/}
+                                    {/*                }));*/}
+
+                                    {/*            // console.log(`Generated crumbs for ${props.match.path}`);*/}
+                                    {/*            crumbs.map(({ name, path }) => console.log({ name, path }));*/}
+
+                                    {/*            return (*/}
+                                    {/*                <div className="container" style={{padding: "40px"}}>*/}
+                                    {/*                    <Breadcrumbs crumbs={crumbs}/>*/}
+                                    {/*                    <Component {...props} />*/}
+                                    {/*                </div>*/}
+                                    {/*            );*/}
+                                    {/*        }}*/}
+                                    {/*    />*/}
+                                    {/*))}*/}
+
+                                    {/** Routing to a specific item */}
+                                    <Route path="/shop/:id" element={<ItemView/>}/>
+                                </Routes>
+                            </Suspense>
+                        </section>
+                    </div>
+                </Router>
+
+                <footer className={"footer"}>
+                    <small>&copy; Copyright 2022, Example Corporation. All Rights Reserved</small>
+                </footer>
+            </main>
         </div>
     );
 }

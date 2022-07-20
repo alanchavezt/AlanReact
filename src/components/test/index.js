@@ -1,3 +1,3 @@
-import TestEntry from "./TestEntry";
+import Components from "./Components";
 
-export {TestEntry};
+export {Components};

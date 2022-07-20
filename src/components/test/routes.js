@@ -1,10 +1,10 @@
 // Test Component
 import {lazy} from 'react';
 
-const TestEntry = lazy(() => import('./TestEntry'));
+const Components = lazy(() => import('./Components'));
 
 const routes = [
-    {name: "Test", Component: TestEntry, path: "/tests"}
+    {name: "Components", Component: Components, path: "/components"}
 ];
 
 export default routes;

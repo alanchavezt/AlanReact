@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import ACTModal from "../common/actModal/ACTModal";
 import {toast} from "../common/toast/toast";
 import Button from "../common/form/Button";
-import './tests.css';
+import './Components.css';
 import Timer from "../common/timer/Timer";
 
-const TestEntry = (props) => {
+const Components = (props) => {
 
     const [show, setShow] = useState(false);
 
@@ -103,4 +103,4 @@ const TestEntry = (props) => {
     );
 }
 
-export default TestEntry;
+export default Components;

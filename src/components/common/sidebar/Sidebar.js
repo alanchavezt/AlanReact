@@ -38,6 +38,11 @@ const Sidebar = (props) => {
                             {/*    </div>Roles*/}
                             {/*</NavLink>*/}
                         </NavLink>
+                        <NavLink className="nav-link" to='/components'>
+                            <div className="sb-nav-link-icon">
+                                <i className="fa-solid fa-user-gear"/>
+                            </div>Components
+                        </NavLink>
 
 
                         {/*<div className="sb-sidenav-menu-heading">Interface</div>*/}

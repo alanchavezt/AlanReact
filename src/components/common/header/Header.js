@@ -24,68 +24,28 @@ const Header = (props) => {
 
                 <div className="flex-header-row flex-header-item-right">
                     {!getToken() ?
-                        <React.Fragment>
-                            <Link className="navbar-item" to='/signin'>
-                                <span>Sign In</span>
-                            </Link>
-                            <Link className="navbar-item" to='/signup'>
-                                <span>Sign up</span>
-                            </Link>
-                        </React.Fragment>
+                        <div className="navbar-links">
+                            <ul>
+                                <li>
+                                    <Link className="navbar-item" to='/signin'>
+                                        <span>Sign In</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link className="navbar-item" to='/signup'>
+                                        <span>Sign up</span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
                         : null
                     }
 
                     {getToken() ? <div className="navbar-item"><Avatar/></div> : null}
                 </div>
             </div>
-
-
-            {/*Header Top section*/}
-            {/*<div className="header-top">*/}
-
-
-
-            {/*</div>*/}
-
-            {/*Header Bottom Section*/}
-            {/*<div className="header-bottom">*/}
-            {/*    <div className="header-bottom__phone">*/}
-            {/*        333333333*/}
-            {/*    </section>*/}
-            {/*    <div className="header-bottom__email">*/}
-            {/*        resume@gmail.com*/}
-            {/*    </section>*/}
-
-            {/*</section>*/}
         </div>
     );
 }
 
 export default Header;
-
-// TODO figure out how to use the sections style in the header without being affected by the other section styles
-// return (
-//     <section className="header">
-//         {/*Header Top section*/}
-//         <section className="header-top">
-//             <section className="header-top__logo">
-//                 <a href="/" className="header-logo">AC</a>
-//             </section>
-//
-//             <section className="header-top__navbar">
-//                 <Navbar/>
-//             </section>
-//         </section>
-//
-//         {/*Header Bottom Section*/}
-//         {/*<section className="header-bottom">*/}
-//         {/*    <section className="header-bottom__phone">*/}
-//         {/*        333333333*/}
-//         {/*    </section>*/}
-//         {/*    <section className="header-bottom__email">*/}
-//         {/*        resume@gmail.com*/}
-//         {/*    </section>*/}
-//
-//         {/*</section>*/}
-//     </section>
-// );

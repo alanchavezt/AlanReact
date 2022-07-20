@@ -138,28 +138,3 @@
 /*    border-radius: 10px;*/
 /*    color: white;*/
 /*}*/
-
-
-
-.flex-item {
-    /*background: tomato;*/
-    padding: 5px;
-    /*width: 200px;*/
-    /*height: 150px;*/
-    margin: 10px 15px;
-    line-height: 150px;
-    /*color: white;*/
-    /*font-weight: bold;*/
-    /*font-size: 3em;*/
-    text-align: center;
-
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*padding-top: 16px !important;*/
-    /*padding-bottom: 16px !important;*/
-    /*margin-right: 16px;*/
-    /*color: inherit;*/
-    /*text-decoration: none !important;*/
-    /*outline: none;*/
-}

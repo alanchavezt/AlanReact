@@ -23,22 +23,19 @@ const Header = (props) => {
                 </div>
 
                 <div className="flex-header-row flex-header-item-right">
+                    {!getToken() ?
+                        <React.Fragment>
+                            <Link className="navbar-item" to='/signin'>
+                                <span>Sign In</span>
+                            </Link>
+                            <Link className="navbar-item" to='/signup'>
+                                <span>Sign up</span>
+                            </Link>
+                        </React.Fragment>
+                        : null
+                    }
 
-                    <div className="navbar-top-item">
-                        {!getToken() ?
-                            <React.Fragment>
-                                <Link className="navbar-item" to='/signin'>
-                                    <span>Sign In</span>
-                                </Link>
-                                <Link className="navbar-item" to='/signup'>
-                                    <span>Sign up</span>
-                                </Link>
-                            </React.Fragment>
-                            : null
-                        }
-
-                        {getToken() ? <div className="navbar-item"><Avatar/></div> : null}
-                    </div>
+                    {getToken() ? <div className="navbar-item"><Avatar/></div> : null}
                 </div>
             </div>
 

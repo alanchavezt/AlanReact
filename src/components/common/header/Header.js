@@ -19,9 +19,7 @@ const Header = (props) => {
                 </div>
 
                 <div className="flex-header-row flex-header-item-middle">
-                    <div className="header-top__navbar">
-                        <Navbar/>
-                    </div>
+                    <Navbar/>
                 </div>
 
                 <div className="flex-header-row flex-header-item-right">

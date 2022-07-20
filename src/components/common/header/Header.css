@@ -4,6 +4,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    background-color: #343a40;
 }
 
 .flex-header-row  {
@@ -11,23 +12,21 @@
 }
 
 .flex-header-item-left {
-    background-color: #343a40;
     padding: 10px;
     flex: 50%;
 }
 
 .flex-header-item-middle {
-    background-color: #343a40;
     display: flex;
     flex: 50%;
 }
 
 .flex-header-item-right {
     display: flex;
-    background-color: #343a40;
     padding: 10px;
     flex: 50%;
     justify-content: flex-end;
+    align-items: center;
 }
 
 /* Responsive layout - makes a one column-layout instead of two-column layout */

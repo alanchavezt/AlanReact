@@ -8,8 +8,6 @@
 .navbar-item {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
     color: inherit;
     text-decoration: none !important;
     outline: none;

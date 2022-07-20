@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import ACTModal from "../common/actModal/ACTModal";
 import {toast} from "../common/toast/toast";
 import Button from "../common/form/Button";
-import './Components.css';
 import Timer from "../common/timer/Timer";
+import Spinner from "../common/spinner/Spinner";
+import './Components.css';
 
 const Components = (props) => {
 
@@ -98,6 +99,15 @@ const Components = (props) => {
                 <h4>This is the test for the Timer component</h4>
 
                 <Timer/>
+            </div>
+
+            <div className="p-4">
+                <h1>Loader Component</h1>
+                <h4>This is the test for the Loader component</h4>
+
+                <div className={"act-row"}>
+                    <Spinner/>
+                </div>
             </div>
         </div>
     );

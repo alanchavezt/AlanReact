@@ -59,14 +59,11 @@
 .header-logo {
     color: inherit;
     text-decoration: inherit;
-    font-family: Optima;
     font-size: 100px;
 }
 
 .header-logo-small{
-    /*color: white !important;*/
     text-decoration: inherit;
-    font-family: Optima;
     font-size: 25px;
     position:relative;
     left:-15px

@@ -31,9 +31,15 @@
 }
 
 /* Responsive layout - makes a one column-layout instead of two-column layout */
-@media (max-width: 800px) {
+@media (max-width: 640px) {
     .flex-header-container {
         flex-direction: column;
+    }
+
+    .flex-header-item-middle {
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        width: 100%;
     }
 }
 

@@ -122,7 +122,7 @@ function App() {
                             : null
                         }
 
-                        <section className={"ac-content"} id="layoutSidenav_content">
+                        <section className="content" id="layoutSidenav_content">
                             <Suspense fallback={<div>Loading...</div>}>
                                 <Routes>
                                     <Route path="/signup" exact element={<SignUp/>}/>

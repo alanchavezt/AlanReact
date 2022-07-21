@@ -32,25 +32,3 @@ body {
   font-family: 'Optima Bold';
   src: url('./fonts/optima/OPTIMA_B.ttf');
 }
-
-/*.header {*/
-/*  padding: 20px;*/
-/*  background: #343a40 !important;*/
-/*  color: white;*/
-/*}*/
-
-/*.header a {*/
-/*  !*color: #0072ff;*!*/
-/*  text-decoration: none;*/
-/*  !*margin-left: 20px;*!*/
-/*  !*margin-right: 5px;*!*/
-/*}*/
-/*.header a:hover {*/
-/*  !*color: #8a0f53;*!*/
-/*}*/
-/*.header small {*/
-/*  color: #666;*/
-/*}*/
-/*.header .active {*/
-/*  color: #2c7613;*/
-/*}*/

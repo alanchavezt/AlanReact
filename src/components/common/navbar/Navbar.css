@@ -23,7 +23,11 @@
 }
 
 .navbar-links li:hover {
-    background-color: #6c757d;
+    background-color: #e9ecef;
+}
+
+.navbar-links a:hover {
+    color: black;
 }
 
 .toggle-button {

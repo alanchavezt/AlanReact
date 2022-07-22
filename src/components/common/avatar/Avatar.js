@@ -11,13 +11,13 @@ const Avatar = (props) => {
     useEffect(() => {
         let avatar;
 
-        if(user){
+        if (user) {
             const firstName = user.firstName.charAt(0).toUpperCase();
             const lastName = user.lastName.charAt(0).toUpperCase();
             const initials = firstName.concat(lastName);
 
             avatar = generateAvatar(initials, "white", "#6c757d"); // #007398
-        }else {
+        } else {
             avatar = generateAvatar("", "white", "#6c757d");
         }
 
@@ -67,7 +67,7 @@ const Avatar = (props) => {
                     />
                     <span className="dropdown-caret"/>
                 </div>
-                <div className="dropdown-menu dropdown-menu-end" aria-labelledby="avatar">
+                <div className="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="avatar">
                     <a className="dropdown-item" href="#" style={{display: "block"}}>
                         <span>Signed in as
                             <strong> {user.email}</strong>
@@ -75,7 +75,9 @@ const Avatar = (props) => {
                     </a>
                     <div role="none" className="dropdown-divider"/>
                     <a className="dropdown-item" href="#">Profile</a>
+                    <a className="dropdown-item" href="#">Settings</a>
                     <div role="none" className="dropdown-divider"/>
+                    <a className="dropdown-item" href="#">Help</a>
                     <a className="dropdown-item" onClick={handleSingOut}>Sign Out</a>
                 </div>
             </div>

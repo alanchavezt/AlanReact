@@ -3,11 +3,14 @@
     width: 100%;
     justify-content: space-around;
     align-items: center;
+    padding: 0;
 }
 
-/*.navbar-links {*/
-/*    height: 100%;*/
-/*}*/
+.navbar-links {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+}
 
 .navbar-links ul {
     margin: 0;

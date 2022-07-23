@@ -2,13 +2,13 @@
 .flex-header-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-around;
+    align-items: stretch;
     background-color: #343a40;
 }
 
 .flex-header-row  {
-    margin: 0;
+    margin: 0 10px 0;
 }
 
 .flex-header-item-left {
@@ -26,7 +26,6 @@
     flex: 50%;
     justify-content: flex-end;
     align-items: center;
-    margin-right: 10px;
 }
 
 /* Responsive layout - makes a one column-layout instead of two-column layout */

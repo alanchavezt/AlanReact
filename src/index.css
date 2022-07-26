@@ -23,12 +23,12 @@ body {
   src: url('./fonts/Roboto-Thin.ttf');
 }
 
-@font-face {
-  font-family: 'Optima';
-  src: url('./fonts/optima/OPTIMA.ttf');
-}
+/*@font-face {*/
+/*  font-family: 'Optima';*/
+/*  src: url('./fonts/optima/OPTIMA.ttf');*/
+/*}*/
 
-@font-face {
-  font-family: 'Optima Bold';
-  src: url('./fonts/optima/OPTIMA_B.ttf');
-}
+/*@font-face {*/
+/*  font-family: 'Optima Bold';*/
+/*  src: url('./fonts/optima/OPTIMA_B.ttf');*/
+/*}*/

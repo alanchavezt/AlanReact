@@ -10,7 +10,7 @@ module.exports = {
     context: __dirname,
     entry: path.resolve(__dirname, 'src/index.js'),
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
         publicPath: "/"
     },

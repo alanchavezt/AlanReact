@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const path = require( 'path' );
-const DefinePlugin = webpack.DefinePlugin;
 
 const port = process.env.PORT || 3000;
 
@@ -61,10 +60,6 @@ module.exports = {
     },
     plugins: [
         // new webpack.HotModuleReplacementPlugin(),
-        new DefinePlugin({
-            "foo": JSON.stringify("bar-dev"),
-            "API_URL": JSON.stringify('https://www.alanchavez-dev.com/')
-        }),
         new HtmlWebpackPlugin({
             inject: true,
             template: './public/index.html'

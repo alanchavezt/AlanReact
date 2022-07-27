@@ -5,7 +5,6 @@ const path = require( 'path' );
 const port = process.env.PORT || 3000;
 
 module.exports = {
-    mode: 'development',
     context: __dirname,
     entry: path.resolve(__dirname, 'src/index.js'),
     output: {

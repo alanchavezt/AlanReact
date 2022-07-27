@@ -6,7 +6,7 @@ const prodConfig = {
     mode: 'production',
     plugins: [
         new webpack.DefinePlugin({
-            "API_URL": JSON.stringify("http://alanchavezt.com")
+            "process.env.API_URL": JSON.stringify("https://alanchavezt.com")
         })
     ],
 };

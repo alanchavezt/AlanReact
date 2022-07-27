@@ -7,7 +7,7 @@ const devConfig = {
     devtool: 'inline-source-map',
     plugins: [
         new webpack.DefinePlugin({
-            "API_URL": JSON.stringify("http://localhost:8080")
+            "process.env.API_URL": JSON.stringify("http://localhost:8080")
         })
     ],
 };

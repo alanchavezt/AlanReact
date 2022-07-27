@@ -2,14 +2,13 @@ const express = require('express');
 const axios = require("axios");
 
 const routes = express.Router();
-const API = "http://localhost:8080";
 
 routes.get('/API/users/:id/roles', (req, res) => {
     console.log('GET User Roles - User ID:', req.params.id)
     const userId =  req.params.id;
     const authorization = "Bearer " + req.headers.authorization;
 
-    axios.get(`${API}/API/users/${userId}/roles`, {
+    axios.get(`${process.env.API_URL}/API/users/${userId}/roles`, {
         headers: {'authorization': authorization}
     }).then(response => {
         res.status(200);
@@ -27,7 +26,7 @@ routes.post('/API/users/:id/roles', async (req, res, next)=>{
     const role = req.body;
 
     try {
-        const response = await axios.post(`${API}/API/users/${userId}/roles`, role, {
+        const response = await axios.post(`${process.env.API_URL}/API/users/${userId}/roles`, role, {
             headers: {'authorization': authorization}
         });
 

@@ -2,7 +2,6 @@ const express = require('express');
 const axios = require("axios");
 
 const routes = express.Router();
-const API = "http://localhost:8080";
 
 routes.post('/API/users/:id/password', async (req, res)=>{
     console.log('New Password - User ID: ', req.params.id);
@@ -14,7 +13,7 @@ routes.post('/API/users/:id/password', async (req, res)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.post(`${API}/API/users/${userId}/password`, createPassword, {
+        const response = await axios.post(`${process.env.API_URL}/API/users/${userId}/password`, createPassword, {
             headers: {'authorization': authorization}
         });
 
@@ -38,7 +37,7 @@ routes.put('/API/users/:id/password', async (req, res)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.put(`${API}/API/passwords/${userId}`, changePassword, {
+        const response = await axios.put(`${process.env.API_URL}/API/passwords/${userId}`, changePassword, {
             headers: {'authorization': authorization}
         });
 

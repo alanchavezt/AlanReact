@@ -2,7 +2,6 @@ const express = require('express');
 const axios = require("axios");
 
 const routes = express.Router();
-const API = "http://localhost:8080";
 
 routes.post('/', async (req, res) => {
     // const username = req.body.username;
@@ -18,7 +17,7 @@ routes.post('/', async (req, res) => {
     }
 
     try {
-        const response = await axios.post(`${API}/API/auth`, {email, password});
+        const response = await axios.post(`${process.env.API_URL}/API/auth`, {email, password});
         const token = response.data.token;
         const user = response.data.user;
 

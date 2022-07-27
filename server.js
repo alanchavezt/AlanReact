@@ -19,9 +19,8 @@ const userRolesRoutes = require('./src/routes/userRolesRoutes');
 const resumeRoutes = require('./src/routes/resumeRoutes');
 
 const app = express();
-const router = express.Router();
 const port = process.env.PORT || 4000;
-const API = "http://localhost:8080";
+// const API = process.env.API_URL || "http://localhost:8080";
 
 // enable CORS
 app.use(cors());

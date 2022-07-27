@@ -2,13 +2,12 @@ const express = require('express');
 const axios = require("axios");
 
 const routes = express.Router();
-const API = "http://localhost:8080";
 
 routes.get('/', (req, res) => {
     console.log('Role List')
     const authorization = "Bearer " + req.headers.authorization;
 
-    axios.get(`${API}/API/roles`,{
+    axios.get(`${process.env.API_URL}/API/roles`,{
         headers: {'authorization': authorization}
     }).then(response => {
         res.status(200);
@@ -24,7 +23,7 @@ routes.get('/:id', (req, res) => {
     const roleId =  req.params.id;
     const authorization = "Bearer " + req.headers.authorization;
 
-    axios.get(`${API}/API/roles/${roleId}`, {
+    axios.get(`${process.env.API_URL}/API/roles/${roleId}`, {
         headers: {'authorization': authorization}
     }).then(response => {
         res.status(200);
@@ -44,7 +43,7 @@ routes.post('/', async (req, res, next)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.post(`${API}/API/roles`, role, {
+        const response = await axios.post(`${process.env.API_URL}/API/roles`, role, {
             headers: {'authorization': authorization}
         });
 
@@ -68,7 +67,7 @@ routes.put('/:id', async (req, res)=>{
         // const hashedPassword = await bcrypt.hash(req.body.password, 10);
         // user.password = hashedPassword;
 
-        const response = await axios.put(`${API}/API/roles/${roleId}`, role, {
+        const response = await axios.put(`${process.env.API_URL}/API/roles/${roleId}`, role, {
             headers: {'authorization': authorization}
         });
 
@@ -87,7 +86,7 @@ routes.delete('/:id', (req, res)=>{
     const roleId = req.params.id;
     const authorization = "Bearer " + req.headers.authorization;
 
-    axios.delete(`${API}/API/roles/${roleId}`, {
+    axios.delete(`${process.env.API_URL}/API/roles/${roleId}`, {
         headers: {'authorization': authorization}
     }).then(response => {
         res.status(200);
